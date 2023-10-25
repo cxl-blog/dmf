@@ -19,7 +19,7 @@ export default defineConfig({
     Unocss({ configFile: './uno.config.ts' }),
     AutoImport({
       include: [/\.[tj]sx?$/, /\.vue$/, /\.md$/],
-      imports: ['vue', 'vue-i18n', 'pinia'],
+      imports: ['vue', 'vue-i18n', 'pinia', 'uni-app'],
       dirs: ['./src/hooks', './src/store/modules'],
       eslintrc: {
         enabled: true,
