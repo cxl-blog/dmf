@@ -18,7 +18,13 @@ module.exports = defineConfig({
       jsx: true
     }
   },
-  extends: ['./.eslintrc-auto-import.json', '@antfu', 'prettier', 'plugin:prettier/recommended'],
+  extends: [
+    './.eslintrc-auto-import.json',
+    '@antfu',
+    '@unocss',
+    'prettier',
+    'plugin:prettier/recommended'
+  ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
