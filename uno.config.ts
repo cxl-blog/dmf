@@ -1,11 +1,13 @@
 import presetWeapp from 'unocss-preset-weapp'
 import { extractorAttributify, transformerClass } from 'unocss-preset-weapp/transformer'
 import { defineConfig } from 'unocss'
+import { presetUni } from '@uni-helper/unocss-preset-uni'
 
 const { presetWeappAttributify, transformerAttributify } = extractorAttributify()
 
 export default defineConfig({
   presets: [
+    presetUni(),
     // https://github.com/MellowCo/unocss-preset-weapp
     // @ts-expect-error
     presetWeapp(),
