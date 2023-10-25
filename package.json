@@ -59,10 +59,10 @@
     "@dcloudio/uni-mp-weixin": "3.0.0-3081220230817001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-3081220230817001",
     "@uni-helper/uni-network": "^0.16.1",
+    "@uni-helper/uni-use": "^0.16.0",
     "@vueuse/core": "^10.5.0",
     "lodash-es": "^4.17.21",
     "pinia": "^2.1.7",
-    "uni-app-use": "^0.8.1",
     "vue": "^3.3.4",
     "vue-i18n": "^9.2.2"
   },
