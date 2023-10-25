@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "uni-helper.uni-helper-vscode",
+    "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
+    "streetsidesoftware.code-spell-chcker",
+    "lokalise.i18n-ally",
+    "antfu.unocss",
+    "Vue.vscode-typescript-vue-plugin",
+    "esbenp.prettier-vscode"
+  ]
+}
