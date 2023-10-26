@@ -18,6 +18,9 @@ module.exports = defineConfig({
       jsx: true
     }
   },
+  globals: {
+    'process.env': 'readonly'
+  },
   extends: [
     './.eslintrc-auto-import.json',
     '@antfu',

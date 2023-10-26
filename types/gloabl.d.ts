@@ -1,4 +1,8 @@
 declare global {
+  declare const process: {
+    env: NodeJS.ProcessEnv
+  }
+
   declare interface Fn<T = any> {
     (...arg: T[]): T
   }
@@ -10,4 +14,8 @@ declare global {
   declare type Recordable<T = any, K = string> = Record<K extends null | undefined ? string : K, T>
 
   declare type ComponentRef<T> = InstanceType<T>
+
+  // 用于获取泛型组件实例类型
+  declare type GenericComponentRef<T> = ComponentPublicInstance &
+    Parameters<NonNullable<NonNullable<ReturnType<T>['__ctx']>['expose']>>[0]
 }

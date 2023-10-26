@@ -1,4 +1,5 @@
-import { fileURLToPath } from 'node:url'
+import { URL, fileURLToPath } from 'node:url'
+import process from 'node:process'
 import { defineConfig } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -41,6 +42,9 @@ export default defineConfig({
       'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js'
     }
   },
+  define: {
+    'process.env': process.env
+  },
   server: {
     hmr: {
       overlay: false
@@ -55,6 +59,6 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    include: ['@vueuse/core', 'lodash-es']
+    include: ['@uni-helper/uni-use', '@vueuse/core', 'lodash-es']
   }
 })
