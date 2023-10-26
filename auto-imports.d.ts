@@ -89,6 +89,7 @@ declare global {
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useI18n: typeof import('vue-i18n')['useI18n']
+  const useLocale: typeof import('./src/hooks/useLocale')['useLocale']
   const useSlots: typeof import('vue')['useSlots']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
@@ -98,7 +99,19 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { Component, ComponentPublicInstance, ComputedRef, ExtractDefaultPropTypes, ExtractPropTypes, ExtractPublicPropTypes, InjectionKey, PropType, Ref, VNode, WritableComputedRef } from 'vue'
+  export type {
+    Component,
+    ComponentPublicInstance,
+    ComputedRef,
+    ExtractDefaultPropTypes,
+    ExtractPropTypes,
+    ExtractPublicPropTypes,
+    InjectionKey,
+    PropType,
+    Ref,
+    VNode,
+    WritableComputedRef
+  } from 'vue'
 }
 // for vue template auto import
 import { UnwrapRef } from 'vue'
@@ -143,11 +156,21 @@ declare module 'vue' {
     readonly onLaunch: UnwrapRef<typeof import('@dcloudio/uni-app')['onLaunch']>
     readonly onLoad: UnwrapRef<typeof import('@dcloudio/uni-app')['onLoad']>
     readonly onMounted: UnwrapRef<typeof import('vue')['onMounted']>
-    readonly onNavigationBarButtonTap: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarButtonTap']>
-    readonly onNavigationBarSearchInputChanged: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputChanged']>
-    readonly onNavigationBarSearchInputClicked: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputClicked']>
-    readonly onNavigationBarSearchInputConfirmed: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputConfirmed']>
-    readonly onNavigationBarSearchInputFocusChanged: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputFocusChanged']>
+    readonly onNavigationBarButtonTap: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarButtonTap']
+    >
+    readonly onNavigationBarSearchInputChanged: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputChanged']
+    >
+    readonly onNavigationBarSearchInputClicked: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputClicked']
+    >
+    readonly onNavigationBarSearchInputConfirmed: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputConfirmed']
+    >
+    readonly onNavigationBarSearchInputFocusChanged: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputFocusChanged']
+    >
     readonly onPageNotFound: UnwrapRef<typeof import('@dcloudio/uni-app')['onPageNotFound']>
     readonly onPageScroll: UnwrapRef<typeof import('@dcloudio/uni-app')['onPageScroll']>
     readonly onPullDownRefresh: UnwrapRef<typeof import('@dcloudio/uni-app')['onPullDownRefresh']>
@@ -163,7 +186,9 @@ declare module 'vue' {
     readonly onShow: UnwrapRef<typeof import('@dcloudio/uni-app')['onShow']>
     readonly onTabItemTap: UnwrapRef<typeof import('@dcloudio/uni-app')['onTabItemTap']>
     readonly onThemeChange: UnwrapRef<typeof import('@dcloudio/uni-app')['onThemeChange']>
-    readonly onUnhandledRejection: UnwrapRef<typeof import('@dcloudio/uni-app')['onUnhandledRejection']>
+    readonly onUnhandledRejection: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onUnhandledRejection']
+    >
     readonly onUnload: UnwrapRef<typeof import('@dcloudio/uni-app')['onUnload']>
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
@@ -188,6 +213,7 @@ declare module 'vue' {
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
+    readonly useLocale: UnwrapRef<typeof import('./src/hooks/useLocale')['useLocale']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
@@ -236,11 +262,21 @@ declare module '@vue/runtime-core' {
     readonly onLaunch: UnwrapRef<typeof import('@dcloudio/uni-app')['onLaunch']>
     readonly onLoad: UnwrapRef<typeof import('@dcloudio/uni-app')['onLoad']>
     readonly onMounted: UnwrapRef<typeof import('vue')['onMounted']>
-    readonly onNavigationBarButtonTap: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarButtonTap']>
-    readonly onNavigationBarSearchInputChanged: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputChanged']>
-    readonly onNavigationBarSearchInputClicked: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputClicked']>
-    readonly onNavigationBarSearchInputConfirmed: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputConfirmed']>
-    readonly onNavigationBarSearchInputFocusChanged: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputFocusChanged']>
+    readonly onNavigationBarButtonTap: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarButtonTap']
+    >
+    readonly onNavigationBarSearchInputChanged: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputChanged']
+    >
+    readonly onNavigationBarSearchInputClicked: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputClicked']
+    >
+    readonly onNavigationBarSearchInputConfirmed: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputConfirmed']
+    >
+    readonly onNavigationBarSearchInputFocusChanged: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputFocusChanged']
+    >
     readonly onPageNotFound: UnwrapRef<typeof import('@dcloudio/uni-app')['onPageNotFound']>
     readonly onPageScroll: UnwrapRef<typeof import('@dcloudio/uni-app')['onPageScroll']>
     readonly onPullDownRefresh: UnwrapRef<typeof import('@dcloudio/uni-app')['onPullDownRefresh']>
@@ -256,7 +292,9 @@ declare module '@vue/runtime-core' {
     readonly onShow: UnwrapRef<typeof import('@dcloudio/uni-app')['onShow']>
     readonly onTabItemTap: UnwrapRef<typeof import('@dcloudio/uni-app')['onTabItemTap']>
     readonly onThemeChange: UnwrapRef<typeof import('@dcloudio/uni-app')['onThemeChange']>
-    readonly onUnhandledRejection: UnwrapRef<typeof import('@dcloudio/uni-app')['onUnhandledRejection']>
+    readonly onUnhandledRejection: UnwrapRef<
+      typeof import('@dcloudio/uni-app')['onUnhandledRejection']
+    >
     readonly onUnload: UnwrapRef<typeof import('@dcloudio/uni-app')['onUnload']>
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
@@ -281,6 +319,7 @@ declare module '@vue/runtime-core' {
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
+    readonly useLocale: UnwrapRef<typeof import('./src/hooks/useLocale')['useLocale']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>

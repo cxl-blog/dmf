@@ -99,6 +99,7 @@
     "onTabItemTap": true,
     "onThemeChange": true,
     "onUnhandledRejection": true,
-    "onUnload": true
+    "onUnload": true,
+    "useLocale": true
   }
 }
