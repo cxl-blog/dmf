@@ -53,6 +53,17 @@ export default defineConfig(({ mode }) => {
     define: {
       'process.env': process.env
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@/styles/variables.scss";`,
+          sassOptions: {
+            // 输出风格为expanded，解决Unicode字符压缩的时候会被置为乱码问题
+            outputStyle: 'expanded'
+          }
+        }
+      }
+    },
     server: {
       hmr: {
         overlay: false
