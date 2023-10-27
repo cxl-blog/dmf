@@ -62,6 +62,12 @@ declare global {
     UnCustomConfig<T, D>,
     UnCustomConfig['url'] | UnCustomConfig['method'] | UnCustomConfig['data']
   >
+
+  declare interface ImportMetaEnv {
+    NODE_ENV: string
+    VITE_BASE_PATH: string
+    VITE_API_BASE_PATH: string
+  }
 }
 
 export {}

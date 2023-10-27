@@ -78,7 +78,7 @@ class CancelRequestUtil {
 const cancelUtil = new CancelRequestUtil()
 
 const requestInstance: UnInstance = uan.create({
-  baseUrl: '',
+  baseUrl: import.meta.env.VITE_API_BASE_PATH,
   withCredentials: false,
   headers: {
     'Content-Type': 'application/json',
