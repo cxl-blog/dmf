@@ -3,15 +3,22 @@ const title = ref('Hello')
 </script>
 
 <template>
-  <view class="content">
-    <image class="logo mt-50px" src="/static/logo.png" />
+  <view class="content w-100% p-20px">
+    <view class="header w-100% flex justify-between">
+      <view class="header-left color-gray">
+        <text>占事</text>
+      </view>
+      <view class="header-right">
+        <up-text suffixIcon="arrow-right" text="查看更多" />
+      </view>
+    </view>
     <view class="text-area">
       <text class="title">{{ title }}</text>
     </view>
   </view>
 </template>
 
-<style>
+<style lang="scss" scoped>
 .content {
   display: flex;
   flex-direction: column;

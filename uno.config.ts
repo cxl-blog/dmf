@@ -1,19 +1,17 @@
-import presetWeapp from 'unocss-preset-weapp'
-import { extractorAttributify, transformerClass } from 'unocss-preset-weapp/transformer'
+// import presetWeapp from 'unocss-preset-weapp'
+// import { extractorAttributify, transformerClass } from 'unocss-preset-weapp/transformer'
 import { defineConfig } from 'unocss'
 import { presetUni } from '@uni-helper/unocss-preset-uni'
 
-const { presetWeappAttributify, transformerAttributify } = extractorAttributify()
+// const { presetWeappAttributify, transformerAttributify } = extractorAttributify()
 
 export default defineConfig({
   presets: [
-    presetUni(),
+    presetUni()
     // https://github.com/MellowCo/unocss-preset-weapp
-    // @ts-expect-error
-    presetWeapp(),
+    // presetWeapp(),
     // attributify autocomplete
-    // @ts-expect-error
-    presetWeappAttributify()
+    // presetWeappAttributify()
   ],
   shortcuts: [
     {
@@ -23,11 +21,8 @@ export default defineConfig({
 
   transformers: [
     // https://github.com/MellowCo/unocss-preset-weapp/tree/main/src/transformer/transformerAttributify
-    // @ts-expect-error
-    transformerAttributify(),
-
+    // transformerAttributify(),
     // https://github.com/MellowCo/unocss-preset-weapp/tree/main/src/transformer/transformerClass
-    // @ts-expect-error
-    transformerClass()
+    // transformerClass()
   ]
 })
