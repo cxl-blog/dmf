@@ -1,6 +1,4 @@
-<script setup lang="ts">
-const title = ref('Hello')
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <view class="content w-100% p-20px">
@@ -12,13 +10,28 @@ const title = ref('Hello')
         <up-text suffixIcon="arrow-right" text="查看更多" />
       </view>
     </view>
-    <view class="text-area">
-      <text class="title">{{ title }}</text>
+    <view class="content-center" />
+    <view class="content-footer w-100% flex justify-between">
+      <view class="flex flex-1 flex-col items-center">
+        <up-icon name="play-circle" size="80" />
+        <text class="block">重新摇卦</text>
+      </view>
+      <view class="flex flex-1 flex-col items-center">
+        <up-icon name="more-circle" size="80" />
+        <text class="block">查看卦象</text>
+      </view>
     </view>
   </view>
 </template>
 
 <style lang="scss" scoped>
+.content-center {
+  border-radius: 50%;
+  box-shadow: 0 0 15px 10px #ece5dd;
+  height: 70vw;
+  width: 70vw;
+  margin: 50px 0;
+}
 .content {
   display: flex;
   flex-direction: column;
