@@ -82,6 +82,7 @@ module.exports = defineConfig({
         order: ['script[setup]', 'template', 'script:not[setup]', 'style']
       }
     ],
-    '@typescript-eslint/consistent-type-assertions': 'off'
+    '@typescript-eslint/consistent-type-assertions': 'off',
+    '@typescript-eslint/consistent-type-definitions': 'off'
   }
 })
