@@ -88,6 +88,8 @@ declare global {
   const useAttrs: typeof import('vue')['useAttrs']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
+  const useDivination: typeof import('./src/store/modules/divination')['useDivination']
+  const useDivinationStore: typeof import('./src/store/modules/divination')['useDivinationStore']
   const useI18n: typeof import('vue-i18n')['useI18n']
   const useLocale: typeof import('./src/hooks/useLocale')['useLocale']
   const useSlots: typeof import('vue')['useSlots']
@@ -212,6 +214,9 @@ declare module 'vue' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
+    readonly useDivinationStore: UnwrapRef<
+      typeof import('./src/store/modules/divination')['useDivinationStore']
+    >
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useLocale: UnwrapRef<typeof import('./src/hooks/useLocale')['useLocale']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
@@ -318,6 +323,9 @@ declare module '@vue/runtime-core' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
+    readonly useDivinationStore: UnwrapRef<
+      typeof import('./src/store/modules/divination')['useDivinationStore']
+    >
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useLocale: UnwrapRef<typeof import('./src/hooks/useLocale')['useLocale']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>

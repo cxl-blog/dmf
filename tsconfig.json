@@ -16,6 +16,7 @@
     "noUnusedParameters": true,
     "experimentalDecorators": true,
     "noImplicitAny": false,
+    "importHelpers": true,
     "skipLibCheck": true,
     // Required in Vite
     // "isolatedModules": true,
@@ -36,13 +37,14 @@
   "vueCompilerOptions": {
     "experimentalRuntimeMode": "runtime-uni-app"
   },
+  "typeRoots": ["./types"],
   "include": [
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "types/**/*.d.ts",
-    "./auto-imports.d.ts",
+    "./auto-imports.d.ts"
   ],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "src/**/*.nvue"]
 }

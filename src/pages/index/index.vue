@@ -1,24 +1,35 @@
-<script setup lang="ts"></script>
+<script setup>
+const { mode } = storeToRefs(useDivinationStore())
+const { t } = useI18n()
+
+function jumpTo() {
+  uni.navigateTo({ url: '/pages/category/index' })
+}
+
+function handleShowDetail() {
+  uni.navigateTo({ url: '/pages/divinatory-symbol/Detail' })
+}
+</script>
 
 <template>
-  <view class="content w-100% p-20px">
+  <view class="content box-border w-100% p-20px">
     <view class="header w-100% flex justify-between">
       <view class="header-left color-gray">
-        <text>占事</text>
+        <text>{{ mode }}</text>
       </view>
       <view class="header-right">
-        <up-text suffixIcon="arrow-right" text="查看更多" />
+        <up-text suffixIcon="arrow-right" :text="t('查看更多')" @click="jumpTo" />
       </view>
     </view>
     <view class="content-center" />
     <view class="content-footer w-100% flex justify-between">
       <view class="flex flex-1 flex-col items-center">
         <up-icon name="play-circle" size="80" />
-        <text class="block">重新摇卦</text>
+        <text class="block">{{ t('重新摇卦') }}</text>
       </view>
-      <view class="flex flex-1 flex-col items-center">
+      <view class="flex flex-1 flex-col items-center" @click="handleShowDetail">
         <up-icon name="more-circle" size="80" />
-        <text class="block">查看卦象</text>
+        <text class="block">{{ t('查看卦象') }}</text>
       </view>
     </view>
   </view>

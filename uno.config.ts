@@ -15,7 +15,7 @@ export default defineConfig({
   ],
   shortcuts: [
     {
-      'uno-center': 'uno-flex uno-justify-center uno-items-center'
+      'flex-center': 'flex justify-center items-center'
     }
   ],
 

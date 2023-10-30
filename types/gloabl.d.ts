@@ -5,6 +5,8 @@ declare global {
     env: NodeJS.ProcessEnv
   }
 
+  declare interface IntrinsicElementAttributes {}
+
   declare interface Fn<T = any> {
     (...arg: T[]): T
   }

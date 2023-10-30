@@ -100,6 +100,8 @@
     "onThemeChange": true,
     "onUnhandledRejection": true,
     "onUnload": true,
-    "useLocale": true
+    "useLocale": true,
+    "useDivination": true,
+    "useDivinationStore": true
   }
 }

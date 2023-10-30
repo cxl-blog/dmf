@@ -4,6 +4,10 @@
   background-color: $u-bg-color;
 }
 
-* {
-  box-sizing: border-box;
+uni-page-wrapper {
+  position: relative;
+}
+
+uni-page-body {
+  min-height: 100%;
 }
