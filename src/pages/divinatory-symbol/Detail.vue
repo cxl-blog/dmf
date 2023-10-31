@@ -16,8 +16,8 @@ const { t } = useI18n()
               <text>印章</text>
               <text class="wm-ht">{{ t('本卦') }}</text>
             </view>
-            <view class="flex-center flex-1 py-20px">
-              <up-icon name="level" :size="50" />
+            <view class="flex-center flex-1">
+              <view class="divination-img" />
             </view>
             <View class="">
               <text class="lh-1px write-vertical-right"> {{ t('地风升') }} . {{ t('本卦') }} </text>
@@ -30,7 +30,7 @@ const { t } = useI18n()
           <view
             class="box-border h-100% flex flex-row-reverse b-1px b-[#000] b-rd-4px b-solid px-12px py-10px"
           >
-            <view class="ml-20px mr--12px flex items-center">
+            <view class="relative ml-20px mr--12px flex items-center">
               <text
                 class="divination-name w-16px w-16px b-1px b-r-0px b-[#000] b-solid px-8px py-5px line-height-20px write-vertical-right write-orient-upright"
                 >{{ t('周易第6卦初六爻') }}</text
@@ -70,10 +70,65 @@ const { t } = useI18n()
 }
 
 .divination-name {
+  position: relative;
   letter-spacing: 5px;
+  padding-top: 20px;
+  $wrap-h: 45px;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: $wrap-h;
+    background-color: black;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &::after {
+    border-radius: 100%;
+    width: 100%;
+    height: $wrap-h * 2;
+    content: '';
+    background-color: $u-bg-color;
+    // background-color: transparent;
+    position: absolute;
+    top: 2px;
+    left: 0;
+  }
+
+  :deep() span {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .divination-detail {
   letter-spacing: 5px;
+}
+
+.divination-img {
+  width: 50%;
+  height: 64%;
+  background-image: linear-gradient(
+      to right,
+      black 40%,
+      $u-bg-color 41%,
+      $u-bg-color 59%,
+      black 60%,
+      black 100%
+    ),
+    linear-gradient(to right, $u-bg-color, $u-bg-color),
+    linear-gradient(to right, black 40%, $u-bg-color 41%, $u-bg-color 59%, black 60%, black 100%),
+    linear-gradient(to right, $u-bg-color, $u-bg-color),
+    linear-gradient(to right, black 40%, $u-bg-color 41%, $u-bg-color 59%, black 60%, black 100%),
+    linear-gradient(to right, $u-bg-color, $u-bg-color), linear-gradient(to right, black, black),
+    linear-gradient(to right, $u-bg-color, $u-bg-color), linear-gradient(to right, black, black),
+    linear-gradient(to right, $u-bg-color, $u-bg-color),
+    linear-gradient(to right, black 40%, $u-bg-color 41%, $u-bg-color 59%, black 60%, black 100%);
+
+  background-size: 100% 6px, 100% 16px, 100% 24px, 100% 32px, 100% 40px, 100% 48px, 100% 56px,
+    100% 64px, 100% 72px, 100% 80px, 100% 88px;
+  background-repeat: no-repeat;
 }
 </style>
