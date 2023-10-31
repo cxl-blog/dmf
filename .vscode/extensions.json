@@ -9,6 +9,7 @@
     "Vue.vscode-typescript-vue-plugin",
     "esbenp.prettier-vscode",
     "antfu.unocss",
-    "dbaeumer.vscode-eslint"
+    "dbaeumer.vscode-eslint",
+    "github.vscode-github-actions"
   ]
 }
