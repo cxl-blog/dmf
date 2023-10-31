@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { useGlobalData, useRouter } from '@uni-helper/uni-use'
 import { categories } from './constant'
 

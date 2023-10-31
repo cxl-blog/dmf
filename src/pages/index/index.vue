@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
 
