@@ -108,26 +108,50 @@ const { t } = useI18n()
 }
 
 .divination-img {
+  $color-primary: rgba(0, 0, 0, 0.7);
   width: 50%;
   height: 64%;
   background-image: linear-gradient(
       to right,
-      black 40%,
+      $color-primary 40%,
       $u-bg-color 41%,
       $u-bg-color 59%,
-      black 60%,
-      black 100%
+      $color-primary 60%,
+      $color-primary 100%
     ),
     linear-gradient(to right, $u-bg-color, $u-bg-color),
-    linear-gradient(to right, black 40%, $u-bg-color 41%, $u-bg-color 59%, black 60%, black 100%),
+    linear-gradient(
+      to right,
+      $color-primary 40%,
+      $u-bg-color 41%,
+      $u-bg-color 59%,
+      $color-primary 60%,
+      $color-primary 100%
+    ),
     linear-gradient(to right, $u-bg-color, $u-bg-color),
-    linear-gradient(to right, black 40%, $u-bg-color 41%, $u-bg-color 59%, black 60%, black 100%),
-    linear-gradient(to right, $u-bg-color, $u-bg-color), linear-gradient(to right, black, black),
-    linear-gradient(to right, $u-bg-color, $u-bg-color), linear-gradient(to right, black, black),
+    linear-gradient(
+      to right,
+      $color-primary 40%,
+      $u-bg-color 41%,
+      $u-bg-color 59%,
+      $color-primary 60%,
+      $color-primary 100%
+    ),
     linear-gradient(to right, $u-bg-color, $u-bg-color),
-    linear-gradient(to right, black 40%, $u-bg-color 41%, $u-bg-color 59%, black 60%, black 100%);
+    linear-gradient(to right, $color-primary, $color-primary),
+    linear-gradient(to right, $u-bg-color, $u-bg-color),
+    linear-gradient(to right, $color-primary, $color-primary),
+    linear-gradient(to right, $u-bg-color, $u-bg-color),
+    linear-gradient(
+      to right,
+      $color-primary 40%,
+      $u-bg-color 41%,
+      $u-bg-color 59%,
+      $color-primary 60%,
+      $color-primary 100%
+    );
 
-  background-size: 100% 6px, 100% 16px, 100% 24px, 100% 32px, 100% 40px, 100% 48px, 100% 56px,
+  background-size: 100% 8px, 100% 16px, 100% 24px, 100% 32px, 100% 40px, 100% 48px, 100% 56px,
     100% 64px, 100% 72px, 100% 80px, 100% 88px;
   background-repeat: no-repeat;
 }
