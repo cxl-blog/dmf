@@ -16,11 +16,20 @@ function handleClick(item) {
 </script>
 
 <template>
-  <up-list class="box-border b-rd-4px p-16px">
+  <up-list class="list-container box-border p-16px">
     <up-list-item v-for="item in categories" :key="item.key">
       <up-cell :title="item.name" @click="handleClick(item)" />
     </up-list-item>
   </up-list>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.list-container {
+  background-color: $u-bg-color;
+
+  :deep() > div {
+    border-radius: 8px;
+    background-color: #fff;
+  }
+}
+</style>

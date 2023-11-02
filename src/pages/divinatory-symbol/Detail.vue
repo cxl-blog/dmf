@@ -36,7 +36,26 @@ const { t } = useI18n()
                 >{{ t('周易第6卦初六爻') }}</text
               >
             </view>
-            <scroll-view :scroll-x="true" class="min-w-0" :scroll-left="Number.MAX_SAFE_INTEGER">
+            <u-scroll-list
+              class="scroll-container min-w-0 shrink-1!"
+              indicator-active-color="#ebd478"
+              :indicator-style="{ left: `${Number.MAX_SAFE_INTEGER}px;` }"
+            >
+              <view
+                class="divination-detail pb-20px pt-30px write-vertical-right write-orient-upright"
+              >
+                <text>
+                  <text>初六爻辞，</text>
+                  <br />
+                  {{
+                    t(
+                      '初六，不永所事，小有言，终吉象曰：不永所事，讼不可长也，虽小有言，其辨明也。'
+                    )
+                  }}
+                </text>
+              </view>
+            </u-scroll-list>
+            <!-- <scroll-view :scroll-x="true" class="min-w-0" :scroll-left="Number.MAX_SAFE_INTEGER">
               <text class="divination-detail py-30px write-vertical-right write-orient-upright">
                 <text>初六爻辞，</text>
                 <br />
@@ -44,7 +63,7 @@ const { t } = useI18n()
                   t('初六，不永所事，小有言，终吉象曰：不永所事，讼不可长也，虽小有言，其辨明也。')
                 }}
               </text>
-            </scroll-view>
+            </scroll-view> -->
           </view>
         </view>
       </up-col>
@@ -67,6 +86,17 @@ const { t } = useI18n()
 <style scoped lang="scss">
 .wm-ht {
   writing-mode: vertical-rl;
+}
+
+.scroll-container {
+  :deep() .u-scroll-list__scroll-view,
+  :deep() .u-scroll-list__scroll-view__content {
+    height: 100%;
+  }
+
+  :deep() .u-scroll-list__indicator {
+    margin-top: 0;
+  }
 }
 
 .divination-name {
