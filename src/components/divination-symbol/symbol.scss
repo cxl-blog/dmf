@@ -1332,3 +1332,236 @@
   @include jian_53;
   transform: rotate(180deg);
 }
+
+// 55. 丰 feng
+@mixin feng {
+  background-image: linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor);
+}
+
+// 56. 旅 lv_56
+@mixin lv_56 {
+  @include feng;
+  transform: rotate(180deg);
+}
+
+// 57. 巽 xun
+@mixin xun {
+  background-image: linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    );
+}
+
+// 58. 兑 dui
+@mixin dui {
+  @include xun;
+  transform: rotate(180deg);
+}
+
+// 59. 涣 huan
+@mixin huan {
+  background-image: linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    );
+}
+
+// 60. 节 jie_60
+@mixin jie_60 {
+  @include huan;
+  transform: rotate(180deg);
+}
+
+// 61. 中孚 zhongfu
+@mixin zhongfu {
+  background-image: linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor);
+}
+
+// 62. 小过 xiaoguo
+@mixin xiaoguo {
+  background-image: linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    );
+}
+
+// 63. 既济 jiji
+@mixin jiji {
+  background-image: linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(
+      to right,
+      $activeBgColor 40%,
+      $inactiveBgColor 41%,
+      $inactiveBgColor 59%,
+      $activeBgColor 60%,
+      $activeBgColor 100%
+    ),
+    linear-gradient(to right, $inactiveBgColor, $inactiveBgColor),
+    linear-gradient(to right, $activeBgColor, $activeBgColor);
+}
+
+// 64. 未济 weiji
+@mixin weiji {
+  @include jiji;
+  transform: rotate(180deg);
+}

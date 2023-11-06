@@ -217,6 +217,46 @@ const list = ref([
   {
     name: '归妹',
     key: 'guimei'
+  },
+  {
+    name: '丰',
+    key: 'feng'
+  },
+  {
+    name: '旅',
+    key: 'lv_56'
+  },
+  {
+    name: '巽',
+    key: 'xun'
+  },
+  {
+    name: '兑',
+    key: 'dui'
+  },
+  {
+    name: '涣',
+    key: 'huan'
+  },
+  {
+    name: '节',
+    key: 'jie_60'
+  },
+  {
+    name: '中孚',
+    key: 'zhongfu'
+  },
+  {
+    name: '小过',
+    key: 'xiaoguo'
+  },
+  {
+    name: '既济',
+    key: 'jiji'
+  },
+  {
+    name: '未济',
+    key: 'weiji'
   }
 ])
 </script>

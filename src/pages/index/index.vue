@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { demo1 } from '@/api/common'
+
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
+
+demo1().then(res => {
+  console.log(res)
+})
 
 function jumpTo() {
   uni.navigateTo({ url: '/pages/category/index' })

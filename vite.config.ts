@@ -14,10 +14,12 @@ const targetMaps = {
 }
 
 if (process.env.npm_lifecycle_event && process.env.npm_lifecycle_event.match(/:(.+)/)) {
-  PROXY_ENV = process.env.npm_lifecycle_event.match(/:(.+)/)?.[0] || ''
+  PROXY_ENV = process.env.npm_lifecycle_event.split(':')?.[0] || ''
 }
 
 const root = process.cwd()
+
+console.log({ PROXY_ENV, ...targetMaps[PROXY_ENV] })
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {

@@ -122,7 +122,7 @@ const { t } = useI18n()
     width: 100%;
     height: $wrap-h * 2;
     content: '';
-    background-color: $u-bg-color;
+    background-color: #fff;
     // background-color: transparent;
     position: absolute;
     top: 2px;

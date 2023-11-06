@@ -269,5 +269,45 @@ $offset-11: v-bind(offset_11);
   &.guimei {
     @include guimei;
   }
+
+  &.feng {
+    @include feng;
+  }
+
+  &.lv_56 {
+    @include lv_56;
+  }
+
+  &.xun {
+    @include xun;
+  }
+
+  &.dui {
+    @include dui;
+  }
+
+  &.huan {
+    @include huan;
+  }
+
+  &.jie_60 {
+    @include jie_60;
+  }
+
+  &.zhongfu {
+    @include zhongfu;
+  }
+
+  &.xiaoguo {
+    @include xiaoguo;
+  }
+
+  &.jiji {
+    @include jiji;
+  }
+
+  &.weiji {
+    @include weiji;
+  }
 }
 </style>
