@@ -19,8 +19,6 @@ if (process.env.npm_lifecycle_event && process.env.npm_lifecycle_event.match(/:(
 
 const root = process.cwd()
 
-console.log({ PROXY_ENV, ...targetMaps[PROXY_ENV] })
-
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, root)
