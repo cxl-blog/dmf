@@ -157,11 +157,14 @@ function parseResponse(data: AppResponse) {
 export default {
   get: <D = any>(
     url: UnConfig['url'],
-    params: UnConfig['params'],
+    params: UnConfig['params'] = {},
     config: UnCustomGetConfig = {}
   ) => requestInstance({ url, params, ...config, method: 'GET' }) as unknown as Promise<D>,
-  post: <D = any>(url: UnConfig['url'], data: UnConfig['data'], config: UnCustomPostConfig = {}) =>
-    requestInstance({ url, data, ...config, method: 'POST' }) as unknown as Promise<D>,
+  post: <D = any>(
+    url: UnConfig['url'],
+    data: UnConfig['data'] = {},
+    config: UnCustomPostConfig = {}
+  ) => requestInstance({ url, data, ...config, method: 'POST' }) as unknown as Promise<D>,
   download: (config: UnConfig) => requestInstance.download(config),
   upload: (config: UnConfig) => requestInstance.upload(config)
 }

@@ -26,6 +26,12 @@
       "style": {
         "navigationBarTitleText": "预测解卦"
       }
+    },
+    {
+      "path": "pages/divinatory-symbol/List",
+      "style": {
+        "navigationBarTitleText": "卦象百科"
+      }
     }
   ],
   "globalStyle": {

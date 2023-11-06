@@ -9,6 +9,10 @@ function jumpTo() {
 function handleShowDetail() {
   uni.navigateTo({ url: '/pages/divinatory-symbol/Detail' })
 }
+
+function handleJumpList() {
+  uni.navigateTo({ url: '/pages/divinatory-symbol/List' })
+}
 </script>
 
 <template>
@@ -23,7 +27,7 @@ function handleShowDetail() {
     </view>
     <view class="content-center" />
     <view class="content-footer w-100% flex justify-between">
-      <view class="flex flex-1 flex-col items-center">
+      <view class="flex flex-1 flex-col items-center" @click="handleJumpList">
         <up-icon name="play-circle" size="80" />
         <text class="block">{{ t('重新摇卦') }}</text>
       </view>
