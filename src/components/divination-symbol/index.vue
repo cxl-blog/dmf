@@ -37,6 +37,7 @@ const defaultH = `${props.offsetItemY * 11}px`
 
 $activeBgColor: v-bind(activeBgColor);
 $inactiveBgColor: v-bind(inactiveBgColor);
+// $inactiveBgColor: transparent;
 $offset-1: v-bind(offset_1);
 $offset-2: v-bind(offset_2);
 $offset-3: v-bind(offset_3);

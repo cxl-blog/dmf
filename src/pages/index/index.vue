@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { demo1 } from '@/api/common'
+import { categories } from '@/api/common'
 
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
 
-demo1().then(res => {
+categories().then(res => {
   console.log(res)
 })
 

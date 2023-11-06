@@ -4,7 +4,8 @@
 import type { UnCancelTokenSource, UnConfig, UnInstance, UnResponse } from '@uni-helper/uni-network'
 import uan, { UnCancelToken, UnError } from '@uni-helper/uni-network'
 import qs from 'qs'
-import { HTTP_OK_STATUS } from '@/constants/request'
+
+// import { HTTP_OK_STATUS } from '@/constants/request'
 import { t } from '@/i18n'
 
 const { getLocale } = useLocale()
@@ -105,15 +106,15 @@ requestInstance.interceptors.response.use(
     }
 
     // 二进制请求，不用处理，直接返回
-    if (['blob', 'stream', 'arrayBuffer'].includes(config!.responseType!)) {
-      return Promise.resolve(data)
-    } else {
-      if (data?.code !== HTTP_OK_STATUS) {
-        !(config as UnCustomConfig<AppResponse>).ignoreErrorMsg && parseResponse(data!)
+    // if (['blob', 'stream', 'arrayBuffer'].includes(config!.responseType!)) {
+    //   return Promise.resolve(data)
+    // } else {
+    //   if (data?.code !== HTTP_OK_STATUS) {
+    //     !(config as UnCustomConfig<AppResponse>).ignoreErrorMsg && parseResponse(data!)
 
-        return Promise.reject(data)
-      }
-    }
+    //     return Promise.reject(data)
+    //   }
+    // }
 
     return Promise.resolve(data!.data)
   },
