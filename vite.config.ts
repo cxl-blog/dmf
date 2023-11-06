@@ -5,6 +5,18 @@ import uni from '@dcloudio/vite-plugin-uni'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 
+let PROXY_ENV = 'dev'
+
+const targetMaps = {
+  dev: {
+    target: 'https://sprintboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
+  }
+}
+
+if (process.env.npm_lifecycle_event && process.env.npm_lifecycle_event.match(/:(.+)/)) {
+  PROXY_ENV = process.env.npm_lifecycle_event.match(/:(.+)/)?.[0] || ''
+}
+
 const root = process.cwd()
 
 // https://vitejs.dev/config/
@@ -72,6 +84,18 @@ export default defineConfig(({ mode }) => {
         'access-control-allow-origin': '*',
         'access-control-allow-headers': '*',
         'access-control-allow-methods': '*'
+      },
+      proxy: {
+        [`${env.VITE_API_BASE_PATH}`]: {
+          ws: true,
+          changeOrigin: true,
+          secure: true,
+          rewrite: (path: string) => {
+            const regexp = new RegExp(`^${env.VITE_API_BASE_PATH}`)
+            return env.VITE_API_BASE_PATH !== '/' ? path.replace(regexp, '') : path
+          },
+          ...(targetMaps[PROXY_ENV] || {})
+        }
       }
     },
     optimizeDeps: {
