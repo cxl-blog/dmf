@@ -7,6 +7,7 @@ import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
 import UniPages from '@uni-helper/vite-plugin-uni-pages'
 import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import Unocss from 'unocss/vite'
+import { VitePluginOptimize, VitePluginPkgConfig } from './plugins/vite-plugin-optimize'
 
 let PROXY_ENV = 'dev'
 
@@ -42,6 +43,8 @@ export default defineConfig(({ mode }) => {
       }),
       UniManifest(),
       Unocss({ configFile: './uno.config.ts' }),
+      VitePluginPkgConfig(),
+      VitePluginOptimize(),
       AutoImport({
         include: [/\.[tj]sx?$/, /\.vue$/, /\.md$/],
         imports: ['vue', 'vue-i18n', 'pinia', 'uni-app'],
