@@ -85,6 +85,7 @@
     "@uni-helper/uni-ui-types": "^0.5.11",
     "@uni-helper/unocss-preset-uni": "^0.2.3",
     "@uni-helper/vite-plugin-uni-layouts": "^0.1.6",
+    "@uni-helper/vite-plugin-uni-manifest": "^0.2.3",
     "@uni-helper/vite-plugin-uni-pages": "^0.2.12",
     "@uni-helper/volar-service-uni-pages": "^0.2.12",
     "@unocss/eslint-config": "^0.57.1",

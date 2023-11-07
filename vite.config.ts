@@ -5,6 +5,7 @@ import uni from '@dcloudio/vite-plugin-uni'
 import AutoImport from 'unplugin-auto-import/vite'
 import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
 import UniPages from '@uni-helper/vite-plugin-uni-pages'
+import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import Unocss from 'unocss/vite'
 
 let PROXY_ENV = 'dev'
@@ -39,6 +40,7 @@ export default defineConfig(({ mode }) => {
         },
         vueJsxOptions: true
       }),
+      UniManifest(),
       Unocss({ configFile: './uno.config.ts' }),
       AutoImport({
         include: [/\.[tj]sx?$/, /\.vue$/, /\.md$/],
