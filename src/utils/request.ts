@@ -116,7 +116,7 @@ requestInstance.interceptors.response.use(
     //   }
     // }
 
-    return Promise.resolve(data!.data)
+    return Promise.resolve(data!)
   },
   (error: UnError<AppResponse>) => {
     const { data = {} } = error.response || {}

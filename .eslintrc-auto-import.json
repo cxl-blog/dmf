@@ -102,6 +102,8 @@
     "onUnload": true,
     "useLocale": true,
     "useDivination": true,
-    "useDivinationStore": true
+    "useDivinationStore": true,
+    "useAppStore": true,
+    "useAppStoreWithout": true
   }
 }

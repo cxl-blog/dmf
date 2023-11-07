@@ -3,6 +3,8 @@ import process from 'node:process'
 import { defineConfig, loadEnv } from 'vite'
 import uni from '@dcloudio/vite-plugin-uni'
 import AutoImport from 'unplugin-auto-import/vite'
+import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
+import UniPages from '@uni-helper/vite-plugin-uni-pages'
 import Unocss from 'unocss/vite'
 
 let PROXY_ENV = 'dev'
@@ -26,6 +28,8 @@ export default defineConfig(({ mode }) => {
   return {
     base: env.VITE_BASE_PATH,
     plugins: [
+      UniLayouts(),
+      UniPages(),
       uni({
         vueOptions: {
           include: [/\.vue$/, /\.md$/],

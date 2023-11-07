@@ -18,6 +18,7 @@
     "noImplicitAny": false,
     "importHelpers": true,
     "skipLibCheck": true,
+    "isolatedModules": true,
     // Required in Vite
     // "isolatedModules": true,
     "baseUrl": ".",
@@ -35,7 +36,6 @@
     ]
   },
   "vueCompilerOptions": {
-    "experimentalRuntimeMode": "runtime-uni-app"
   },
   "typeRoots": ["./types"],
   "include": [
