@@ -35,8 +35,7 @@
       "@uni-helper/uni-app-types"
     ]
   },
-  "vueCompilerOptions": {
-  },
+  "vueCompilerOptions": {},
   "typeRoots": ["./types"],
   "include": [
     "src/**/*.ts",

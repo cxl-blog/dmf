@@ -10,11 +10,24 @@
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
-    "source.fixAll.eslint": true
+    "source.fixAll.eslint": true,
+    "source.organizeImports": false
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.associations": {
     "manifest.json": "jsonc",
     "pages.json": "jsonc"
-  }
+  },
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml"
+  ]
 }
