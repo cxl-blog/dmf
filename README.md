@@ -29,7 +29,7 @@ npm run build:%PLATFORM%
 | mp-baidu | 百度小程序 |
 | mp-weixin | 微信小程序 |
 | mp-toutiao | 头条小程序 |
-| ml-lark | 飞书小程序 |
+| mp-lark | 飞书小程序 |
 | mp-qq | qq 小程序 |
 | mp-360 | 360 小程序 |
 | mp-kuaishuou | 快手小程序 |
