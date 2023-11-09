@@ -104,6 +104,7 @@
     "useDivination": true,
     "useDivinationStore": true,
     "useAppStore": true,
-    "useAppStoreWithout": true
+    "useAppStoreWithout": true,
+    "useRouteOptions": true
   }
 }

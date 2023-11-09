@@ -1,8 +1,24 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
+import { useRouter } from '@uni-helper/uni-use'
 import SymbolImg from '@/components/divination-symbol/index.vue'
+import { divinationDetail } from '@/api/divination'
 
 const { t } = useI18n()
+const router = useRouter()
+const trigramsId = computed<string>(() => (unref(router.page) as any).$page.options.trigramsId)
+console.log({ router, trigramsId })
+const detail = reactive<any>({})
+
+onBeforeMount(() => {
+  getDetail()
+})
+
+function getDetail() {
+  divinationDetail(unref(trigramsId)).then(res => {
+    Object.assign(detail, res)
+  })
+}
 </script>
 
 <template>
