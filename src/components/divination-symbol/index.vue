@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import type { CSSProperties } from 'vue'
+import type { DivinationSymbolType } from '@/config/divination'
 
 const props = withDefaults(
   defineProps<{
     offsetItemY?: number
-    symbolName: string
+    symbolName: DivinationSymbolType
     activeBgColor?: CSSProperties['background-color']
     inactiveBgColor?: CSSProperties['background-color']
   }>(),

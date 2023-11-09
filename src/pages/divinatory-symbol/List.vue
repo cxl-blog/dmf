@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import SymbolImg from '@/components/divination-symbol/index.vue'
+import type { DivinationSymbolType } from '@/config/divination'
 
 const list = ref([
   {
@@ -270,7 +271,11 @@ const list = ref([
             <text>{{ index + 1 }}.{{ item.name }}</text>
           </view>
           <view class="flex items-center justify-center px-12px pb-20px pt-10px">
-            <SymbolImg :symbol-name="item.key" inactive-bg-color="#fff" class="w-65%" />
+            <SymbolImg
+              :symbol-name="(item.key as DivinationSymbolType)"
+              inactive-bg-color="#fff"
+              class="w-65%"
+            />
           </view>
         </view>
       </up-col>

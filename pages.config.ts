@@ -39,7 +39,7 @@ export default defineUniPages({
     }
   ],
   globalStyle: {
-    navigationBarTextStyle: 'black',
+    navigationBarTextStyle: 'white',
     navigationStyle: 'custom'
   }
 })

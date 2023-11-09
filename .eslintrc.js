@@ -49,7 +49,7 @@ module.exports = defineConfig({
     'no-unused-vars': 'off',
     'space-before-function-paren': 'off',
 
-    // 'vue/attributes-order': 'off',
+    'vue/attributes-order': 'error',
     'vue/one-component-per-file': 'off',
     'vue/html-closing-bracket-newline': 'off',
     'vue/max-attributes-per-line': 'off',

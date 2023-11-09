@@ -17,7 +17,7 @@ function handleClick(item: CategoryItem) {
   divinationStore.$patch({
     mode: item.name
   })
-  uni.navigateBack({ delta: 1 })
+  uni.navigateBack({ delta: 1, animationType: 'pop-out' })
 }
 
 function getCategories() {
@@ -38,6 +38,7 @@ function getCategories() {
 <style scoped lang="scss">
 .list-container {
   background-color: $u-bg-color;
+  height: 100% !important;
 
   :deep() > div {
     border-radius: 8px;
