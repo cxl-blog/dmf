@@ -44,7 +44,7 @@ function start() {
     <view class="content-footer w-100% flex justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
         <up-icon name="play-circle" size="80" />
-        <text class="block">{{ !divinationDetail.trigramsId ? t('启卦') : t('重新摇卦') }}</text>
+        <text class="block">{{ !divinationDetail.trigramsId ? t('起卦') : t('重新摇卦') }}</text>
       </view>
       <view
         v-show="divinationDetail.trigramsId"

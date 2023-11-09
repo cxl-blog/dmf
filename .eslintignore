@@ -1,3 +1,5 @@
 /node_modules
 /dist/**
 .DS_Store
+/src/components/biz-scroll/
+/src/components/biz-scroll/*

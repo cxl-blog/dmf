@@ -3,12 +3,14 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from '@uni-helper/uni-use'
 import SymbolImg from '@/components/divination-symbol/index.vue'
 import { divinationDetail } from '@/api/divination'
+import BizScroll from '@/components/biz-scroll/index.vue'
 
 const { t } = useI18n()
 const router = useRouter()
 const trigramsId = computed<string>(() => (unref(router.page) as any).$page.options.trigramsId)
 console.log({ router, trigramsId })
 const detail = reactive<any>({})
+const bizScrollRef = ref()
 
 onBeforeMount(() => {
   getDetail()
@@ -17,6 +19,10 @@ onBeforeMount(() => {
 function getDetail() {
   divinationDetail(unref(trigramsId)).then(res => {
     Object.assign(detail, res)
+    nextTick(() => {
+      console.log({ a: unref(bizScrollRef) })
+      unref(bizScrollRef).scrollInfo.scrollLeft = Number.MAX_SAFE_INTEGER
+    })
   })
 }
 </script>
@@ -54,10 +60,13 @@ function getDetail() {
                 >{{ t('周易第6卦初六爻') }}</text
               >
             </view>
-            <u-scroll-list
+            <BizScroll
+              ref="bizScrollRef"
               class="scroll-container min-w-0 shrink-1!"
               indicator-active-color="#ebd478"
-              :indicator-style="{ left: `${Number.MAX_SAFE_INTEGER}px;` }"
+              :scrollViewAttrs="{
+                scrollLeft: Number.MAX_SAFE_INTEGER
+              }"
             >
               <view
                 class="divination-detail pb-20px pt-30px write-vertical-right write-orient-upright"
@@ -72,7 +81,7 @@ function getDetail() {
                   }}
                 </text>
               </view>
-            </u-scroll-list>
+            </BizScroll>
             <!-- <scroll-view :scroll-x="true" class="min-w-0" :scroll-left="Number.MAX_SAFE_INTEGER">
               <text class="divination-detail py-30px write-vertical-right write-orient-upright">
                 <text>初六爻辞，</text>

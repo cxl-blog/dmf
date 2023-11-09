@@ -124,7 +124,10 @@
     "optimizeDeps": {
       "include": [
         "@uni-helper/uni-network",
-        "qs"
+        "qs",
+        "uview-plus/components/u-scroll-list/props.js",
+        "uview-plus/libs/mixin/mixin.js",
+        "uview-plus/libs/mixin/mpMixin.js"
       ]
     }
   }
