@@ -21,6 +21,7 @@ const navbarH = useCssVar('--status-bar-height')
 const autoBack = computed(() => {
   return !unref(pageConfig).navbarDisableAutoBack
 })
+const pageLoading = ref(false)
 </script>
 
 <template>
@@ -36,6 +37,9 @@ const autoBack = computed(() => {
     <view class="app-main">
       <slot></slot>
     </view>
+    <up-loading-page v-show="pageLoading" loading-mode="spinner" class="page-loading">
+      212121
+    </up-loading-page>
   </view>
 </template>
 
@@ -43,6 +47,16 @@ const autoBack = computed(() => {
 .app-navbar {
   height: var(--status-bar-height);
   width: 100%;
+
+  :deep() .u-navbar__content {
+    background-color: $u-bg-color !important;
+    box-shadow: 0px 1px 0px 0px rgba(234, 226, 210, 0.8);
+  }
+
+  :deep() .u-navbar__content__title {
+    font-size: 18px;
+    font-weight: 600;
+  }
 }
 
 .app-main {

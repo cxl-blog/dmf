@@ -6,7 +6,8 @@ export const useAppStore = defineStore('app', {
   state: (): AppState => {
     return {
       title: '',
-      pages
+      pages,
+      pageLoading: false
     }
   }
 })

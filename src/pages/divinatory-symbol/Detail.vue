@@ -51,7 +51,7 @@ function getDetail() {
               />
             </view>
             <View class="">
-              <text class="lh-1px write-vertical-right">
+              <text class="text-12px lh-[normal] write-vertical-right">
                 {{ detail.alias }} . {{ t('本卦') }}
               </text>
             </View>
@@ -86,15 +86,6 @@ function getDetail() {
                 </text>
               </view>
             </BizScroll>
-            <!-- <scroll-view :scroll-x="true" class="min-w-0" :scroll-left="Number.MAX_SAFE_INTEGER">
-              <text class="divination-detail py-30px write-vertical-right write-orient-upright">
-                <text>初六爻辞，</text>
-                <br />
-                {{
-                  t('初六，不永所事，小有言，终吉象曰：不永所事，讼不可长也，虽小有言，其辨明也。')
-                }}
-              </text>
-            </scroll-view> -->
           </view>
         </view>
       </up-col>

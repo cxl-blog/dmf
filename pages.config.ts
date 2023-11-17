@@ -29,7 +29,7 @@ export default defineUniPages({
     {
       path: 'pages/divinatory-symbol/Detail',
       style: {
-        navigationBarTitleText: '预测解卦'
+        navigationBarTitleText: '查看卦象'
       }
     },
     {

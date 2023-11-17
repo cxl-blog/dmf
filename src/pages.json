@@ -27,7 +27,7 @@
       "path": "pages/divinatory-symbol/Detail",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "预测解卦"
+        "navigationBarTitleText": "查看卦象"
       }
     },
     {
