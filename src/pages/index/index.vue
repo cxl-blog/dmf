@@ -16,7 +16,8 @@ function jumpTo() {
 function handleShowDetail() {
   uni.navigateTo({
     url: `/pages/divinatory-symbol/Detail?trigramsId=${divinationDetail.trigramsId}`,
-    animationType: 'pop-in'
+    animationType: 'slide-in-right',
+    animationDuration: 300
   })
 }
 

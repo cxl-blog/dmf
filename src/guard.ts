@@ -2,13 +2,26 @@
  * @description 路由拦截器
  */
 
-const interceptors = ['navigateTo', 'redirectTo', 'switchTab', 'reLaunch']
+const interceptors = [
+  'navigateTo',
+  'redirectTo',
+  'switchTab',
+  'reLaunch',
+  'navigateBack',
+  'onLaunch'
+]
+const appStore = useAppStoreWithout()
+const { pageLoading } = storeToRefs(appStore)
 
 interceptors.forEach(path => {
   uni.addInterceptor(path, {
-    invoke(result) {
-      console.log({ result })
+    invoke() {
+      pageLoading.value = true
+
       return true
+    },
+    complete() {
+      pageLoading.value = false
     }
   })
 })

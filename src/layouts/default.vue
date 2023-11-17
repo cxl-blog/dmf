@@ -4,7 +4,7 @@ import { useCssVar } from '@vueuse/core'
 
 const page = usePage()
 const { t } = useI18n()
-const { pages } = storeToRefs(useAppStore())
+const { pages, pageLoading } = storeToRefs(useAppStore())
 console.log({ page })
 
 const pageConfig = computed<Partial<PageConfig>>(() => {
@@ -21,7 +21,6 @@ const navbarH = useCssVar('--status-bar-height')
 const autoBack = computed(() => {
   return !unref(pageConfig).navbarDisableAutoBack
 })
-const pageLoading = ref(false)
 </script>
 
 <template>
@@ -37,9 +36,16 @@ const pageLoading = ref(false)
     <view class="app-main">
       <slot></slot>
     </view>
-    <up-loading-page v-show="pageLoading" loading-mode="spinner" class="page-loading">
-      212121
-    </up-loading-page>
+    <u-loading-page class="page-loading" bg-color="rgba(17,14,12,0.70);" :loading="pageLoading">
+      <view class="loading-content">
+        <view class="loading-logo">
+          <view class="loading-logo-center" />
+        </view>
+        <view class="loading-text">
+          <text>{{ t('卜算子') }}</text>
+        </view>
+      </view>
+    </u-loading-page>
   </view>
 </template>
 
@@ -62,5 +68,61 @@ const pageLoading = ref(false)
 .app-main {
   height: calc(100svh - var(--status-bar-height));
   position: relative;
+}
+
+.page-loading {
+  background-color: rgba(17, 14, 12, 0.7);
+  :deep() .u-loading-page__warpper__loading-icon {
+    display: none;
+  }
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loading-logo {
+  $color: #b4a38c;
+
+  padding: 8px;
+  background-color: transparent;
+  border: 2px solid $color;
+  border-radius: 50%;
+  position: relative;
+  animation: logo-animate 2s linear infinite forwards;
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background-color: #b4a38c;
+    border-radius: 4px;
+    position: absolute;
+    bottom: -5px;
+    left: calc(50% - 4px);
+  }
+
+  &-center {
+    width: 72px;
+    height: 72px;
+    background-color: $color;
+    border-radius: 50%;
+  }
+}
+
+.loading-text {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 400;
+}
+
+@keyframes logo-animate {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

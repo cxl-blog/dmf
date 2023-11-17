@@ -8,6 +8,8 @@ type CategoryItem = {
 
 const divinationStore = useDivinationStore()
 const categories = ref<CategoryItem[]>([])
+const { pageLoading } = storeToRefs(useAppStore())
+pageLoading.value = true
 
 onBeforeMount(() => {
   getCategories()
@@ -18,18 +20,22 @@ function handleClick(item: CategoryItem) {
     category: item.index,
     mode: item.name
   })
-  uni.navigateBack({ delta: 1, animationType: 'pop-out' })
+  uni.navigateBack({ delta: 1, animationType: 'slide-out-right', animationDuration: 300 })
 }
 
 function getCategories() {
-  categoryList().then(res => {
-    categories.value = res.categories
-    const item = categories[0]
-    divinationStore.$patch({
-      category: item.index,
-      mode: item.name
+  categoryList()
+    .then(res => {
+      categories.value = res.categories
+      const item = categories.value[0]
+      divinationStore.$patch({
+        category: item.index,
+        mode: item.name
+      })
     })
-  })
+    .finally(() => {
+      pageLoading.value = false
+    })
 }
 </script>
 

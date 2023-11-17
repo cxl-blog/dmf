@@ -7,11 +7,13 @@ import BizScroll from '@/components/biz-scroll/index.vue'
 import { DIVINATION_SYMBOL } from '@/constants/divination'
 import type { DivinationDetail } from '@/config/divination'
 import { convertToChinaNum } from '@/utils'
+import sealSrc from '@/static/imgs/seal.png'
 
 const { t } = useI18n()
 
 const router = useRouter()
 const { category } = storeToRefs(useDivinationStore())
+const { pageLoading } = storeToRefs(useAppStore())
 const trigramsId = computed<string>(() => (unref(router.page) as any).$page.options.trigramsId)
 const detail = reactive<Partial<DivinationDetail>>({})
 const bizScrollRef = ref()
@@ -19,14 +21,20 @@ const symbolId = computed(() => {
   return DIVINATION_SYMBOL[detail.id!]?.key
 })
 
+pageLoading.value = true
+
 onBeforeMount(() => {
   getDetail()
 })
 
 function getDetail() {
-  divinationDetail(unref(trigramsId), { categoryIndex: category.value }).then(res => {
-    Object.assign(detail, res)
-  })
+  divinationDetail(unref(trigramsId), { categoryIndex: category.value })
+    .then(res => {
+      Object.assign(detail, res)
+    })
+    .finally(() => {
+      pageLoading.value = false
+    })
 }
 </script>
 
@@ -39,7 +47,7 @@ function getDetail() {
             class="box-border h-100% flex flex-col b-1px b-[#000] b-rd-4px b-solid px-12px py-10px align-start"
           >
             <view class="flex justify-between pt-12px">
-              <text>印章</text>
+              <up-image :src="sealSrc" width="20px" height="20px" :fade="true" />
               <text class="wm-ht">{{ t('本卦') }}</text>
             </view>
             <view class="flex-center flex-1">
@@ -92,7 +100,7 @@ function getDetail() {
     </up-row>
     <view class="b-rd-4px bg-[#fff] p-16px">
       <view class="mb-10px">
-        <text class="font-bold">{{ t('解释说明') }}</text>
+        <text class="font-bold">{{ t('解读说明') }}</text>
       </view>
       <view>
         <text> {{ detail.description }} </text>
@@ -156,7 +164,6 @@ function getDetail() {
 }
 
 .divination-img {
-  width: 50%;
-  height: 74%;
+  width: 55%;
 }
 </style>
