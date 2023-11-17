@@ -17,7 +17,8 @@ export default defineUniPages({
       path: 'pages/index/index',
       style: {
         navigationBarTitleText: '预测卦象'
-      }
+      },
+      navbarDisableAutoBack: true
     },
     {
       path: 'pages/category/index',

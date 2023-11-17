@@ -2,7 +2,7 @@
 import { categoryList } from '@/api/divination'
 
 type CategoryItem = {
-  id: string | number
+  index: number
   name: string
 }
 
@@ -15,6 +15,7 @@ onBeforeMount(() => {
 
 function handleClick(item: CategoryItem) {
   divinationStore.$patch({
+    category: item.index,
     mode: item.name
   })
   uni.navigateBack({ delta: 1, animationType: 'pop-out' })
@@ -23,13 +24,18 @@ function handleClick(item: CategoryItem) {
 function getCategories() {
   categoryList().then(res => {
     categories.value = res.categories
+    const item = categories[0]
+    divinationStore.$patch({
+      category: item.index,
+      mode: item.name
+    })
   })
 }
 </script>
 
 <template>
   <up-list class="list-container box-border p-16px">
-    <up-list-item v-for="item in categories" :key="item.id">
+    <up-list-item v-for="item in categories" :key="item.index">
       <up-cell :title="item.name" @click="handleClick(item)" />
     </up-list-item>
   </up-list>

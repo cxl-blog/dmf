@@ -5,19 +5,34 @@ import { useCssVar } from '@vueuse/core'
 const page = usePage()
 const { t } = useI18n()
 const { pages } = storeToRefs(useAppStore())
+console.log({ page })
+
+const pageConfig = computed<Partial<PageConfig>>(() => {
+  return unref(pages).find(item => item.path === unref(page).route) ?? {}
+})
 
 const title = computed(() => {
-  const route = unref(pages).find(item => item.path === unref(page).route)
-  const name = route?.title || route?.style?.navigationBarTitleText || '算子'
+  const name =
+    unref(pageConfig)?.navbarTitle ?? (unref(pageConfig)?.style?.navigationBarTitleText || '算子')
 
   return t(name)
 })
 const navbarH = useCssVar('--status-bar-height')
+const autoBack = computed(() => {
+  return !unref(pageConfig).navbarDisableAutoBack
+})
 </script>
 
 <template>
   <view>
-    <up-navbar class="app-navbar" :title="title" auto-back placeholder :height="navbarH" />
+    <up-navbar
+      class="app-navbar"
+      :title="title"
+      :auto-back="autoBack"
+      :leftIcon="autoBack ? 'arrow-left' : ''"
+      placeholder
+      :height="navbarH"
+    />
     <view class="app-main">
       <slot></slot>
     </view>

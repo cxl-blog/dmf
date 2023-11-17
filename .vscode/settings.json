@@ -6,7 +6,7 @@
   "i18n-ally.sourceLanguage": "en",
   "i18n-ally.displayLanguage": "zh-CN",
   "i18n-ally.enabledFrameworks": ["vue-sfc", "vue"],
-  "cSpell.words": ["pinia", "dcloudio", "unplugin", "unocss", "weapp", "vueuse"],
+  "cSpell.words": ["pinia", "dcloudio", "unplugin", "unocss", "weapp", "vueuse", "unref"],
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,

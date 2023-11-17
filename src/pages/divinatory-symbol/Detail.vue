@@ -5,19 +5,15 @@ import SymbolImg from '@/components/divination-symbol/index.vue'
 import { divinationDetail } from '@/api/divination'
 import BizScroll from '@/components/biz-scroll/index.vue'
 import { DIVINATION_SYMBOL } from '@/constants/divination'
+import type { DivinationDetail } from '@/config/divination'
+import { convertToChinaNum } from '@/utils'
 
 const { t } = useI18n()
 
-type Data = {
-  id: number
-  description: string
-  name: string
-  hexagramRecord: string
-}
-
 const router = useRouter()
+const { category } = storeToRefs(useDivinationStore())
 const trigramsId = computed<string>(() => (unref(router.page) as any).$page.options.trigramsId)
-const detail = reactive<Partial<Data>>({})
+const detail = reactive<Partial<DivinationDetail>>({})
 const bizScrollRef = ref()
 const symbolId = computed(() => {
   return DIVINATION_SYMBOL[detail.id!]?.key
@@ -28,12 +24,8 @@ onBeforeMount(() => {
 })
 
 function getDetail() {
-  divinationDetail(unref(trigramsId)).then(res => {
+  divinationDetail(unref(trigramsId), { categoryIndex: category.value }).then(res => {
     Object.assign(detail, res)
-    nextTick(() => {
-      console.log({ a: unref(bizScrollRef) })
-      unref(bizScrollRef).scrollInfo.scrollLeft = Number.MAX_SAFE_INTEGER
-    })
   })
 }
 </script>
@@ -59,7 +51,9 @@ function getDetail() {
               />
             </view>
             <View class="">
-              <text class="lh-1px write-vertical-right"> {{ t('地风升') }} . {{ t('本卦') }} </text>
+              <text class="lh-1px write-vertical-right">
+                {{ detail.alias }} . {{ t('本卦') }}
+              </text>
             </View>
           </view>
         </view>
@@ -72,7 +66,7 @@ function getDetail() {
             <view class="relative ml-20px mr--12px flex items-center">
               <text
                 class="divination-name w-16px w-16px b-1px b-r-0px b-[#000] b-solid px-8px py-5px line-height-20px write-vertical-right write-orient-upright"
-                >{{ t('周易第6卦') }}</text
+                >{{ t(`周易第${convertToChinaNum(detail.id!)}卦`) }}</text
               >
             </view>
             <BizScroll
@@ -87,7 +81,8 @@ function getDetail() {
                 class="divination-detail pb-20px pt-30px write-vertical-right write-orient-upright"
               >
                 <text>
-                  {{ detail.hexagramRecord }}
+                  {{ detail.hexagramRecord }}{{ detail.hexagramRecordExplanation }}<br />
+                  {{ detail.symbol }}{{ detail.symbolicExplanation }}
                 </text>
               </view>
             </BizScroll>

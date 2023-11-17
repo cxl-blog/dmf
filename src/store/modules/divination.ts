@@ -6,7 +6,8 @@ import type { DivinationState } from '@/config/divination'
 export const useDivinationStore = defineStore('divination', {
   state: (): DivinationState => {
     return {
-      mode: '运势'
+      category: 1,
+      mode: '事业'
     }
   }
 })
