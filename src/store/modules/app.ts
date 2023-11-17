@@ -7,7 +7,8 @@ export const useAppStore = defineStore('app', {
     return {
       title: '',
       pages,
-      pageLoading: false
+      pageLoading: false,
+      scheme: uni.getSystemInfoSync().hostTheme as any
     }
   }
 })

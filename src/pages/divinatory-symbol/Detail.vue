@@ -13,12 +13,16 @@ const { t } = useI18n()
 
 const router = useRouter()
 const { category } = storeToRefs(useDivinationStore())
-const { pageLoading } = storeToRefs(useAppStore())
+const { pageLoading, scheme } = storeToRefs(useAppStore())
 const trigramsId = computed<string>(() => (unref(router.page) as any).$page.options.trigramsId)
 const detail = reactive<Partial<DivinationDetail>>({})
 const bizScrollRef = ref()
 const symbolId = computed(() => {
   return DIVINATION_SYMBOL[detail.id!]?.key
+})
+
+const symbolActiveColor = computed(() => {
+  return scheme.value === 'light' ? 'rgba(0, 0, 0, 0.7)' : '#f5f5f5'
 })
 
 pageLoading.value = true
@@ -55,6 +59,7 @@ function getDetail() {
                 v-if="symbolId"
                 :symbol-name="symbolId"
                 inactiveBgColor="#ffffff"
+                :active-bg-color="symbolActiveColor"
                 class="divination-img"
               />
             </view>
