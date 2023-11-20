@@ -158,7 +158,7 @@ function getDetail() {
     left: 0;
   }
 
-  :deep() span {
+  :deep() * {
     position: relative;
     z-index: 1;
   }

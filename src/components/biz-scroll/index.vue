@@ -11,7 +11,6 @@
       scroll-direction="horizontal"
       :show-scrollbar="false"
       :offset-accuracy="1"
-      v-bind="scrollViewAttrs"
       @scroll="nvueScrollHandler"
     >
       <view class="u-scroll-list__scroll-view__content">
@@ -28,7 +27,6 @@
       :data-scrollWidth="scrollWidth"
       :data-barWidth="$u.getPx(indicatorBarWidth)"
       :data-indicatorWidth="$u.getPx(indicatorWidth)"
-      v-bind="scrollViewAttrs"
       :show-scrollbar="false"
       :upper-threshold="0"
       :lower-threshold="0"
@@ -45,7 +43,6 @@
         :show-scrollbar="false"
         :upper-threshold="0"
         :lower-threshold="0"
-        v-bind="scrollViewAttrs"
         @scroll="scrollHandler"
         @scrolltoupper="scrolltoupperHandler"
         @scrolltolower="scrolltolowerHandler"
