@@ -12,6 +12,7 @@ node_modules
 dist
 *.local
 .history
+.hbuilderx
 
 # Editor directories and files
 .idea

@@ -1,8 +1,8 @@
 import { defineManifestConfig } from '@uni-helper/vite-plugin-uni-manifest'
 
 export default defineManifestConfig({
-  name: '',
-  appid: '',
+  name: 'divination-master',
+  appid: '__UNI__8296E10',
   description: '',
   versionName: '1.0.0',
   versionCode: '100',
@@ -52,7 +52,7 @@ export default defineManifestConfig({
   quickapp: {},
   /* 小程序特有相关 */
   'mp-weixin': {
-    appid: '',
+    appid: 'wx3bb12404cf91f8f4',
     setting: {
       urlCheck: false
     },

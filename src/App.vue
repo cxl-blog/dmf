@@ -21,4 +21,9 @@ onBeforeMount(() => {
 })
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss">
+body {
+  background-color: $u-bg-color;
+  height: 100vh !important;
+}
+</style>

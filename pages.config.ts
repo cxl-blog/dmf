@@ -19,6 +19,7 @@ export default defineUniPages({
         navigationBarTitleText: '预测卦象'
       },
       navbarDisableAutoBack: true
+      // layout: false 不使用layout布局
     },
     {
       path: 'pages/category/index',
@@ -40,7 +41,9 @@ export default defineUniPages({
     }
   ],
   globalStyle: {
-    navigationBarTextStyle: 'white',
-    navigationStyle: 'custom'
+    // navigationBarTextStyle: 'black',
+    // navigationBarBackgroundColor: '#f7f5f1',
+    navigationStyle: 'custom',
+    'mp-weixin': {}
   }
 })

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
-import { useRouter } from '@uni-helper/uni-use'
 import SymbolImg from '@/components/divination-symbol/index.vue'
 import { divinationDetail } from '@/api/divination'
 import BizScroll from '@/components/biz-scroll/index.vue'
@@ -11,14 +10,19 @@ import sealSrc from '@/static/imgs/seal.png'
 
 const { t } = useI18n()
 
-const router = useRouter()
+// const router = useRouter()
 const { category } = storeToRefs(useDivinationStore())
 const { pageLoading, scheme } = storeToRefs(useAppStore())
-const trigramsId = computed<string>(() => (unref(router.page) as any).$page.options.trigramsId)
+const trigramsId = ref<string>('')
 const detail = reactive<Partial<DivinationDetail>>({})
 const bizScrollRef = ref()
 const symbolId = computed(() => {
   return DIVINATION_SYMBOL[detail.id!]?.key
+})
+
+onLoad(option => {
+  console.log({ option })
+  trigramsId.value = option!.trigramsId
 })
 
 const symbolActiveColor = computed(() => {
@@ -158,10 +162,10 @@ function getDetail() {
     left: 0;
   }
 
-  :deep() * {
-    position: relative;
-    z-index: 1;
-  }
+  // :deep() * {
+  //   position: relative;
+  //   z-index: 1;
+  // }
 }
 
 .divination-detail {

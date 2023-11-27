@@ -1,13 +1,16 @@
 @import 'uview-plus/index.scss';
 
-#app {
+body {
   background-color: $u-bg-color;
+  height: 100vh !important;
 }
 
 uni-page-wrapper {
   position: relative;
+  height: 100%;
 }
 
 uni-page-body {
   background-color: $u-bg-color;
+  height: 100%;
 }

@@ -29,5 +29,6 @@
     "json",
     "jsonc",
     "yaml"
-  ]
+  ],
+  "files.eol": "\n"
 }

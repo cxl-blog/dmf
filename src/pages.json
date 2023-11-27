@@ -39,8 +39,8 @@
     }
   ],
   "globalStyle": {
-    "navigationBarTextStyle": "white",
-    "navigationStyle": "custom"
+    "navigationStyle": "custom",
+    "mp-weixin": {}
   },
   "subPackages": []
 }

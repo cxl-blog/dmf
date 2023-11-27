@@ -89,7 +89,8 @@ const requestInstance: UnInstance = uan.create({
 })
 
 requestInstance.interceptors.request.use((config: UnConfig) => {
-  if ((config as UnCustomConfig).cancelable) {
+  console.log({ config })
+  if ((config as UnCustomConfig)?.cancelable) {
     cancelUtil.removePendingList(config) // 移除上次请求且没有结束的请求信息
     cancelUtil.addPendingList(config) // 添加新的信息
   }
@@ -99,9 +100,10 @@ requestInstance.interceptors.request.use((config: UnConfig) => {
 
 requestInstance.interceptors.response.use(
   (response: UnResponse<AppResponse>) => {
-    const { config, data } = response
+    // 微信小程序不能获取到config
+    const { config = {}, data } = response
 
-    if ((config as UnCustomConfig).cancelable) {
+    if ((config as UnCustomConfig)?.cancelable) {
       cancelUtil.removePendingList(config as UnCustomConfig)
     }
 

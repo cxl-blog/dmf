@@ -60,7 +60,8 @@ export default defineConfig(({ mode }) => {
     ],
     assetsInclude: ['./src/static/**'],
     esbuild: {
-      pure: ['console.log'],
+      // 微信调试
+      // pure: ['console.log'],
       drop: ['debugger']
     },
     resolve: {
@@ -98,12 +99,12 @@ export default defineConfig(({ mode }) => {
         [`${env.VITE_API_BASE_PATH}`]: {
           ws: true,
           changeOrigin: true,
-          secure: true,
-          rewrite: (path: string) => {
-            const regexp = new RegExp(`^${env.VITE_API_BASE_PATH}`)
-            return env.VITE_API_BASE_PATH !== '/' ? path.replace(regexp, '') : path
-          },
-          ...(targetMaps[PROXY_ENV] || {})
+          secure: true
+          // rewrite: (path: string) => {
+          //   const regexp = new RegExp(`^${env.VITE_API_BASE_PATH}`)
+          //   return env.VITE_API_BASE_PATH !== '/' ? path.replace(regexp, '') : path
+          // },
+          // ...(targetMaps[PROXY_ENV] || {})
         }
       }
     },

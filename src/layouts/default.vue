@@ -6,6 +6,8 @@ const page = usePage()
 const { t } = useI18n()
 const { pages, pageLoading } = storeToRefs(useAppStore())
 console.log({ page })
+const statusBarHeight = ref(44)
+const titleBarHeight = ref(44)
 
 const pageConfig = computed<Partial<PageConfig>>(() => {
   return unref(pages).find(item => item.path === unref(page).route) ?? {}
@@ -21,17 +23,34 @@ const navbarH = useCssVar('--status-bar-height')
 const autoBack = computed(() => {
   return !unref(pageConfig).navbarDisableAutoBack
 })
+
+onLoad(() => {
+  // #ifdef MP-WEIXIN
+  const systemInfo = uni.getSystemInfoSync()
+  statusBarHeight.value = systemInfo.statusBarHeight as number
+  const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
+  console.log({ menuButtonInfo })
+  titleBarHeight.value = (menuButtonInfo.top - unref(statusBarHeight)) * 2 + menuButtonInfo.height
+  // #endif
+})
 </script>
 
 <template>
-  <view>
+  <view class="h-100% bg-[#f7f5f1]">
+    <!-- 状态栏 -->
+    <!-- #ifdef MP-WEIXIN  -->
+    <view class="status_bar" :style="{ height: `${statusBarHeight}px` }" />
+    <!-- #endif -->
     <up-navbar
       class="app-navbar"
       :title="title"
       :auto-back="autoBack"
       :leftIcon="autoBack ? 'arrow-left' : ''"
+      bgColor="#f7f5f1"
       placeholder
+      :border="true"
       :height="navbarH"
+      :style="{ height: `${titleBarHeight}px` }"
     />
     <view class="app-main">
       <slot></slot>
@@ -53,11 +72,9 @@ const autoBack = computed(() => {
 .app-navbar {
   height: var(--status-bar-height);
   width: 100%;
-
-  :deep() .u-navbar__content {
-    background-color: $u-bg-color !important;
-    box-shadow: 0px 1px 0px 0px rgba(234, 226, 210, 0.8);
-  }
+  background-color: $u-bg-color !important;
+  box-shadow: 0px 1px 0px 0px rgba(234, 226, 210, 0.8);
+  border: 1px solid rgba(234, 226, 210, 0.8);
 
   :deep() .u-navbar__content__title {
     font-size: 18px;
@@ -66,7 +83,10 @@ const autoBack = computed(() => {
 }
 
 .app-main {
-  height: calc(100svh - var(--status-bar-height));
+  height: calc(100% - var(--status-bar-height));
+  // #ifdef MP-WEIXIN
+  height: calc(100vh - v-bind(statusBarHeight) - v-bind(titleBarHeight));
+  // #endif
   position: relative;
 }
 

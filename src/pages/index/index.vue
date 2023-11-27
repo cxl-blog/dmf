@@ -22,13 +22,9 @@ function handleShowDetail() {
 }
 
 async function start() {
-  startLoading.value = true
   const res = await customerTrigrams()
-
-  setTimeout(() => {
-    startLoading.value = false
-    Object.assign(divinationDetail, res)
-  }, 3000)
+  Object.assign(divinationDetail, res)
+  console.log({ res })
 }
 </script>
 
