@@ -1,7 +1,9 @@
 <script setup lang="ts">
+import { nextTick } from 'vue'
 import { customerTrigrams } from '@/api/divination'
 
 const { mode } = storeToRefs(useDivinationStore())
+const { pageLoading } = storeToRefs(useAppStore())
 const { t } = useI18n()
 const divinationDetail = reactive({
   id: '',
@@ -22,9 +24,12 @@ function handleShowDetail() {
 }
 
 async function start() {
+  pageLoading.value = true
   const res = await customerTrigrams()
   Object.assign(divinationDetail, res)
-  console.log({ res })
+  nextTick(() => {
+    pageLoading.value = false
+  })
 }
 </script>
 
