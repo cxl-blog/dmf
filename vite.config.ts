@@ -29,6 +29,9 @@ export default defineConfig(({ mode }) => {
 
   return {
     base: env.VITE_BASE_PATH,
+    build: {
+      assetsInlineLimit: 4096 * 1024 * 1024
+    },
     plugins: [
       UniLayouts(),
       UniPages(),
@@ -99,12 +102,12 @@ export default defineConfig(({ mode }) => {
         [`${env.VITE_API_BASE_PATH}`]: {
           ws: true,
           changeOrigin: true,
-          secure: true
-          // rewrite: (path: string) => {
-          //   const regexp = new RegExp(`^${env.VITE_API_BASE_PATH}`)
-          //   return env.VITE_API_BASE_PATH !== '/' ? path.replace(regexp, '') : path
-          // },
-          // ...(targetMaps[PROXY_ENV] || {})
+          secure: true,
+          rewrite: (path: string) => {
+            const regexp = new RegExp(`^${env.VITE_API_BASE_PATH}`)
+            return env.VITE_API_BASE_PATH !== '/' ? path.replace(regexp, '') : path
+          },
+          ...(targetMaps[PROXY_ENV] || {})
         }
       }
     },

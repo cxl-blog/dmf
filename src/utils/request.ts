@@ -80,7 +80,7 @@ const cancelUtil = new CancelRequestUtil()
 
 const requestInstance: UnInstance = uan.create({
   baseUrl: import.meta.env.VITE_API_BASE_PATH,
-  withCredentials: false,
+  withCredentials: true,
   headers: {
     'Content-Type': 'application/json',
     'Accept-Language': getLocale()

@@ -3,7 +3,6 @@ import { nextTick } from 'vue'
 import { customerTrigrams } from '@/api/divination'
 
 const { mode } = storeToRefs(useDivinationStore())
-const { pageLoading } = storeToRefs(useAppStore())
 const { t } = useI18n()
 const divinationDetail = reactive({
   id: '',
@@ -24,12 +23,15 @@ function handleShowDetail() {
 }
 
 async function start() {
-  pageLoading.value = true
-  const res = await customerTrigrams()
-  Object.assign(divinationDetail, res)
-  nextTick(() => {
-    pageLoading.value = false
-  })
+  startLoading.value = true
+  const timer = setTimeout(async () => {
+    const res = await customerTrigrams()
+    Object.assign(divinationDetail, res)
+    nextTick(() => {
+      startLoading.value = false
+    })
+    clearTimeout(timer)
+  }, 2000)
 }
 </script>
 
@@ -49,11 +51,7 @@ async function start() {
       <view class="content-center-3" :class="{ 'content-center-3-animate': startLoading }" />
     </view>
     <view class="content-footer w-100% flex justify-between">
-      <view
-        class="flex flex-1 flex-col items-center"
-        :class="{ 'btn-start-animate': startLoading }"
-        @click="start"
-      >
+      <view class="flex flex-1 flex-col items-center" @click="start">
         <up-icon name="play-circle" size="80" />
         <text class="text-block block">{{
           !divinationDetail.trigramsId ? t('起卦') : t('重新摇卦')
@@ -79,6 +77,10 @@ async function start() {
   height: 70vw;
   width: 70vw;
   margin: 50px 0;
+
+  &.logo-start-animate {
+    animation: content1 2s linear infinite forwards;
+  }
 }
 .content {
   display: flex;
@@ -92,39 +94,42 @@ async function start() {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: conic-gradient(red, orange);
+  background-size: 100% 100%;
 
-  &-animate {
-    animation: content1 1s linear infinite forwards;
-    animation-delay: 1.3s;
-  }
+  // background: conic-gradient(red, orange);
+  background-image: url('~@/static/imgs/logo3-1.png');
+
+  // &-animate {
+  //   animation: content1 2s linear infinite forwards;
+  // }
 }
 
 .content-center-2 {
   position: absolute;
-  width: 60%;
-  height: 60%;
-  margin: 20%;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background: conic-gradient(rgb(141, 141, 38), rgb(0, 255, 98));
-  &-animate {
-    animation: content2 1s linear infinite forwards;
-    animation-delay: 1.3s;
-  }
+  // background: conic-gradient(rgb(141, 141, 38), rgb(0, 255, 98));
+  background-image: url('~@/static/imgs/logo2-1.png');
+  background-size: 100% 100%;
+
+  // &-animate {
+  //   animation: content2 2s linear infinite forwards;
+  // }
 }
 
 .content-center-3 {
   position: absolute;
-  width: 30%;
-  height: 30%;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background: conic-gradient(rgb(255, 221, 249), rgb(85, 0, 255));
-  margin: 35%;
+  // background: conic-gradient(rgb(255, 221, 249), rgb(85, 0, 255));
+  background-size: 100% 100%;
+  background-image: url('~@/static/imgs/logo1-1.png');
 
-  &-animate {
-    animation: content1 1s linear infinite forwards;
-    animation-delay: 1.3s;
-  }
+  // &-animate {
+  //   animation: content1 2s linear infinite forwards;
+  // }
 }
 
 .text-area {
@@ -133,8 +138,8 @@ async function start() {
 }
 
 .logo-start-animate {
-  animation: logo-animate 0.3s ease-in forwards;
-  animation-delay: 1s;
+  // animation: logo-animate 0.3s ease-in forwards;
+  // animation-delay: 1s;
 }
 
 .btn-start-animate {

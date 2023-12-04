@@ -104,7 +104,7 @@ function VitePluginOptimize({ delay = 1000, filter = () => true }: OptimizeOptio
       resolve = function update(...args: string[]) {
         const str = args[0]
 
-        if (str && !str?.includes?.('new dependencies optimized:')) {
+        if (!str?.includes?.('new dependencies optimized:')) {
           return
         }
 
