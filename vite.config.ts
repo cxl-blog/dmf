@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => {
   return {
     base: env.VITE_BASE_PATH,
     build: {
-      assetsInlineLimit: 4096 * 1024 * 1024
+      assetsInlineLimit: 4096
     },
     plugins: [
       UniLayouts(),
