@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { nextTick } from 'vue'
 import { customerTrigrams } from '@/api/divination'
+import img1 from '~@/static/imgs/logo1-1.png'
+import img2 from '~@/static/imgs/logo2-1.png'
+import img3 from '~@/static/imgs/logo3-1.png'
 
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
@@ -46,9 +49,12 @@ async function start() {
       </view>
     </view>
     <view class="content-center" :class="{ 'logo-start-animate': startLoading }">
-      <view class="content-center-1" :class="{ 'content-center-1-animate': startLoading }" />
-      <view class="content-center-2" :class="{ 'content-center-2-animate': startLoading }" />
-      <view class="content-center-3" :class="{ 'content-center-3-animate': startLoading }" />
+      <image :src="img1" class="content-center-1" mode="scaleToFill" />
+      <image :src="img2" class="content-center-2" mode="scaleToFill" />
+      <image :src="img3" class="content-center-3" mode="scaleToFill" />
+      <!-- <view class="content-center-1" :class="{ 'content-center-1-animate': startLoading }" /> -->
+      <!-- <view class="content-center-2" :class="{ 'content-center-2-animate': startLoading }" /> -->
+      <!-- <view class="content-center-3" :class="{ 'content-center-3-animate': startLoading }" /> -->
     </view>
     <view class="content-footer w-100% flex justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
@@ -95,13 +101,6 @@ async function start() {
   height: 100%;
   border-radius: 50%;
   background-size: 100% 100%;
-
-  // background: conic-gradient(red, orange);
-  background-image: url('~@/static/imgs/logo3-1.png');
-
-  // &-animate {
-  //   animation: content1 2s linear infinite forwards;
-  // }
 }
 
 .content-center-2 {
@@ -109,13 +108,7 @@ async function start() {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  // background: conic-gradient(rgb(141, 141, 38), rgb(0, 255, 98));
-  background-image: url('~@/static/imgs/logo2-1.png');
   background-size: 100% 100%;
-
-  // &-animate {
-  //   animation: content2 2s linear infinite forwards;
-  // }
 }
 
 .content-center-3 {
@@ -123,13 +116,7 @@ async function start() {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  // background: conic-gradient(rgb(255, 221, 249), rgb(85, 0, 255));
   background-size: 100% 100%;
-  background-image: url('~@/static/imgs/logo1-1.png');
-
-  // &-animate {
-  //   animation: content1 2s linear infinite forwards;
-  // }
 }
 
 .text-area {

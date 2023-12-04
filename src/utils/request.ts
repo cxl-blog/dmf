@@ -89,7 +89,6 @@ const requestInstance: UnInstance = uan.create({
 })
 
 requestInstance.interceptors.request.use((config: UnConfig) => {
-  console.log({ config })
   if ((config as UnCustomConfig)?.cancelable) {
     cancelUtil.removePendingList(config) // 移除上次请求且没有结束的请求信息
     cancelUtil.addPendingList(config) // 添加新的信息

@@ -21,7 +21,6 @@ const symbolId = computed(() => {
 })
 
 onLoad(option => {
-  console.log({ option })
   trigramsId.value = option!.trigramsId
 })
 

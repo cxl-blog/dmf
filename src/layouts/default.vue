@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { usePage } from '@uni-helper/uni-use'
-import { useCssVar } from '@vueuse/core'
 
 const page = usePage()
 const { t } = useI18n()
 const { pages, pageLoading } = storeToRefs(useAppStore())
-console.log({ page })
 const statusBarHeight = ref(44)
 const titleBarHeight = ref(44)
 
@@ -19,9 +17,17 @@ const title = computed(() => {
 
   return t(name)
 })
-const navbarH = useCssVar('--status-bar-height')
+
 const autoBack = computed(() => {
   return !unref(pageConfig).navbarDisableAutoBack
+})
+const showBorder = computed(() => {
+  let flag = false
+  // #ifdef MP-WEIXIN
+  flag = true
+  // #endif
+
+  return flag
 })
 
 onLoad(() => {
@@ -29,7 +35,6 @@ onLoad(() => {
   const systemInfo = uni.getSystemInfoSync()
   statusBarHeight.value = systemInfo.statusBarHeight as number
   const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
-  console.log({ menuButtonInfo })
   titleBarHeight.value = (menuButtonInfo.top - unref(statusBarHeight)) * 2 + menuButtonInfo.height
   // #endif
 })
@@ -39,7 +44,7 @@ onLoad(() => {
   <view class="h-100% bg-[#f7f5f1]">
     <!-- 状态栏 -->
     <!-- #ifdef MP-WEIXIN  -->
-    <view class="status_bar" :style="{ height: `${statusBarHeight}px` }" />
+    <!-- <view class="status-bar" :style="{ height: `${statusBarHeight}px` }" /> -->
     <!-- #endif -->
     <up-navbar
       class="app-navbar"
@@ -48,9 +53,8 @@ onLoad(() => {
       :leftIcon="autoBack ? 'arrow-left' : ''"
       bgColor="#f7f5f1"
       placeholder
-      :border="true"
-      :height="navbarH"
-      :style="{ height: `${titleBarHeight}px` }"
+      :border="showBorder"
+      :height="`${titleBarHeight}px`"
     />
     <view class="app-main">
       <slot></slot>
