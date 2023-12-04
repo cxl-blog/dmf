@@ -10,6 +10,7 @@ import Unocss from 'unocss/vite'
 import { VitePluginOptimize, VitePluginPkgConfig } from './plugins/vite-plugin-optimize'
 
 let PROXY_ENV = 'dev'
+let platform = ''
 
 const targetMaps = {
   dev: {
@@ -19,6 +20,7 @@ const targetMaps = {
 
 if (process.env.npm_lifecycle_event && process.env.npm_lifecycle_event.match(/:(.+)/)) {
   PROXY_ENV = process.env.npm_lifecycle_event.split(':')?.[0] || ''
+  platform = process.env.npm_lifecycle_event.split(':')?.[1] || ''
 }
 
 const root = process.cwd()
@@ -26,6 +28,12 @@ const root = process.cwd()
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, root)
+
+  if (!platform || platform.toUpperCase() === 'MP-WEIXIN') {
+    env.VITE_API_BASE_PATH = 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com/'
+  } else {
+    env.VITE_API_BASE_PATH = '/apis/'
+  }
 
   return {
     base: env.VITE_BASE_PATH,
@@ -105,6 +113,10 @@ export default defineConfig(({ mode }) => {
           secure: true,
           rewrite: (path: string) => {
             const regexp = new RegExp(`^${env.VITE_API_BASE_PATH}`)
+            if (!platform || platform.toUpperCase() === 'MP-WEIXIN') {
+              return path
+            }
+
             return env.VITE_API_BASE_PATH !== '/' ? path.replace(regexp, '') : path
           },
           ...(targetMaps[PROXY_ENV] || {})

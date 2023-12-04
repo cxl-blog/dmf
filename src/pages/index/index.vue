@@ -52,9 +52,6 @@ async function start() {
       <image :src="img1" class="content-center-1" mode="scaleToFill" />
       <image :src="img2" class="content-center-2" mode="scaleToFill" />
       <image :src="img3" class="content-center-3" mode="scaleToFill" />
-      <!-- <view class="content-center-1" :class="{ 'content-center-1-animate': startLoading }" /> -->
-      <!-- <view class="content-center-2" :class="{ 'content-center-2-animate': startLoading }" /> -->
-      <!-- <view class="content-center-3" :class="{ 'content-center-3-animate': startLoading }" /> -->
     </view>
     <view class="content-footer w-100% flex justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
