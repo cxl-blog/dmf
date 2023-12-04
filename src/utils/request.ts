@@ -77,15 +77,20 @@ class CancelRequestUtil {
 }
 
 const cancelUtil = new CancelRequestUtil()
-let baseUrl = '/apis/'
+let baseUrl = import.meta.env.VITE_API_BASE_PATH
 
-// #ifdef MP-WEIXIN
-baseUrl = 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
-// #endif
+// eslint-disable-next-line n/prefer-global/process
+if (process.env.NODE_ENV === 'development') {
+  baseUrl = '/apis/'
+
+  // #ifdef MP-WEIXIN
+  baseUrl = 'https://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
+  // #endif
+}
 
 const requestInstance: UnInstance = uan.create({
   baseUrl,
-  withCredentials: true,
+  withCredentials: false,
   headers: {
     'Content-Type': 'application/json',
     'Accept-Language': getLocale()
