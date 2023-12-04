@@ -2,7 +2,7 @@
 <!-- eslint-disable prettier/prettier -->
 <!-- eslint-disable vue/no-unused-refs -->
 <template>
-  <view ref="u-scroll-list" class="u-scroll-list">
+  <view ref="u-scroll-list" class="u-scroll-list" :class="class">
     <!-- #ifdef APP-NVUE -->
     <!-- nvue使用bindingX实现，以得到更好的性能 -->
     <scroller
@@ -92,6 +92,10 @@ import mixin from 'uview-plus/libs/mixin/mixin.js'
 export default {
   name: 'biz-scroll',
   props: {
+    class: {
+      type: [Object, String],
+      default: () => ({})
+    },
     scrollViewAttrs: {
       type: Object,
       default: () => ({})

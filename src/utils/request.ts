@@ -77,9 +77,14 @@ class CancelRequestUtil {
 }
 
 const cancelUtil = new CancelRequestUtil()
+let baseUrl = '/apis/'
+
+// #ifdef MP-WEIXIN
+baseUrl = 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
+// #endif
 
 const requestInstance: UnInstance = uan.create({
-  baseUrl: import.meta.env.VITE_API_BASE_PATH,
+  baseUrl,
   withCredentials: true,
   headers: {
     'Content-Type': 'application/json',

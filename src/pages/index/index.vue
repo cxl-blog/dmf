@@ -121,11 +121,6 @@ async function start() {
   justify-content: center;
 }
 
-.logo-start-animate {
-  // animation: logo-animate 0.3s ease-in forwards;
-  // animation-delay: 1s;
-}
-
 .btn-start-animate {
   position: relative;
   animation: btn-start 1s ease-out forwards;

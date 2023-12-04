@@ -10,7 +10,6 @@ import sealSrc from '@/static/imgs/seal.png'
 
 const { t } = useI18n()
 
-// const router = useRouter()
 const { category } = storeToRefs(useDivinationStore())
 const { pageLoading, scheme } = storeToRefs(useAppStore())
 const trigramsId = ref<string>('')
@@ -25,7 +24,7 @@ onLoad(option => {
 })
 
 const symbolActiveColor = computed(() => {
-  return scheme.value === 'light' ? 'rgba(0, 0, 0, 0.7)' : '#f5f5f5'
+  return scheme.value === 'light' ? '#505050' : '#505050'
 })
 
 pageLoading.value = true
@@ -46,72 +45,80 @@ function getDetail() {
 </script>
 
 <template>
-  <view class="h-60vh p-16px">
-    <up-row :gutter="20" class="mb-20px h-60%" justify="space-between">
-      <up-col :span="6" class="h-100%">
-        <view class="h-100% b-2px b-[#000] b-rd-4px b-solid bg-white p-8px">
-          <view
-            class="box-border h-100% flex flex-col b-1px b-[#000] b-rd-4px b-solid px-12px py-10px align-start"
-          >
-            <view class="flex justify-between pt-12px">
-              <up-image :src="sealSrc" width="20px" height="20px" :fade="true" />
-              <text class="wm-ht">{{ t('本卦') }}</text>
-            </view>
-            <view class="flex-center flex-1">
-              <SymbolImg
-                v-if="symbolId"
-                :symbol-name="symbolId"
-                inactiveBgColor="#ffffff"
-                :active-bg-color="symbolActiveColor"
-                class="divination-img"
-              />
-            </view>
-            <View class="">
-              <text class="text-12px lh-[normal] write-vertical-right">
-                {{ detail.alias }} . {{ t('本卦') }}
-              </text>
-            </View>
-          </view>
-        </view>
-      </up-col>
-      <up-col :span="6" class="h-100%">
-        <view class="box-border h-100% b-2px b-[#000] b-rd-4px b-solid bg-white p-8px">
-          <view
-            class="box-border h-100% flex flex-row-reverse b-1px b-[#000] b-rd-4px b-solid px-12px py-10px"
-          >
-            <view class="relative ml-20px mr--12px flex items-center">
-              <text
-                class="divination-name w-16px w-16px b-1px b-r-0px b-[#000] b-solid px-8px py-5px line-height-20px write-vertical-right write-orient-upright"
-                >{{ t(`周易第${convertToChinaNum(detail.id!)}卦`) }}</text
-              >
-            </view>
-            <BizScroll
-              ref="bizScrollRef"
-              class="scroll-container min-w-0 shrink-1!"
-              indicator-active-color="#ebd478"
-              :scrollViewAttrs="{
-                left: Number.MAX_SAFE_INTEGER
-              }"
+  <view class="p-16px">
+    <view class="mb-20px">
+      <up-row :gutter="20" justify="space-between">
+        <up-col :span="6">
+          <view class="box-border h-320px b-2px b-[#000] b-rd-4px b-solid bg-white p-8px">
+            <view
+              class="box-border h-100% flex flex-col b-1px b-[#000] b-rd-4px b-solid px-12px py-10px align-start"
             >
-              <view
-                class="divination-detail pb-20px pt-30px write-vertical-right write-orient-upright"
-              >
-                <text>
-                  {{ detail.hexagramRecord }}{{ detail.hexagramRecordExplanation }}<br />
-                  {{ detail.symbol }}{{ detail.symbolicExplanation }}
-                </text>
+              <view class="flex justify-between pt-12px">
+                <up-image :src="sealSrc" width="20px" height="20px" :fade="true" />
+                <text class="wm-ht">{{ t('本卦') }}</text>
               </view>
-            </BizScroll>
+              <view class="flex-center flex-1">
+                <SymbolImg
+                  v-if="symbolId"
+                  :symbol-name="symbolId"
+                  inactiveBgColor="#ffffff"
+                  :active-bg-color="symbolActiveColor"
+                  class="divination-img"
+                />
+              </view>
+              <View class="">
+                <text class="text-12px lh-[normal] write-vertical-right">
+                  {{ detail.alias }} . {{ t('本卦') }}
+                </text>
+              </View>
+            </view>
           </view>
-        </view>
-      </up-col>
-    </up-row>
+        </up-col>
+        <up-col :span="6">
+          <view class="box-border h-320px b-2px b-[#000] b-rd-4px b-solid bg-white p-8px">
+            <view
+              class="box-border h-100% flex flex-row-reverse b-1px b-[#000] b-rd-4px b-solid px-12px py-10px"
+            >
+              <view class="relative ml-20px mr--12px flex items-center">
+                <!-- <view class="name-before" /> -->
+                <!-- <view class="name-after" /> -->
+                <text
+                  class="divination-name w-16px w-16px b-1px b-r-0px b-[#000] b-solid px-8px py-5px line-height-20px write-vertical-right write-orient-upright"
+                >
+                  {{ t(`周易第${convertToChinaNum(detail.id!)}卦`) }}</text
+                >
+              </view>
+              <view class="scroll-container relative min-w-0 shrink-1!">
+                <BizScroll
+                  ref="bizScrollRef"
+                  indicator-active-color="#ebd478"
+                  class="h-100%"
+                  :scrollViewAttrs="{
+                    left: Number.MAX_SAFE_INTEGER
+                  }"
+                >
+                  <view
+                    class="divination-detail pb-20px pt-30px write-vertical-right write-orient-upright"
+                  >
+                    <text>
+                      {{ detail.hexagramRecord }}{{ detail.hexagramRecordExplanation }}<br />
+                      {{ detail.symbol }}{{ detail.symbolicExplanation }}
+                    </text>
+                  </view>
+                </BizScroll>
+              </view>
+            </view>
+          </view>
+        </up-col>
+      </up-row>
+    </view>
+
     <view class="b-rd-4px bg-[#fff] p-16px">
       <view class="mb-10px">
         <text class="font-bold">{{ t('解读说明') }}</text>
       </view>
       <view>
-        <text> {{ detail.description }} </text>
+        <text> {{ detail.description || t('暂无解读说明') }} </text>
       </view>
     </view>
   </view>
@@ -123,6 +130,12 @@ function getDetail() {
 }
 
 .scroll-container {
+  position: relative;
+  :deep() .u-scroll-list {
+    position: relative;
+    height: 100%;
+  }
+
   :deep() .u-scroll-list__scroll-view,
   :deep() .u-scroll-list__scroll-view__content {
     height: 100%;
@@ -133,38 +146,32 @@ function getDetail() {
   }
 }
 
+$wrap-h: 45px;
 .divination-name {
   position: relative;
   letter-spacing: 5px;
   padding-top: 20px;
-  $wrap-h: 45px;
+}
 
-  &::before {
-    content: '';
-    width: 100%;
-    height: $wrap-h;
-    background-color: black;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
+.name-before {
+  content: '';
+  width: 100%;
+  height: $wrap-h;
+  background-color: black;
+  position: absolute;
+  top: 64px;
+  left: 0;
+}
 
-  &::after {
-    border-radius: 100%;
-    width: 100%;
-    height: $wrap-h * 2;
-    content: '';
-    background-color: #fff;
-    // background-color: transparent;
-    position: absolute;
-    top: 2px;
-    left: 0;
-  }
-
-  // :deep() * {
-  //   position: relative;
-  //   z-index: 1;
-  // }
+.name-after {
+  border-radius: 100%;
+  width: 100%;
+  height: $wrap-h * 2;
+  content: '';
+  background-color: transparent;
+  position: absolute;
+  top: 66px;
+  left: 0;
 }
 
 .divination-detail {

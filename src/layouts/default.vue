@@ -59,7 +59,15 @@ onLoad(() => {
     <view class="app-main">
       <slot></slot>
     </view>
-    <u-loading-page class="page-loading" bg-color="rgba(17,14,12,0.70);" :loading="pageLoading">
+    <u-loading-page
+      class="page-loading"
+      bg-color="rgba(17,14,12,0.70);"
+      :loading="pageLoading"
+      image=""
+      :icon-size="0"
+      loading-mode="spinner"
+      loadingColor="transparent"
+    >
       <view class="loading-content">
         <view class="loading-logo">
           <view class="loading-logo-center" />
@@ -92,6 +100,7 @@ onLoad(() => {
   height: calc(100vh - v-bind(statusBarHeight) - v-bind(titleBarHeight));
   // #endif
   position: relative;
+  background-color: $u-bg-color;
 }
 
 .page-loading {

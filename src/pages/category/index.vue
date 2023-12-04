@@ -40,21 +40,25 @@ function getCategories() {
 </script>
 
 <template>
-  <up-list class="list-container box-border p-16px">
-    <up-list-item v-for="item in categories" :key="item.index">
-      <up-cell :title="item.name" @click="handleClick(item)" />
-    </up-list-item>
-  </up-list>
+  <view class="list-container box-border overflow-hidden p-16px uni-weixin:p-16px">
+    <view class="list-content">
+      <up-list>
+        <up-list-item v-for="item in categories" :key="item.index">
+          <up-cell :title="item.name" @click="handleClick(item)" />
+        </up-list-item>
+      </up-list>
+    </view>
+  </view>
 </template>
 
 <style scoped lang="scss">
 .list-container {
-  background-color: $u-bg-color;
   height: 100% !important;
+  padding: 16px;
 
-  :deep() > div {
-    border-radius: 8px;
+  .list-content {
     background-color: #fff;
+    border-radius: 8px;
   }
 }
 </style>
