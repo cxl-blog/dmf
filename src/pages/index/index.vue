@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { nextTick } from 'vue'
 import { customerTrigrams } from '@/api/divination'
-import img1 from '~@/static/imgs/logo1-1.png'
-import img2 from '~@/static/imgs/logo2-1.png'
-import img3 from '~@/static/imgs/logo3-1.png'
+import imgSrc from '~@/static/imgs/logo1x.png'
 
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
@@ -26,6 +24,10 @@ function handleShowDetail() {
 }
 
 async function start() {
+  if (startLoading.value) {
+    return
+  }
+
   startLoading.value = true
   const timer = setTimeout(async () => {
     const res = await customerTrigrams()
@@ -49,9 +51,9 @@ async function start() {
       </view>
     </view>
     <view class="content-center" :class="{ 'logo-start-animate': startLoading }">
-      <image :src="img1" class="content-center-1" mode="scaleToFill" />
-      <image :src="img2" class="content-center-2" mode="scaleToFill" />
-      <image :src="img3" class="content-center-3" mode="scaleToFill" />
+      <image :src="imgSrc" class="content-center-1" mode="scaleToFill" />
+      <!-- <image :src="img2" class="content-center-2" mode="scaleToFill" /> -->
+      <!-- <image :src="img3" class="content-center-3" mode="scaleToFill" /> -->
     </view>
     <view class="content-footer w-100% flex justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
