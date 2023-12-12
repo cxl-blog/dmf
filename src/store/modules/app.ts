@@ -8,7 +8,8 @@ export const useAppStore = defineStore('app', {
       title: '',
       pages,
       pageLoading: false,
-      scheme: uni.getSystemInfoSync().hostTheme as any
+      scheme: uni.getSystemInfoSync().hostTheme as any,
+      navbarHeight: 0
     }
   }
 })

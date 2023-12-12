@@ -5,7 +5,14 @@ const page = usePage()
 const { t } = useI18n()
 const { pages, pageLoading } = storeToRefs(useAppStore())
 const statusBarHeight = ref(44)
-const titleBarHeight = ref(44)
+const navbarHeight = ref(44)
+
+const statusHPx = computed(() => {
+  return `${unref(statusBarHeight)}px`
+})
+const titleHPx = computed(() => {
+  return `${unref(navbarHeight)}px`
+})
 
 const pageConfig = computed<Partial<PageConfig>>(() => {
   return unref(pages).find(item => item.path === unref(page).route) ?? {}
@@ -35,7 +42,7 @@ onLoad(() => {
   const systemInfo = uni.getSystemInfoSync()
   statusBarHeight.value = systemInfo.statusBarHeight as number
   const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
-  titleBarHeight.value = (menuButtonInfo.top - unref(statusBarHeight)) * 2 + menuButtonInfo.height
+  navbarHeight.value = (menuButtonInfo.top - unref(statusBarHeight)) * 2 + menuButtonInfo.height
   // #endif
 })
 </script>
@@ -43,9 +50,6 @@ onLoad(() => {
 <template>
   <view class="h-100% bg-[#f7f5f1]">
     <!-- 状态栏 -->
-    <!-- #ifdef MP-WEIXIN  -->
-    <!-- <view class="status-bar" :style="{ height: `${statusBarHeight}px` }" /> -->
-    <!-- #endif -->
     <up-navbar
       class="app-navbar"
       :title="title"
@@ -54,7 +58,7 @@ onLoad(() => {
       bgColor="#f7f5f1"
       placeholder
       :border="showBorder"
-      :height="`${titleBarHeight}px`"
+      :height="`${navbarHeight}px`"
     />
     <view class="app-main">
       <slot></slot>
@@ -97,7 +101,7 @@ onLoad(() => {
 .app-main {
   height: calc(100% - var(--status-bar-height));
   // #ifdef MP-WEIXIN
-  height: calc(100vh - v-bind(statusBarHeight) - v-bind(titleBarHeight));
+  height: calc(100vh - v-bind(statusHPx) - v-bind(titleHPx));
   // #endif
   position: relative;
   background-color: $u-bg-color;

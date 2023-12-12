@@ -84,13 +84,14 @@ if (process.env.NODE_ENV === 'development') {
   baseUrl = '/apis/'
 
   // #ifdef MP-WEIXIN
-  baseUrl = 'https://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
+  baseUrl = 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
   // #endif
 }
 
 const requestInstance: UnInstance = uan.create({
   baseUrl,
   withCredentials: false,
+  timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
     'Accept-Language': getLocale()
@@ -104,6 +105,16 @@ requestInstance.interceptors.request.use((config: UnConfig) => {
     cancelUtil.addPendingList(config) // 添加新的信息
   }
 
+  // uni.showToast({
+  //   icon: 'error',
+  //   title: `${config.baseUrl}${config.url}`,
+  //   duration: 5000
+  // })
+
+  // if (config.baseUrl?.endsWith('/') && config.url?.startsWith('/')) {
+  //   config.baseUrl = config.baseUrl.replace(/(.*)\/$/, '$1')
+  // }
+
   return Promise.resolve(config)
 })
 
@@ -111,6 +122,12 @@ requestInstance.interceptors.response.use(
   (response: UnResponse<AppResponse>) => {
     // 微信小程序不能获取到config
     const { config = {}, data } = response
+
+    // uni.showToast({
+    //   icon: 'error',
+    //   title: JSON.stringify(data),
+    //   duration: 5000
+    // })
 
     if ((config as UnCustomConfig)?.cancelable) {
       cancelUtil.removePendingList(config as UnCustomConfig)
@@ -127,10 +144,16 @@ requestInstance.interceptors.response.use(
     //   }
     // }
 
-    return Promise.resolve(data!)
+    return Promise.resolve(data!) as unknown as any
   },
   (error: UnError<AppResponse>) => {
     const { data = {} } = error.response || {}
+
+    // uni.showToast({
+    //   icon: 'error',
+    //   title: data.message || error.message || t('请求失败啦T_T'),
+    //   duration: 5000
+    // })
 
     // 取消请求，跳过处理
     if (error.code === UnError.ERR_CANCELED) {

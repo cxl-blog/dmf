@@ -41,7 +41,7 @@ function getCategories() {
 
 <template>
   <view class="list-container box-border overflow-hidden p-16px uni-weixin:p-16px">
-    <view class="list-content">
+    <view class="list-content h-100%">
       <up-list>
         <up-list-item v-for="item in categories" :key="item.index">
           <up-cell :title="item.name" @click="handleClick(item)" />
@@ -59,6 +59,10 @@ function getCategories() {
   .list-content {
     background-color: #fff;
     border-radius: 8px;
+
+    :deep() .u-list {
+      height: 100% !important;
+    }
   }
 }
 </style>

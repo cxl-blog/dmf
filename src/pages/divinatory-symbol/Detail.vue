@@ -79,7 +79,7 @@ function getDetail() {
             <view
               class="box-border h-100% flex flex-row-reverse b-1px b-[#000] b-rd-4px b-solid px-12px py-10px"
             >
-              <view class="relative ml-20px mr--12px flex items-center">
+              <view class="relative ml-20px mr--10px flex items-center">
                 <!-- <view class="name-before" /> -->
                 <!-- <view class="name-after" /> -->
                 <text
@@ -88,7 +88,7 @@ function getDetail() {
                   {{ t(`周易第${convertToChinaNum(detail.id!)}卦`) }}</text
                 >
               </view>
-              <view class="scroll-container relative min-w-0 shrink-1!">
+              <view class="scroll-container relative min-w-0">
                 <BizScroll
                   ref="bizScrollRef"
                   indicator-active-color="#ebd478"
