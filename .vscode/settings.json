@@ -9,9 +9,9 @@
   "cSpell.words": ["pinia", "dcloudio", "unplugin", "unocss", "weapp", "vueuse", "unref"],
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.eslint": true,
-    "source.organizeImports": false
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.associations": {
