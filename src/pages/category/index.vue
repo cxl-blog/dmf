@@ -27,11 +27,6 @@ function getCategories() {
   categoryList()
     .then(res => {
       categories.value = res.categories
-      const item = categories.value[0]
-      divinationStore.$patch({
-        category: item.index,
-        mode: item.name
-      })
     })
     .finally(() => {
       pageLoading.value = false

@@ -4,6 +4,7 @@ import { usePage } from '@uni-helper/uni-use'
 const page = usePage()
 const { t } = useI18n()
 const { pages, pageLoading } = storeToRefs(useAppStore())
+const { mode } = storeToRefs(useDivinationStore())
 const statusBarHeight = ref(44)
 const navbarHeight = ref(44)
 
@@ -20,9 +21,10 @@ const pageConfig = computed<Partial<PageConfig>>(() => {
 
 const title = computed(() => {
   const name =
-    unref(pageConfig)?.navbarTitle ?? (unref(pageConfig)?.style?.navigationBarTitleText || '算子')
+    unref(pageConfig)?.navbarTitle ??
+    (unref(pageConfig)?.style?.navigationBarTitleText || '命运大师')
 
-  return t(name)
+  return pageConfig.value.path === 'pages/category/index' ? t(unref(mode)) : t(name)
 })
 
 const autoBack = computed(() => {
