@@ -48,7 +48,7 @@ onLoad(() => {
 </script>
 
 <template>
-  <view class="h-100% bg-[#f7f5f1]">
+  <view class="app-layout h-100% bg-[#f7f5f1]">
     <!-- 状态栏 -->
     <up-navbar
       class="app-navbar"
@@ -85,17 +85,18 @@ onLoad(() => {
 </template>
 
 <style scoped lang="scss">
+.app-layout {
+  :deep() .u-navbar__content__title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+}
 .app-navbar {
   height: var(--status-bar-height);
   width: 100%;
   background-color: $u-bg-color !important;
   box-shadow: 0px 1px 0px 0px rgba(234, 226, 210, 0.8);
   border: 1px solid rgba(234, 226, 210, 0.8);
-
-  :deep() .u-navbar__content__title {
-    font-size: 18px;
-    font-weight: 600;
-  }
 }
 
 .app-main {

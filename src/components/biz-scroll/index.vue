@@ -30,6 +30,7 @@
       :show-scrollbar="false"
       :upper-threshold="0"
       :lower-threshold="0"
+      :scroll-left="initScrollLeft"
       @scroll="wxs.scroll"
       @scrolltoupper="wxs.scrolltoupper"
       @scrolltolower="wxs.scrolltolower"
@@ -43,6 +44,7 @@
         :show-scrollbar="false"
         :upper-threshold="0"
         :lower-threshold="0"
+        :scroll-left="initScrollLeft"
         @scroll="scrollHandler"
         @scrolltoupper="scrolltoupperHandler"
         @scrolltolower="scrolltolowerHandler"
@@ -96,9 +98,9 @@ export default {
       type: [Object, String],
       default: () => ({})
     },
-    scrollViewAttrs: {
-      type: Object,
-      default: () => ({})
+    initScrollLeft: {
+      type: [Number, String],
+      default: () => 0
     }
   },
   // #ifndef APP-NVUE

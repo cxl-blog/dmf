@@ -7,6 +7,7 @@ import { DIVINATION_SYMBOL } from '@/constants/divination'
 import type { DivinationDetail } from '@/config/divination'
 import { convertToChinaNum } from '@/utils'
 import sealSrc from '@/static/imgs/seal.png'
+import bgSrc from '@/static/imgs/detail_bg1x.png'
 
 const { t } = useI18n()
 
@@ -26,6 +27,11 @@ onLoad(option => {
 const symbolActiveColor = computed(() => {
   return scheme.value === 'light' ? '#505050' : '#505050'
 })
+const bizScrollLeft = ref(0)
+const nameRect = reactive({
+  with: 32,
+  height: 130
+})
 
 pageLoading.value = true
 
@@ -37,15 +43,29 @@ function getDetail() {
   divinationDetail(unref(trigramsId), { categoryIndex: category.value })
     .then(res => {
       Object.assign(detail, res)
+      nextTick(() => {
+        bizScrollLeft.value = Number.MAX_SAFE_INTEGER
+        computedNameRect()
+      })
     })
     .finally(() => {
       pageLoading.value = false
     })
 }
+
+function computedNameRect() {
+  uni
+    .createSelectorQuery()
+    .select('.divination-detail-container .divination-name')
+    .boundingClientRect(data => {
+      Object.assign(nameRect, data)
+    })
+    .exec()
+}
 </script>
 
 <template>
-  <view class="p-16px">
+  <view class="divination-detail-container p-16px">
     <view class="mb-20px">
       <up-row :gutter="20" justify="space-between">
         <up-col :span="6">
@@ -80,22 +100,29 @@ function getDetail() {
               class="box-border h-100% flex flex-row-reverse b-1px b-[#000] b-rd-4px b-solid px-12px py-10px"
             >
               <view class="relative ml-20px mr--10px flex items-center">
-                <!-- <view class="name-before" /> -->
-                <!-- <view class="name-after" /> -->
+                <!-- #ifdef MP-WEIXIN -->
+                <image
+                  class="absolute"
+                  :style="{ width: `${nameRect.with}px`, height: `${nameRect.height}px` }"
+                  :src="bgSrc"
+                  mode="scaleToFill"
+                />
+                <!-- #endif -->
                 <text
-                  class="divination-name w-16px w-16px b-1px b-r-0px b-[#000] b-solid px-8px py-5px line-height-20px write-vertical-right write-orient-upright"
+                  class="divination-name w-16px w-16px px-8px py-5px line-height-20px write-vertical-right write-orient-upright"
                 >
+                  <!-- #ifndef MP-WEIXIN -->
+                  <image :src="bgSrc" class="name-bg-image" mode="scaleToFill" />
+                  <!-- #endif -->
                   {{ t(`周易第${convertToChinaNum(detail.id!)}卦`) }}</text
                 >
               </view>
-              <view class="scroll-container relative min-w-0">
+              <view class="scroll-container relative min-w-0 flex-1">
                 <BizScroll
                   ref="bizScrollRef"
                   indicator-active-color="#ebd478"
                   class="h-100%"
-                  :scrollViewAttrs="{
-                    left: Number.MAX_SAFE_INTEGER
-                  }"
+                  :initScrollLeft="bizScrollLeft"
                 >
                   <view
                     class="divination-detail pb-20px pt-30px write-vertical-right write-orient-upright"
@@ -151,6 +178,14 @@ $wrap-h: 45px;
   position: relative;
   letter-spacing: 5px;
   padding-top: 20px;
+
+  .name-bg-image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
 }
 
 .name-before {
