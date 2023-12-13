@@ -52,8 +52,6 @@ async function start() {
     </view>
     <view class="content-center" :class="{ 'logo-start-animate': startLoading }">
       <image :src="imgSrc" class="content-center-1" mode="scaleToFill" />
-      <!-- <image :src="img2" class="content-center-2" mode="scaleToFill" /> -->
-      <!-- <image :src="img3" class="content-center-3" mode="scaleToFill" /> -->
     </view>
     <view class="content-footer w-100% flex justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">

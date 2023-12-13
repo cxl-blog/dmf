@@ -29,7 +29,9 @@ function getCategories() {
       categories.value = res.categories
     })
     .finally(() => {
-      pageLoading.value = false
+      nextTick(() => {
+        pageLoading.value = false
+      })
     })
 }
 </script>

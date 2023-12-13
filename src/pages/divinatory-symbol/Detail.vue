@@ -43,13 +43,13 @@ function getDetail() {
   divinationDetail(unref(trigramsId), { categoryIndex: category.value })
     .then(res => {
       Object.assign(detail, res)
+    })
+    .finally(() => {
       nextTick(() => {
         bizScrollLeft.value = Number.MAX_SAFE_INTEGER
         computedNameRect()
+        pageLoading.value = false
       })
-    })
-    .finally(() => {
-      pageLoading.value = false
     })
 }
 
