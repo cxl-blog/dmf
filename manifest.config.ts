@@ -54,7 +54,10 @@ export default defineManifestConfig({
   'mp-weixin': {
     appid: 'wx3bb12404cf91f8f4',
     setting: {
-      urlCheck: false
+      urlCheck: false,
+      es6: true,
+      minified: true,
+      bigPackageSizeSupport: false
     },
     usingComponents: true
   },
@@ -70,6 +73,13 @@ export default defineManifestConfig({
   },
   uniStatistics: {
     enable: false
+  },
+  h5: {
+    optimization: {
+      treeShaking: {
+        enable: true
+      }
+    }
   },
   vueVersion: '3'
 })
