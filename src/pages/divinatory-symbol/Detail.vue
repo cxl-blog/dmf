@@ -15,7 +15,6 @@ const { category } = storeToRefs(useDivinationStore())
 const { pageLoading, scheme } = storeToRefs(useAppStore())
 const trigramsId = ref<string>('')
 const detail = reactive<Partial<DivinationDetail>>({})
-const bizScrollRef = ref()
 const symbolId = computed(() => {
   return DIVINATION_SYMBOL[detail.id!]?.key
 })
@@ -129,7 +128,6 @@ async function computedNameRect() {
               </view>
               <view class="scroll-container relative min-w-0 flex-1">
                 <BizScroll
-                  ref="bizScrollRef"
                   indicator-active-color="#ebd478"
                   class="h-100%"
                   :initScrollLeft="bizScrollLeft"

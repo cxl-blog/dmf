@@ -2,14 +2,7 @@
  * @description 路由拦截器
  */
 
-const interceptors = [
-  'navigateTo',
-  'redirectTo',
-  'switchTab',
-  'reLaunch',
-  'navigateBack',
-  'onLaunch'
-]
+const interceptors = ['navigateTo', 'redirectTo', 'switchTab', 'reLaunch', 'navigateBack']
 const appStore = useAppStoreWithout()
 const { pageLoading } = storeToRefs(appStore)
 
