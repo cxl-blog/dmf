@@ -2,6 +2,8 @@
 import { nextTick } from 'vue'
 import { customerTrigrams } from '@/api/divination'
 import imgSrc from '~@/static/imgs/logo1x.png'
+import startSrc from '@/static/imgs/start.svg'
+import restartSrc from '@/static/imgs/restart.svg'
 
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
@@ -55,7 +57,13 @@ async function start() {
     </view>
     <view class="content-footer w-100% flex justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
-        <up-icon name="play-circle" size="80" />
+        <up-image
+          :src="!divinationDetail.trigramsId ? startSrc : restartSrc"
+          width="80px"
+          height="80px"
+          :fade="false"
+          :lazyLoad="false"
+        />
         <text class="text-block block">{{
           !divinationDetail.trigramsId ? t('起卦') : t('重新摇卦')
         }}</text>

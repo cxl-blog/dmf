@@ -45,22 +45,26 @@ function getDetail() {
       Object.assign(detail, res)
     })
     .finally(() => {
-      nextTick(() => {
+      nextTick(async () => {
         bizScrollLeft.value = Number.MAX_SAFE_INTEGER
-        computedNameRect()
+        await computedNameRect()
+        await nextTick()
         pageLoading.value = false
       })
     })
 }
 
-function computedNameRect() {
-  uni
-    .createSelectorQuery()
-    .select('.divination-detail-container .divination-name')
-    .boundingClientRect(data => {
-      Object.assign(nameRect, data)
-    })
-    .exec()
+async function computedNameRect() {
+  return new Promise(resolve => {
+    uni
+      .createSelectorQuery()
+      .select('.divination-detail-container .divination-name')
+      .boundingClientRect(data => {
+        Object.assign(nameRect, data)
+        resolve(null)
+      })
+      .exec()
+  })
 }
 </script>
 
@@ -74,7 +78,13 @@ function computedNameRect() {
               class="box-border h-100% flex flex-col b-1px b-[#000] b-rd-4px b-solid px-12px py-10px align-start"
             >
               <view class="flex justify-between pt-12px">
-                <up-image :src="sealSrc" width="20px" height="20px" :fade="true" />
+                <up-image
+                  :src="sealSrc"
+                  width="20px"
+                  height="20px"
+                  :fade="false"
+                  :lazyLoad="false"
+                />
                 <text class="wm-ht">{{ t('本卦') }}</text>
               </view>
               <view class="flex-center flex-1">

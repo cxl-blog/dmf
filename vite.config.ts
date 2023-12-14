@@ -14,7 +14,8 @@ let platform = ''
 
 const targetMaps = {
   dev: {
-    target: 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
+    // target: 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
+    target: 'https://springboot-5thz-84626-6-1322169562.sh.run.tcloudbase.com'
   }
 }
 
@@ -31,7 +32,8 @@ export default defineConfig(({ mode }) => {
 
   if (mode === 'development') {
     if (!platform || platform.toUpperCase() === 'MP-WEIXIN') {
-      env.VITE_API_BASE_PATH = 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
+      // env.VITE_API_BASE_PATH = 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
+      env.VITE_API_BASE_PATH = 'https://springboot-5thz-84626-6-1322169562.sh.run.tcloudbase.com'
     } else {
       env.VITE_API_BASE_PATH = '/apis/'
     }
