@@ -339,7 +339,9 @@
 // 10. 履 lv
 @mixin lv {
   @include xiaochu;
-  transform: rotate(180deg);
+  // 使用transform 实现由轮廓问题
+  // transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 11. 泰 tai
@@ -381,7 +383,7 @@
 // 12. 否 fou
 @mixin fou {
   @include tai;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 13. 同人 tongren
@@ -409,7 +411,7 @@
 // 14. 大有 dayou
 @mixin dayou {
   @include tongren;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 15. 谦 qian_15
@@ -465,7 +467,7 @@
 // 16. 豫 yu
 @mixin yu {
   @include qian_15;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 17. 随 sui
@@ -507,7 +509,7 @@
 // 18. 蛊 gu
 @mixin gu {
   @include sui;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 19. 临 lin
@@ -556,7 +558,7 @@
 // 20. 观 guan
 @mixin guan {
   @include lin;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 21. 噬嗑 shike
@@ -598,7 +600,7 @@
 // 22. 贲 ben
 @mixin ben {
   @include shike;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 23. 剥 bo
@@ -654,7 +656,7 @@
 // 24. 复 fu
 @mixin fu {
   @include bo;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 25. 无妄 wuwang
@@ -689,7 +691,7 @@
 // 26. 大畜 dachu
 @mixin dachu {
   @include wuwang;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 27. 颐 yi
@@ -875,7 +877,7 @@
 // 32. 恒 heng
 @mixin heng {
   @include xian;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 33. 遁 dun
@@ -910,7 +912,7 @@
 // 34. 大壮 dazhuang
 @mixin dazhuang {
   @include dun;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 35. 晋 jin
@@ -959,7 +961,7 @@
 // 36. 明夷 mingyi
 @mixin mingyi {
   @include jin;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 37. 家人 jiaren
@@ -994,7 +996,7 @@
 // 38. 睽 kui
 @mixin kui {
   @include jiaren;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 39. 蹇 jian
@@ -1043,7 +1045,7 @@
 // 40. 解 jie
 @mixin jie {
   @include jian;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 41. 损 sun
@@ -1085,7 +1087,7 @@
 // 42. 益 yi_42
 @mixin yi_42 {
   @include sun;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 43. 夬 guai
@@ -1113,7 +1115,7 @@
 // 44. 姤 gou
 @mixin gou {
   @include guai;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 45. 萃 cui
@@ -1162,7 +1164,7 @@
 // 46. 升 sheng
 @mixin sheng {
   @include cui;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 47. 困 kun_47
@@ -1204,7 +1206,7 @@
 // 48. 井 jing
 @mixin jing {
   @include kun_47;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 49. 革 ge
@@ -1239,7 +1241,7 @@
 // 50. 鼎 ding
 @mixin ding {
   @include ge;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 51. 震 zhen
@@ -1288,7 +1290,7 @@
 // 52. 艮 gen
 @mixin gen {
   @include zhen;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 53. 渐 jian_53
@@ -1330,7 +1332,7 @@
 // 54. 归妹 guimei
 @mixin guimei {
   @include jian_53;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 55. 丰 feng
@@ -1372,7 +1374,7 @@
 // 56. 旅 lv_56
 @mixin lv_56 {
   @include feng;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 57. 巽 xun
@@ -1407,7 +1409,7 @@
 // 58. 兑 dui
 @mixin dui {
   @include xun;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 59. 涣 huan
@@ -1449,7 +1451,7 @@
 // 60. 节 jie_60
 @mixin jie_60 {
   @include huan;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
 
 // 61. 中孚 zhongfu
@@ -1563,5 +1565,5 @@
 // 64. 未济 weiji
 @mixin weiji {
   @include jiji;
-  transform: rotate(180deg);
+  background-position: bottom;
 }
