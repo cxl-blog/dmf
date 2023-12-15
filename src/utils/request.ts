@@ -92,7 +92,6 @@ if (process.env.NODE_ENV === 'development') {
 const requestInstance: UnInstance = uan.create({
   baseUrl,
   withCredentials: false,
-  timeout: 1000,
   headers: {
     'Content-Type': 'application/json',
     'Accept-Language': getLocale()
