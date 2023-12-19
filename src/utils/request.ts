@@ -7,6 +7,7 @@ import qs from 'qs'
 
 // import { HTTP_OK_STATUS } from '@/constants/request'
 import { t } from '@/i18n'
+import { HTTP_OK_STATUS } from '@/constants/request'
 
 const { getLocale } = useLocale()
 
@@ -84,19 +85,48 @@ if (process.env.NODE_ENV === 'development') {
   baseUrl = '/apis/'
 
   // #ifdef MP-WEIXIN
+
   // baseUrl = 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
   baseUrl = 'https://springboot-5thz-84626-6-1322169562.sh.run.tcloudbase.com'
   // #endif
 }
+let requestInstance: UnInstance
+let wexinRequestInstance: typeof wx.cloud.callContainer
 
-const requestInstance: UnInstance = uan.create({
+// #ifdef MP-WEIXIN
+// eslint-disable-next-line prefer-const
+wexinRequestInstance = async ({ url, method, params, data, ...others }) => {
+  const res = await wx.cloud.callContainer({
+    config: { env: 'prod-8ge16jg5afdf6cc6' },
+    header: {
+      'X-WX-SERVICE': 'springboot-5thz',
+      'content-type': 'application/json'
+    },
+    ...others,
+    data: params ?? data,
+    path: url,
+    method
+  })
+
+  if (res.statusCode === HTTP_OK_STATUS) {
+    return res.data
+  }
+
+  return res
+}
+// #endif
+
+// #ifndef MP-WEIXIN
+// eslint-disable-next-line prefer-const
+requestInstance = uan.create({
   baseUrl,
   withCredentials: false,
   headers: {
     'Content-Type': 'application/json',
     'Accept-Language': getLocale()
   },
-  paramsSerializer: qs.stringify
+  paramsSerializer: qs.stringify,
+  sslVerify: false
 })
 
 requestInstance.interceptors.request.use((config: UnConfig) => {
@@ -105,16 +135,6 @@ requestInstance.interceptors.request.use((config: UnConfig) => {
     cancelUtil.addPendingList(config) // 添加新的信息
   }
 
-  // uni.showToast({
-  //   icon: 'error',
-  //   title: `${config.baseUrl}${config.url}`,
-  //   duration: 5000
-  // })
-
-  // if (config.baseUrl?.endsWith('/') && config.url?.startsWith('/')) {
-  //   config.baseUrl = config.baseUrl.replace(/(.*)\/$/, '$1')
-  // }
-
   return Promise.resolve(config)
 })
 
@@ -122,12 +142,6 @@ requestInstance.interceptors.response.use(
   (response: UnResponse<AppResponse>) => {
     // 微信小程序不能获取到config
     const { config = {}, data } = response
-
-    // uni.showToast({
-    //   icon: 'error',
-    //   title: JSON.stringify(data),
-    //   duration: 5000
-    // })
 
     if ((config as UnCustomConfig)?.cancelable) {
       cancelUtil.removePendingList(config as UnCustomConfig)
@@ -149,12 +163,6 @@ requestInstance.interceptors.response.use(
   (error: UnError<AppResponse>) => {
     const { data = {} } = error.response || {}
 
-    // uni.showToast({
-    //   icon: 'error',
-    //   title: data.message || error.message || t('请求失败啦T_T'),
-    //   duration: 5000
-    // })
-
     // 取消请求，跳过处理
     if (error.code === UnError.ERR_CANCELED) {
       return Promise.reject(error)
@@ -174,6 +182,7 @@ requestInstance.interceptors.response.use(
     return Promise.reject(error)
   }
 )
+// #endif
 
 /**
  * @description 解析业务数据
@@ -186,6 +195,9 @@ function parseResponse(data: AppResponse) {
   })
 }
 
+// 目前只区分微信小程序与其他平台
+const httpInstance = requestInstance || wexinRequestInstance
+
 /**
  * @description 基于各个平台兼容性考虑，考虑只使用get post see {@link https://uniapp.dcloud.net.cn/api/request/request.html}
  */
@@ -194,14 +206,14 @@ export default {
     url: UnConfig['url'],
     params: UnConfig['params'] = {},
     config: UnCustomGetConfig = {}
-  ) => requestInstance({ url, params, ...config, method: 'GET' }) as unknown as Promise<D>,
+  ) => httpInstance({ url, params, ...config, method: 'GET' }) as unknown as Promise<D>,
   post: <D = any>(
     url: UnConfig['url'],
     data: UnConfig['data'] = {},
     config: UnCustomPostConfig = {}
-  ) => requestInstance({ url, data, ...config, method: 'POST' }) as unknown as Promise<D>,
-  download: (config: UnConfig) => requestInstance.download(config),
-  upload: (config: UnConfig) => requestInstance.upload(config)
+  ) => httpInstance({ url, data, ...config, method: 'POST' }) as unknown as Promise<D>,
+  download: (config: UnConfig) => httpInstance.download(config),
+  upload: (config: UnConfig) => httpInstance.upload(config)
 }
 
-export { requestInstance }
+export { httpInstance }

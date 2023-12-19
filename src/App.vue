@@ -1,6 +1,14 @@
 <script setup lang="ts">
 onLaunch(() => {
   console.log('App Launch')
+  if (!wx.cloud) {
+    console.error('初始化失败')
+  } else {
+    wx.cloud.init({
+      env: 'prod-8ge16jg5afdf6cc6',
+      traceUser: true
+    })
+  }
 })
 onShow(() => {
   console.log('App Show')

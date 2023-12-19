@@ -24,6 +24,22 @@ function handleClick(item: CategoryItem) {
 }
 
 function getCategories() {
+  // #ifdef MP-WEIXIN
+  // wx.cloud
+  //   .callContainer({
+  //     config: { env: 'prod-8ge16jg5afdf6cc6' },
+  //     path: '/categories',
+  //     header: {
+  //       'X-WX-SERVICE': 'springboot-5thz',
+  //       'content-type': 'application/json'
+  //     }
+  //   })
+  //   .then(res => {
+  //     // console.log({ res })
+  //     categories.value = res.data.categories
+  //   })
+  // #endif
+
   categoryList()
     .then(res => {
       categories.value = res.categories
