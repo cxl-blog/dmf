@@ -14,7 +14,6 @@ let platform = ''
 
 const targetMaps = {
   dev: {
-    // target: 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
     target: 'https://springboot-5thz-84626-6-1322169562.sh.run.tcloudbase.com'
   }
 }
@@ -29,15 +28,6 @@ const root = process.cwd()
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, root)
-
-  if (mode === 'development') {
-    if (!platform || platform.toUpperCase() === 'MP-WEIXIN') {
-      // env.VITE_API_BASE_PATH = 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
-      env.VITE_API_BASE_PATH = 'https://springboot-5thz-84626-6-1322169562.sh.run.tcloudbase.com'
-    } else {
-      env.VITE_API_BASE_PATH = '/apis/'
-    }
-  }
 
   return {
     base: env.VITE_BASE_PATH,
@@ -117,9 +107,6 @@ export default defineConfig(({ mode }) => {
           secure: true,
           rewrite: (path: string) => {
             const regexp = new RegExp(`^${env.VITE_API_BASE_PATH}`)
-            if (!platform || platform.toUpperCase() === 'MP-WEIXIN') {
-              return path
-            }
 
             return env.VITE_API_BASE_PATH !== '/' ? path.replace(regexp, '') : path
           },

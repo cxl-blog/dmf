@@ -76,6 +76,8 @@ declare global {
     NODE_ENV: string
     VITE_BASE_PATH: string
     VITE_API_BASE_PATH: string
+    VITE_WEIXIN_CLOUD_ENV: string
+    VITE_X_WX_SERVICE: string
   }
 }
 

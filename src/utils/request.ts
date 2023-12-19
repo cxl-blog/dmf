@@ -85,8 +85,6 @@ if (process.env.NODE_ENV === 'development') {
   baseUrl = '/apis/'
 
   // #ifdef MP-WEIXIN
-
-  // baseUrl = 'http://springboot-0l81-77914-5-1322066261.sh.run.tcloudbase.com'
   baseUrl = 'https://springboot-5thz-84626-6-1322169562.sh.run.tcloudbase.com'
   // #endif
 }
