@@ -186,6 +186,7 @@ $wrap-h: 45px;
   position: relative;
   letter-spacing: 5px;
   padding-top: 20px;
+  transition: all 0.2s ease;
 
   .name-bg-image {
     position: absolute;
@@ -193,6 +194,7 @@ $wrap-h: 45px;
     height: 100%;
     top: 0;
     left: 0;
+    transition: all 0.2s ease;
   }
 }
 

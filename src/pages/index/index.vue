@@ -4,6 +4,7 @@ import { customerTrigrams } from '@/api/divination'
 import imgSrc from '~@/static/imgs/logo1x.png'
 import startSrc from '@/static/imgs/start.svg'
 import restartSrc from '@/static/imgs/restart.svg'
+import showDetailSrc from '@/static/imgs/show-detail.svg'
 
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
@@ -73,7 +74,7 @@ async function start() {
         class="flex flex-1 flex-col items-center"
         @click="handleShowDetail"
       >
-        <up-icon name="more-circle" size="80" />
+        <up-image :src="showDetailSrc" width="80px" height="80px" :fade="false" :lazyLoad="false" />
         <text class="block">{{ t('查看卦象') }}</text>
       </view>
     </view>
