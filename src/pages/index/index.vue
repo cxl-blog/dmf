@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { nextTick } from 'vue'
+import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
 import { customerTrigrams } from '@/api/divination'
 import imgSrc from '~@/static/imgs/logo1x.png'
 import startSrc from '@/static/imgs/start.svg'
@@ -13,6 +14,7 @@ const divinationDetail = reactive({
   trigramsId: ''
 })
 const startLoading = ref(false)
+const showDetail = ref(false)
 
 function jumpTo() {
   uni.navigateTo({ url: '/pages/category/index' })
@@ -37,6 +39,7 @@ async function start() {
     Object.assign(divinationDetail, res)
     nextTick(() => {
       startLoading.value = false
+      showDetail.value = true
     })
     clearTimeout(timer)
   }, 2000)
@@ -78,6 +81,8 @@ async function start() {
         <text class="block">{{ t('查看卦象') }}</text>
       </view>
     </view>
+
+    <DetailPopup v-if="showDetail" v-model="showDetail" :trigramsId="divinationDetail.trigramsId" />
   </view>
 </template>
 

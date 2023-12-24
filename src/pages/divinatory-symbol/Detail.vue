@@ -27,14 +27,10 @@ const symbolActiveColor = computed(() => {
   return scheme.value === 'light' ? '#505050' : '#505050'
 })
 const bizScrollLeft = ref(0)
-const nameRect = reactive({
-  with: 32,
-  height: 130
-})
 
 pageLoading.value = true
 
-onBeforeMount(() => {
+onMounted(() => {
   getDetail()
 })
 
@@ -46,25 +42,23 @@ function getDetail() {
     .finally(() => {
       nextTick(async () => {
         bizScrollLeft.value = Number.MAX_SAFE_INTEGER
-        await computedNameRect()
-        await nextTick()
         pageLoading.value = false
       })
     })
 }
 
-async function computedNameRect() {
-  return new Promise(resolve => {
-    uni
-      .createSelectorQuery()
-      .select('.divination-detail-container .divination-name')
-      .boundingClientRect(data => {
-        Object.assign(nameRect, data)
-        resolve(null)
-      })
-      .exec()
-  })
-}
+// async function computedNameRect() {
+//   return new Promise(resolve => {
+//     uni
+//       .createSelectorQuery()
+//       .select('.divination-detail-container .divination-name')
+//       .boundingClientRect(data => {
+//         Object.assign(nameRect, data)
+//         resolve(null)
+//       })
+//       .exec()
+//   })
+// }
 </script>
 
 <template>
@@ -109,22 +103,12 @@ async function computedNameRect() {
               class="box-border h-100% flex flex-row-reverse b-1px b-[#000] b-rd-4px b-solid px-12px py-10px"
             >
               <view class="relative ml-20px mr--10px flex items-center">
-                <!-- #ifdef MP-WEIXIN -->
-                <image
-                  class="absolute"
-                  :style="{ width: `${nameRect.with}px`, height: `${nameRect.height}px` }"
-                  :src="bgSrc"
-                  mode="scaleToFill"
-                />
-                <!-- #endif -->
-                <text
+                <view
                   class="divination-name w-16px w-16px px-8px py-5px line-height-20px write-vertical-right write-orient-upright"
                 >
-                  <!-- #ifndef MP-WEIXIN -->
                   <image :src="bgSrc" class="name-bg-image" mode="scaleToFill" />
-                  <!-- #endif -->
-                  {{ t(`周易第${convertToChinaNum(detail.id!)}卦`) }}</text
-                >
+                  {{ t(`周易第${convertToChinaNum(detail.id!)}卦`) }}
+                </view>
               </view>
               <view class="scroll-container relative min-w-0 flex-1">
                 <BizScroll

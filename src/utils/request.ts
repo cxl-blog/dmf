@@ -98,7 +98,8 @@ wexinRequestInstance = async ({ url, method, params, data, ...others }) => {
     config: { env: 'prod-8ge16jg5afdf6cc6' },
     header: {
       'X-WX-SERVICE': 'springboot-5thz',
-      'content-type': 'application/json'
+      'content-type': 'application/json',
+      'X-WX-EXCLUDE-CREDENTIALS': 'unionid, cloudbase-access-token, openid'
     },
     ...others,
     data: params ?? data,

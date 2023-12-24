@@ -7,6 +7,7 @@ body {
 
 page {
   height: 100%;
+  overflow: hidden;
 }
 
 uni-page-wrapper {
@@ -17,4 +18,12 @@ uni-page-wrapper {
 uni-page-body {
   background-color: $u-bg-color;
   height: 100%;
+}
+
+#app,
+uni-app,
+uni-page,
+uni-page-wrapper {
+  height: 100%;
+  overflow: hidden;
 }

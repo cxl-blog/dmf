@@ -2,7 +2,7 @@
 <!-- eslint-disable prettier/prettier -->
 <!-- eslint-disable vue/no-unused-refs -->
 <template>
-  <view ref="u-scroll-list" class="u-scroll-list" :class="class">
+  <view ref="u-scroll-list" class="u-scroll-list biz-scroll" :class="class">
     <!-- #ifdef APP-NVUE -->
     <!-- nvue使用bindingX实现，以得到更好的性能 -->
     <scroller
