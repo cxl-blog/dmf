@@ -2,7 +2,7 @@
 import { nextTick } from 'vue'
 import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
 import { customerTrigrams } from '@/api/divination'
-import imgSrc from '~@/static/imgs/logo1x.png'
+import imgSrc from '~@/static/imgs/logo_v1.png'
 import startSrc from '@/static/imgs/start.svg'
 import restartSrc from '@/static/imgs/restart.svg'
 import showDetailSrc from '@/static/imgs/show-detail.svg'

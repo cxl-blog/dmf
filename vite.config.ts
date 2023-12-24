@@ -10,7 +10,6 @@ import Unocss from 'unocss/vite'
 import { VitePluginOptimize, VitePluginPkgConfig } from './plugins/vite-plugin-optimize'
 
 let PROXY_ENV = 'dev'
-let platform = ''
 
 const targetMaps = {
   dev: {
@@ -20,7 +19,6 @@ const targetMaps = {
 
 if (process.env.npm_lifecycle_event && process.env.npm_lifecycle_event.match(/:(.+)/)) {
   PROXY_ENV = process.env.npm_lifecycle_event.split(':')?.[0] || ''
-  platform = process.env.npm_lifecycle_event.split(':')?.[1] || ''
 }
 
 const root = process.cwd()

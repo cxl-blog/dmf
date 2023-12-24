@@ -78,16 +78,6 @@ class CancelRequestUtil {
 }
 
 const cancelUtil = new CancelRequestUtil()
-let baseUrl = import.meta.env.VITE_API_BASE_PATH
-
-// eslint-disable-next-line n/prefer-global/process
-if (process.env.NODE_ENV === 'development') {
-  baseUrl = '/apis/'
-
-  // #ifdef MP-WEIXIN
-  baseUrl = 'https://springboot-5thz-84626-6-1322169562.sh.run.tcloudbase.com'
-  // #endif
-}
 let requestInstance: UnInstance
 let wexinRequestInstance: typeof wx.cloud.callContainer
 
@@ -118,7 +108,7 @@ wexinRequestInstance = async ({ url, method, params, data, ...others }) => {
 // #ifndef MP-WEIXIN
 // eslint-disable-next-line prefer-const
 requestInstance = uan.create({
-  baseUrl,
+  baseUrl: import.meta.env.VITE_API_BASE_PATH,
   withCredentials: false,
   headers: {
     'Content-Type': 'application/json',
