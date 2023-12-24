@@ -153,6 +153,7 @@ function getDetail() {
   :deep() .u-scroll-list {
     position: relative;
     height: 100%;
+    box-sizing: border-box;
   }
 
   :deep() .u-scroll-list__scroll-view,
