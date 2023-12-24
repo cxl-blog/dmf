@@ -4,8 +4,6 @@
 import type { UnCancelTokenSource, UnConfig, UnInstance, UnResponse } from '@uni-helper/uni-network'
 import uan, { UnCancelToken, UnError } from '@uni-helper/uni-network'
 import qs from 'qs'
-
-// import { HTTP_OK_STATUS } from '@/constants/request'
 import { t } from '@/i18n'
 import { HTTP_OK_STATUS } from '@/constants/request'
 
@@ -79,11 +77,12 @@ class CancelRequestUtil {
 
 const cancelUtil = new CancelRequestUtil()
 let requestInstance: UnInstance
-let wexinRequestInstance: typeof wx.cloud.callContainer
+let weixinRequestInstance: typeof wx.cloud.callContainer
+const timeout = 10000
 
 // #ifdef MP-WEIXIN
 // eslint-disable-next-line prefer-const
-wexinRequestInstance = async ({ url, method, params, data, ...others }) => {
+weixinRequestInstance = async ({ url, method, params, data, ...others }) => {
   const res = await wx.cloud.callContainer({
     config: { env: 'prod-8ge16jg5afdf6cc6' },
     header: {
@@ -91,6 +90,7 @@ wexinRequestInstance = async ({ url, method, params, data, ...others }) => {
       'content-type': 'application/json',
       'X-WX-EXCLUDE-CREDENTIALS': 'unionid, cloudbase-access-token, openid'
     },
+    timeout,
     ...others,
     data: params ?? data,
     path: url,
@@ -114,6 +114,7 @@ requestInstance = uan.create({
     'Content-Type': 'application/json',
     'Accept-Language': getLocale()
   },
+  timeout,
   paramsSerializer: qs.stringify,
   sslVerify: false
 })
@@ -185,7 +186,7 @@ function parseResponse(data: AppResponse) {
 }
 
 // 目前只区分微信小程序与其他平台
-const httpInstance = requestInstance || wexinRequestInstance
+const httpInstance = requestInstance || weixinRequestInstance
 
 /**
  * @description 基于各个平台兼容性考虑，考虑只使用get post see {@link https://uniapp.dcloud.net.cn/api/request/request.html}
