@@ -27,7 +27,9 @@ function getDetail() {
       Object.assign(detail, res)
     })
     .finally(() => {
-      appStore.endLoading()
+      nextTick(() => {
+        appStore.endLoading()
+      })
     })
 }
 
