@@ -7,15 +7,15 @@ import type { DivinationDetail } from '@/config/divination'
 const { t } = useI18n()
 
 const { category } = storeToRefs(useDivinationStore())
-const { pageLoading } = storeToRefs(useAppStore())
+const appStore = useAppStore()
+
 const trigramsId = ref<string>('')
 const detail = reactive<Partial<DivinationDetail>>({})
+appStore.startLoading()
 
 onLoad(option => {
   trigramsId.value = option!.trigramsId
 })
-
-pageLoading.value = true
 
 onMounted(() => {
   getDetail()
@@ -27,7 +27,7 @@ function getDetail() {
       Object.assign(detail, res)
     })
     .finally(() => {
-      pageLoading.value = false
+      appStore.endLoading()
     })
 }
 

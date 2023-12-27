@@ -11,6 +11,14 @@ export const useAppStore = defineStore('app', {
       scheme: uni.getSystemInfoSync().hostTheme as any,
       navbarHeight: 0
     }
+  },
+  actions: {
+    startLoading() {
+      this.pageLoading = true
+    },
+    endLoading() {
+      this.pageLoading = false
+    }
   }
 })
 

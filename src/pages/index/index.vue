@@ -25,7 +25,7 @@ const divinationDetail = reactive({
 })
 const { category } = storeToRefs(useDivinationStore())
 const detail = reactive<Partial<DivinationDetail>>({})
-const { pageLoading } = storeToRefs(useAppStore())
+const appStore = useAppStore()
 const startLoading = ref(false)
 const showPopup = ref(false)
 
@@ -59,14 +59,14 @@ async function start() {
 }
 
 function getDetail() {
-  pageLoading.value = true
+  appStore.startLoading()
   divinationDetailReq(divinationDetail.trigramsId, { categoryIndex: category.value })
     .then(res => {
       Object.assign(detail, res)
     })
     .finally(() => {
       showPopup.value = true
-      pageLoading.value = false
+      appStore.endLoading()
     })
 }
 </script>

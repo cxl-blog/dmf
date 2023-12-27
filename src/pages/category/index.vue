@@ -8,9 +8,9 @@ type CategoryItem = {
 
 const divinationStore = useDivinationStore()
 const categories = ref<CategoryItem[]>([])
-const { pageLoading } = storeToRefs(useAppStore())
+const appStore = useAppStore()
 const { t } = useI18n()
-pageLoading.value = true
+appStore.startLoading()
 
 onBeforeMount(() => {
   getCategories()
@@ -31,7 +31,7 @@ function getCategories() {
     })
     .finally(() => {
       nextTick(() => {
-        pageLoading.value = false
+        appStore.endLoading()
       })
     })
 }

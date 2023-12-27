@@ -3,18 +3,18 @@
  */
 
 const interceptors = ['navigateTo', 'redirectTo', 'switchTab', 'reLaunch', 'navigateBack']
-const appStore = useAppStoreWithout()
-const { pageLoading } = storeToRefs(appStore)
+// const appStore = useAppStoreWithout()
+// const { pageLoading } = storeToRefs(appStore)
 
 interceptors.forEach(path => {
   uni.addInterceptor(path, {
     invoke() {
-      pageLoading.value = true
+      // pageLoading.value = true
 
       return true
     },
     complete() {
-      pageLoading.value = false
+      // pageLoading.value = false
     }
   })
 })
