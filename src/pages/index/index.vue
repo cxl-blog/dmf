@@ -1,11 +1,21 @@
+// #ifdef MP-WEIXIN
+<script lang="ts">
+// 微信小程序 样式穿透
+export default {
+  options: { styleIsolation: 'shared' }
+}
+</script>
+// #endif
+
 <script setup lang="ts">
 import { nextTick } from 'vue'
-import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
-import { customerTrigrams } from '@/api/divination'
+import { customerTrigrams, divinationDetail as divinationDetailReq } from '@/api/divination'
 import imgSrc from '~@/static/imgs/logo_v1.png'
 import startSrc from '@/static/imgs/start.svg'
 import restartSrc from '@/static/imgs/restart.svg'
 import showDetailSrc from '@/static/imgs/show-detail.svg'
+import type { DivinationDetail } from '@/config/divination'
+import Detail from '@/components/divination-symbol/Detail.vue'
 
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
@@ -13,8 +23,11 @@ const divinationDetail = reactive({
   id: '',
   trigramsId: ''
 })
+const { category } = storeToRefs(useDivinationStore())
+const detail = reactive<Partial<DivinationDetail>>({})
+const { pageLoading } = storeToRefs(useAppStore())
 const startLoading = ref(false)
-const showDetail = ref(false)
+const showPopup = ref(false)
 
 function jumpTo() {
   uni.navigateTo({ url: '/pages/category/index' })
@@ -39,10 +52,22 @@ async function start() {
     Object.assign(divinationDetail, res)
     nextTick(() => {
       startLoading.value = false
-      showDetail.value = true
+      getDetail()
     })
     clearTimeout(timer)
-  }, 2000)
+  }, 1000)
+}
+
+function getDetail() {
+  pageLoading.value = true
+  divinationDetailReq(divinationDetail.trigramsId, { categoryIndex: category.value })
+    .then(res => {
+      Object.assign(detail, res)
+    })
+    .finally(() => {
+      showPopup.value = true
+      pageLoading.value = false
+    })
 }
 </script>
 
@@ -82,7 +107,19 @@ async function start() {
       </view>
     </view>
 
-    <DetailPopup v-if="showDetail" v-model="showDetail" :trigramsId="divinationDetail.trigramsId" />
+    <u-popup
+      :show="showPopup"
+      :round="10"
+      mode="bottom"
+      closeable
+      :customStyle="{
+        height: '75%',
+        background: '#f7f5f1'
+      }"
+      @close="showPopup = false"
+    >
+      <Detail v-if="showPopup" :detail="detail" class="mt-10px h-100% pt-28px" />
+    </u-popup>
   </view>
 </template>
 
@@ -104,25 +141,17 @@ async function start() {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  :deep() .u-slide-up-enter-to {
+    height: 75%;
+
+    .u-popup__content {
+      background-color: $u-bg-color;
+    }
+  }
 }
 
 .content-center-1 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-size: 100% 100%;
-}
-
-.content-center-2 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background-size: 100% 100%;
-}
-
-.content-center-3 {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -135,53 +164,9 @@ async function start() {
   justify-content: center;
 }
 
-.btn-start-animate {
-  position: relative;
-  animation: btn-start 1s ease-out forwards;
-  .text-block {
-    opacity: 0;
-    transform: scale(0);
-    transition: 0.1s linear all;
-  }
-}
-
-@keyframes btn-start {
-  0% {
-    top: 0;
-  }
-  40% {
-    transform: scale(0.5) rotate(360deg);
-    top: -400px;
-  }
-
-  85% {
-    opacity: 1;
-    transform: scale(0), rotate(360deg);
-    top: -230px;
-  }
-
-  100% {
-    opacity: 0;
-    transform: scale(0), rotate(360deg);
-    top: -230px;
-  }
-}
-
-@keyframes logo-animate {
-  100% {
-    margin-top: 100px;
-  }
-}
-
 @keyframes content1 {
   100% {
     transform: rotate(360deg);
-  }
-}
-
-@keyframes content2 {
-  100% {
-    transform: rotate(-360deg);
   }
 }
 </style>

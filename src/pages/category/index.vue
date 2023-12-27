@@ -9,6 +9,7 @@ type CategoryItem = {
 const divinationStore = useDivinationStore()
 const categories = ref<CategoryItem[]>([])
 const { pageLoading } = storeToRefs(useAppStore())
+const { t } = useI18n()
 pageLoading.value = true
 
 onBeforeMount(() => {
@@ -24,22 +25,6 @@ function handleClick(item: CategoryItem) {
 }
 
 function getCategories() {
-  // #ifdef MP-WEIXIN
-  // wx.cloud
-  //   .callContainer({
-  //     config: { env: 'prod-8ge16jg5afdf6cc6' },
-  //     path: '/categories',
-  //     header: {
-  //       'X-WX-SERVICE': 'springboot-5thz',
-  //       'content-type': 'application/json'
-  //     }
-  //   })
-  //   .then(res => {
-  //     // console.log({ res })
-  //     categories.value = res.data.categories
-  //   })
-  // #endif
-
   categoryList()
     .then(res => {
       categories.value = res.categories
@@ -54,12 +39,15 @@ function getCategories() {
 
 <template>
   <view class="list-container box-border overflow-hidden p-16px uni-weixin:p-16px">
-    <view class="list-content h-100%">
+    <view v-if="categories.length" class="list-content h-100%">
       <up-list>
         <up-list-item v-for="item in categories" :key="item.index">
           <up-cell :title="item.name" @click="handleClick(item)" />
         </up-list-item>
       </up-list>
+    </view>
+    <view v-else class="">
+      <u-loading-icon :text="t('获取分类中...')" textSize="14" />
     </view>
   </view>
 </template>
