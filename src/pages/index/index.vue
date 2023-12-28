@@ -118,7 +118,7 @@ function getDetail() {
       }"
       @close="showPopup = false"
     >
-      <Detail v-if="showPopup" :detail="detail" class="mt-10px h-100% pt-28px" />
+      <Detail v-if="showPopup" :detail="detail" class="detail-item box-border h-100% pt-44px" />
     </u-popup>
   </view>
 </template>
@@ -148,6 +148,16 @@ function getDetail() {
     .u-popup__content {
       background-color: $u-bg-color;
     }
+  }
+
+  :deep() .popup__content__close--top-right {
+    padding: 5px;
+  }
+}
+
+.detail-item {
+  :deep() .divination-detail-container {
+    padding-top: 0;
   }
 }
 
