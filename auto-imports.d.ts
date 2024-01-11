@@ -95,6 +95,7 @@ declare global {
   const useI18n: typeof import('vue-i18n')['useI18n']
   const useLocale: typeof import('./src/hooks/useLocale')['useLocale']
   const useRouteOptions: typeof import('./src/hooks/useRouteOptions')['useRouteOptions']
+  const useShake: typeof import('./src/hooks/useShake')['useShake']
   const useSlots: typeof import('vue')['useSlots']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
@@ -229,6 +230,7 @@ declare module 'vue' {
     readonly useRouteOptions: UnwrapRef<
       typeof import('./src/hooks/useRouteOptions')['useRouteOptions']
     >
+    readonly useShake: UnwrapRef<typeof import('./src/hooks/useShake')['useShake']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
@@ -345,6 +347,7 @@ declare module '@vue/runtime-core' {
     readonly useRouteOptions: UnwrapRef<
       typeof import('./src/hooks/useRouteOptions')['useRouteOptions']
     >
+    readonly useShake: UnwrapRef<typeof import('./src/hooks/useShake')['useShake']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>

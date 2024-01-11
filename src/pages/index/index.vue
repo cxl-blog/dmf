@@ -28,6 +28,21 @@ const detail = reactive<Partial<DivinationDetail>>({})
 const appStore = useAppStore()
 const startLoading = ref(false)
 const showPopup = ref(false)
+const { isShaking } = useShake()
+const loadingData = ref(false)
+
+watch(isShaking, val => {
+  if (loadingData.value) {
+    return
+  }
+
+  if (val) {
+    showPopup.value = false
+    startLoading.value = true
+  } else {
+    handleShake()
+  }
+})
 
 function jumpTo() {
   uni.navigateTo({ url: '/pages/category/index' })
@@ -46,21 +61,26 @@ async function start() {
     return
   }
 
+  handleShake()
+}
+
+function handleShake() {
   startLoading.value = true
+  loadingData.value = true
   const timer = setTimeout(async () => {
     const res = await customerTrigrams()
     Object.assign(divinationDetail, res)
-    nextTick(() => {
-      startLoading.value = false
-      getDetail()
-    })
+    await nextTick()
+    startLoading.value = false
+    await getDetail()
+    loadingData.value = false
     clearTimeout(timer)
   }, 1000)
 }
 
-function getDetail() {
+async function getDetail() {
   appStore.startLoading()
-  divinationDetailReq(divinationDetail.trigramsId, { categoryIndex: category.value })
+  await divinationDetailReq(divinationDetail.trigramsId, { categoryIndex: category.value })
     .then(res => {
       Object.assign(detail, res)
     })

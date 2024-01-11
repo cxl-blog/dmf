@@ -124,21 +124,13 @@ function getWidth() {
                     :initScrollLeft="bizScrollLeft"
                   >
                     <view
-                      class="divination-detail py-10px text-14px write-vertical-right write-orient-upright"
+                      class="divination-detail min-w-100% py-10px text-14px write-vertical-right write-orient-upright"
                     >
-                      <text
-                        v-if="
-                          !detail.hexagramRecord &&
-                          !detail.hexagramRecordExplanation &&
-                          !detail.symbol &&
-                          !detail.symbolicExplanation
-                        "
-                      >
+                      <text v-if="!detail.hexagramRecord">
                         {{ t('暂无信息') }}
                       </text>
                       <text>
-                        {{ detail.hexagramRecord }}{{ detail.hexagramRecordExplanation }}<br />
-                        {{ detail.symbol }}{{ detail.symbolicExplanation }}
+                        {{ detail.hexagramRecord }}
                       </text>
                     </view>
                   </BizScroll>
@@ -147,6 +139,10 @@ function getWidth() {
             </view>
           </up-col>
         </up-row>
+      </view>
+
+      <view class="mb-20px flex items-center justify-center text-center text-14px color-gray">
+        {{ `-- ${detail.category} --` }}
       </view>
 
       <view class="b-rd-4px bg-[#fff] p-16px">
