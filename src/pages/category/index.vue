@@ -38,7 +38,7 @@ function getCategories() {
 </script>
 
 <template>
-  <view class="list-container box-border overflow-hidden p-16px uni-weixin:p-16px">
+  <view class="list-container box-border overflow-hidden px-16px pt-16px">
     <view v-if="categories.length" class="list-content h-100%">
       <up-list>
         <up-list-item v-for="item in categories" :key="item.index">
@@ -55,11 +55,11 @@ function getCategories() {
 <style scoped lang="scss">
 .list-container {
   height: 100% !important;
-  padding: 16px;
 
   .list-content {
     background-color: #fff;
     border-radius: 8px;
+    overflow: hidden;
 
     :deep() .u-list {
       height: 100% !important;

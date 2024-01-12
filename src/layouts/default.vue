@@ -1,5 +1,15 @@
+// #ifdef MP-WEIXIN
+<script lang="ts">
+// 微信小程序 样式穿透
+export default {
+  options: { styleIsolation: 'shared' }
+}
+</script>
+// #endif
+
 <script setup lang="ts">
 import { usePage } from '@uni-helper/uni-use'
+import PageTooltip from '@/components/page-tooltip/index.vue'
 
 const page = usePage()
 const { t } = useI18n()
@@ -62,8 +72,11 @@ onLoad(() => {
       :border="showBorder"
       :height="`${navbarHeight}px`"
     />
-    <view class="app-main">
-      <slot></slot>
+    <view class="app-main flex flex-col">
+      <view class="app-main__content min-h-0 flex-1">
+        <slot></slot>
+      </view>
+      <PageTooltip />
     </view>
     <u-loading-page
       class="page-loading"

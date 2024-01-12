@@ -32,7 +32,7 @@ const { isShaking } = useShake()
 const loadingData = ref(false)
 
 watch(isShaking, val => {
-  if (loadingData.value) {
+  if (loadingData.value || showPopup.value) {
     return
   }
 
@@ -92,7 +92,7 @@ async function getDetail() {
 </script>
 
 <template>
-  <view class="content box-border w-100% p-20px">
+  <view class="content box-border h-100% w-100% p-20px">
     <view class="header w-100% flex justify-between">
       <view class="header-left color-gray">
         <text>{{ mode }}</text>
@@ -148,12 +148,13 @@ async function getDetail() {
   position: relative;
   border-radius: 50%;
   box-shadow: 0 0 15px 10px #ece5dd;
+  box-shadow: 0 0 20px 20px #ebe1d5;
   height: 70vw;
   width: 70vw;
   margin: 50px 0;
 
   &.logo-start-animate {
-    animation: content1 2s linear infinite forwards;
+    animation: content1 1.5s linear infinite forwards;
   }
 }
 .content {
@@ -187,6 +188,7 @@ async function getDetail() {
   height: 100%;
   border-radius: 50%;
   background-size: 100% 100%;
+  transform: scale(0.96);
 }
 
 .text-area {

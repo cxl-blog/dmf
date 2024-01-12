@@ -19,5 +19,6 @@ export type DivinationDetail = {
   hexagramRecordExplanation: string
   symbol: string
   symbolicExplanation: string
+  generalExplanation: string
   imageURL: string | null
 }

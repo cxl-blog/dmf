@@ -14,7 +14,7 @@ import type { DivinationDetail } from '@/config/divination'
 import { convertToChinaNum } from '@/utils'
 import sealSrc from '@/static/imgs/seal.png'
 import bgSrc from '@/static/imgs/detail_bg1x.png'
-import BizScroll from '@/components/biz-scroll/index.vue'
+import lineSrc from '@/static/imgs/line-short.png'
 
 const props = withDefaults(
   defineProps<{
@@ -75,7 +75,7 @@ function getWidth() {
           <up-col :span="6">
             <view class="box-border h-320px b-2px b-[#000] b-rd-4px b-solid bg-white p-8px">
               <view
-                class="box-border h-100% flex flex-col b-1px b-[#000] b-rd-4px b-solid px-12px py-10px align-start"
+                class="relative box-border h-100% flex flex-col b-1px b-[#000] b-rd-4px b-solid px-12px py-10px align-start"
               >
                 <view class="flex justify-between pt-12px">
                   <up-image
@@ -87,16 +87,16 @@ function getWidth() {
                   />
                   <text class="wm-ht">{{ t('本卦') }}</text>
                 </view>
-                <view class="flex-center flex-1">
+                <view class="mb-60px flex-center flex-1">
                   <SymbolImg
                     v-if="symbolId"
                     :symbol-name="symbolId"
                     inactiveBgColor="#ffffff"
                     active-bg-color="#505050"
-                    class="divination-img"
+                    class="w-60%"
                   />
                 </view>
-                <View class="">
+                <View class="detail-alias absolute bottom-10px">
                   <text class="text-12px lh-[normal] write-vertical-right">
                     {{ detail.alias }} . {{ t('本卦') }}
                   </text>
@@ -117,8 +117,16 @@ function getWidth() {
                     {{ t(`周易第${convertToChinaNum(detail.id!)}卦`) }}
                   </view>
                 </view>
-                <view class="scroll-comment-container relative min-w-0 flex-1">
-                  <BizScroll
+                <view
+                  class="scroll-comment-container divination-detail relative min-w-0 flex flex-1 items-center justify-center py-40px write-vertical-right write-orient-upright"
+                >
+                  <text v-if="!detail.hexagramRecord">
+                    {{ t('暂无信息') }}
+                  </text>
+                  <text>
+                    {{ detail.hexagramRecord }}
+                  </text>
+                  <!-- <BizScroll
                     indicator-active-color="#ebd478"
                     class="h-100%"
                     :initScrollLeft="bizScrollLeft"
@@ -133,7 +141,7 @@ function getWidth() {
                         {{ detail.hexagramRecord }}
                       </text>
                     </view>
-                  </BizScroll>
+                  </BizScroll> -->
                 </view>
               </view>
             </view>
@@ -141,17 +149,42 @@ function getWidth() {
         </up-row>
       </view>
 
-      <view class="mb-20px flex items-center justify-center text-center text-14px color-gray">
-        {{ `-- ${detail.category} --` }}
+      <view class="mb-20px flex items-center justify-center text-center text-14px">
+        <img :src="lineSrc" class="category-img-left h-6px w-25vw" alt="line" />
+        <text class="shrink-0 px-12px">{{ detail.category }}</text>
+        <img :src="lineSrc" class="h-6px w-25vw" alt="line" />
       </view>
 
-      <view class="b-rd-4px bg-[#fff] p-16px">
-        <view class="mb-10px">
-          <text class="font-bold">{{ t('解读说明') }}</text>
+      <view class="desc-container">
+        <view class="desc-content">
+          <view class="mb-10px">
+            <text class="font-bold">{{ t('解读说明') }}</text>
+          </view>
+          <view>
+            <text> {{ detail.description || t('暂无解读说明') }} </text>
+          </view>
         </view>
-        <view>
-          <text> {{ detail.description || t('暂无解读说明') }} </text>
-        </view>
+      </view>
+
+      <view class="other-info-container my-20px bg-white!">
+        <u-collapse>
+          <u-collapse-item title="卦辞解释" name="hexagramRecordExplanation">
+            <text class="u-collapse-content">{{
+              detail.hexagramRecordExplanation || t('暂无数据')
+            }}</text>
+          </u-collapse-item>
+          <u-collapse-item title="象曰" name="symbol">
+            <text class="u-collapse-content">{{ detail.symbol || t('暂无数据') }}</text>
+          </u-collapse-item>
+          <u-collapse-item title="象曰解释" name="symbolicExplanation">
+            <text class="u-collapse-content">{{
+              detail.symbolicExplanation || t('暂无数据')
+            }}</text>
+          </u-collapse-item>
+          <u-collapse-item :title="`${detail.name}卦释义`" name="generalExplanation">
+            <text class="u-collapse-content">{{ detail.generalExplanation || t('暂无数据') }}</text>
+          </u-collapse-item>
+        </u-collapse>
       </view>
     </view>
   </scroll-view>
@@ -178,8 +211,36 @@ function getWidth() {
   }
 }
 
+.detail-alias {
+  letter-spacing: 1px;
+}
+
+.category-img-left {
+  transform: rotate(180deg);
+}
+
 .wm-ht {
   writing-mode: vertical-rl;
+}
+
+.desc-container {
+  background: #ffffff;
+  border: 2px solid rgba(51, 51, 51, 1);
+  box-shadow: 0px 2px 4px 0px rgba(234, 226, 210, 0.5);
+  border-radius: 4px;
+  padding: 8px;
+
+  .desc-content {
+    border: 1px solid rgba(51, 51, 51, 1);
+    box-shadow: 0px 2px 4px 0px rgba(234, 226, 210, 0.5);
+    border-radius: 4px;
+    padding: 14px;
+  }
+}
+
+.other-info-container {
+  border: 2px solid rgba(51, 51, 51, 1);
+  border-radius: 4px;
 }
 
 $wrap-h: 45px;
@@ -222,10 +283,6 @@ $wrap-h: 45px;
 
 .divination-detail {
   letter-spacing: 5px;
-}
-
-.divination-img {
-  width: 55%;
 }
 
 .scroll-a {
