@@ -16,7 +16,7 @@ export function useShake() {
     lastX = res.x
     lastY = res.y
     lastZ = res.z
-    if (speed > 100 && !isShaking.value) {
+    if (speed > 120 && !isShaking.value) {
       console.log({ speed, res })
       isShaking.value = true
       // 触发事件

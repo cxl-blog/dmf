@@ -40,9 +40,23 @@ watch(isShaking, val => {
     showPopup.value = false
     startLoading.value = true
   } else {
-    handleShake()
+    uni.vibrateLong({
+      complete() {
+        handleShake()
+      }
+    })
   }
 })
+
+watch(mode, () => {
+  reset()
+})
+
+function reset() {
+  for (const [key] of Object.entries(divinationDetail)) {
+    Reflect.deleteProperty(divinationDetail, key)
+  }
+}
 
 function jumpTo() {
   uni.navigateTo({ url: '/pages/category/index' })

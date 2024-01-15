@@ -161,7 +161,7 @@ function getWidth() {
             <text class="font-bold">{{ t('解读说明') }}</text>
           </view>
           <view>
-            <text> {{ detail.description || t('暂无解读说明') }} </text>
+            <text class="text-display"> {{ detail.description || t('暂无解读说明') }} </text>
           </view>
         </view>
       </view>
@@ -169,20 +169,24 @@ function getWidth() {
       <view class="other-info-container my-20px bg-white!">
         <u-collapse>
           <u-collapse-item title="卦辞解释" name="hexagramRecordExplanation">
-            <text class="u-collapse-content">{{
+            <text class="u-collapse-content text-display-small">{{
               detail.hexagramRecordExplanation || t('暂无数据')
             }}</text>
           </u-collapse-item>
           <u-collapse-item title="象曰" name="symbol">
-            <text class="u-collapse-content">{{ detail.symbol || t('暂无数据') }}</text>
+            <text class="u-collapse-content text-display-small">{{
+              detail.symbol || t('暂无数据')
+            }}</text>
           </u-collapse-item>
           <u-collapse-item title="象曰解释" name="symbolicExplanation">
-            <text class="u-collapse-content">{{
+            <text class="u-collapse-content text-display-small">{{
               detail.symbolicExplanation || t('暂无数据')
             }}</text>
           </u-collapse-item>
           <u-collapse-item :title="`${detail.name}卦释义`" name="generalExplanation">
-            <text class="u-collapse-content">{{ detail.generalExplanation || t('暂无数据') }}</text>
+            <text class="u-collapse-content text-display-small">{{
+              detail.generalExplanation || t('暂无数据')
+            }}</text>
           </u-collapse-item>
         </u-collapse>
       </view>
@@ -236,6 +240,36 @@ function getWidth() {
     border-radius: 4px;
     padding: 14px;
   }
+}
+
+.text-display {
+  /* #ifndef MP-WEIXIN */
+  :deep() span {
+    display: block;
+  }
+  /* #endif */
+
+  /* #ifdef MP-WEIXIN */
+  display: block;
+  /* #endif */
+
+  text-indent: 32px;
+  line-height: 24px;
+}
+
+.text-display-small {
+  /* #ifndef MP-WEIXIN */
+  :deep() span {
+    display: block;
+  }
+  /* #endif */
+
+  /* #ifdef MP-WEIXIN */
+  display: block;
+  /* #endif */
+
+  text-indent: 28px;
+  line-height: 22px;
 }
 
 .other-info-container {
