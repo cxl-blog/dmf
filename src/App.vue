@@ -1,6 +1,5 @@
 <script setup lang="ts">
 onLaunch(() => {
-  console.log('App Launch')
   if (!wx.cloud) {
     console.error('初始化失败')
   } else {

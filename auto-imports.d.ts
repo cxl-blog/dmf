@@ -97,6 +97,9 @@ declare global {
   const useRouteOptions: typeof import('./src/hooks/useRouteOptions')['useRouteOptions']
   const useShake: typeof import('./src/hooks/useShake')['useShake']
   const useSlots: typeof import('vue')['useSlots']
+  const useUserStore: typeof import('./src/store/modules/user')['useUserStore']
+  const useUserStoreWithout: typeof import('./src/store/modules/user')['useUserStoreWithout']
+  const useWeixin: typeof import('./src/hooks/useWeixin')['useWeixin']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -232,6 +235,11 @@ declare module 'vue' {
     >
     readonly useShake: UnwrapRef<typeof import('./src/hooks/useShake')['useShake']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useUserStore: UnwrapRef<typeof import('./src/store/modules/user')['useUserStore']>
+    readonly useUserStoreWithout: UnwrapRef<
+      typeof import('./src/store/modules/user')['useUserStoreWithout']
+    >
+    readonly useWeixin: UnwrapRef<typeof import('./src/hooks/useWeixin')['useWeixin']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
@@ -349,6 +357,11 @@ declare module '@vue/runtime-core' {
     >
     readonly useShake: UnwrapRef<typeof import('./src/hooks/useShake')['useShake']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useUserStore: UnwrapRef<typeof import('./src/store/modules/user')['useUserStore']>
+    readonly useUserStoreWithout: UnwrapRef<
+      typeof import('./src/store/modules/user')['useUserStoreWithout']
+    >
+    readonly useWeixin: UnwrapRef<typeof import('./src/hooks/useWeixin')['useWeixin']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>

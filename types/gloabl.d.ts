@@ -5,13 +5,6 @@ declare global {
     env: NodeJS.ProcessEnv
   }
 
-  declare const wx: {
-    cloud: {
-      callContainer: (params: any) => Promise<any>
-      init: (params: any) => void
-    }
-  }
-
   declare interface IntrinsicElementAttributes {}
 
   declare interface Fn<T = any> {

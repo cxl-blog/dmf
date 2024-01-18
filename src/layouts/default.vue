@@ -11,12 +11,22 @@ export default {
 import { usePage } from '@uni-helper/uni-use'
 import PageTooltip from '@/components/page-tooltip/index.vue'
 
+// #ifdef MP-WEIXIN
+import WXBizDataCrypt from '@/utils/weixin-biz-data-crypt'
+
+// #endif
+
 const page = usePage()
 const { t } = useI18n()
 const { pages, pageLoading } = storeToRefs(useAppStore())
 const { mode } = storeToRefs(useDivinationStore())
+const { isLogin } = storeToRefs(useUserStore())
 const statusBarHeight = ref(44)
 const navbarHeight = ref(44)
+
+// #ifdef MP-WEIXIN
+const { checkSession, login, getUserProfile } = useWeixin()
+// #endif
 
 const statusHPx = computed(() => {
   return `${unref(statusBarHeight)}px`
@@ -49,6 +59,13 @@ const showBorder = computed(() => {
   return flag
 })
 
+onReady(async () => {
+  // #ifdef MP-WEIXIN
+  await initLoginOfdWeixin()
+  await getUserProfileOfWeixin()
+  // #endif
+})
+
 onLoad(() => {
   // #ifdef MP-WEIXIN
   const systemInfo = uni.getSystemInfoSync()
@@ -57,6 +74,66 @@ onLoad(() => {
   navbarHeight.value = (menuButtonInfo.top - unref(statusBarHeight)) * 2 + menuButtonInfo.height
   // #endif
 })
+
+// #ifdef MP-WEIXIN
+async function initLoginOfdWeixin() {
+  const logined = await checkSession()
+
+  if (!logined) {
+    await login()
+      .then(() => {
+        isLogin.value = true
+      })
+      .catch(res => {
+        uni.showToast({
+          icon: 'error',
+          title: res.errMsg
+        })
+      })
+  } else {
+    isLogin.value = true
+  }
+}
+
+async function getUserProfileOfWeixin() {
+  if (isLogin.value) {
+    wx.showModal({
+      title: t('温馨提示'),
+      content: t('授权微信获取用户信息后，才能正常使用小程序功能'),
+      async success(res) {
+        if (res.confirm) {
+          // const { iv, encryptedData } = await getUserProfile()
+          const res = await getUserProfile()
+          const appId = 'wx4f4bc4dec97d474b'
+          const sessionKey = 'tiihtNczf5v6AKRyjwEUhQ=='
+          const encryptedData =
+            'CiyLU1Aw2KjvrjMdj8YKliAjtP4gsMZM' +
+            'QmRzooG2xrDcvSnxIMXFufNstNGTyaGS' +
+            '9uT5geRa0W4oTOb1WT7fJlAC+oNPdbB+' +
+            '3hVbJSRgv+4lGOETKUQz6OYStslQ142d' +
+            'NCuabNPGBzlooOmB231qMM85d2/fV6Ch' +
+            'evvXvQP8Hkue1poOFtnEtpyxVLW1zAo6' +
+            '/1Xx1COxFvrc2d7UL/lmHInNlxuacJXw' +
+            'u0fjpXfz/YqYzBIBzD6WUfTIF9GRHpOn' +
+            '/Hz7saL8xz+W//FRAUid1OksQaQx4CMs' +
+            '8LOddcQhULW4ucetDf96JcR3g0gfRK4P' +
+            'C7E/r7Z6xNrXd2UIeorGj5Ef7b1pJAYB' +
+            '6Y5anaHqZ9J6nKEBvB4DnNLIVWSgARns' +
+            '/8wR2SiRS7MNACwTyrGvt9ts8p12PKFd' +
+            'lqYTopNHR1Vf7XjfhQlVsAJdNiKdYmYV' +
+            'oKlaRv85IfVunYzO0IKXsyl7JCUjCpoG' +
+            '20f0a04COwfneQAGGwd5oa+T8yO5hzuy' +
+            'Db/XcxxmK01EpqOyuxINew=='
+          const iv = 'r7BXXKkLb8qrSNn05n0qiA=='
+          const pc = new WXBizDataCrypt(appId, sessionKey)
+          const data = pc.decryptData(encryptedData, iv)
+          console.log({ res, data })
+        }
+      }
+    })
+  }
+}
+// #endif
 </script>
 
 <template>
