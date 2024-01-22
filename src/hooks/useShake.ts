@@ -8,7 +8,7 @@ export function useShake() {
   let lastY = 0
   let lastZ = 0
 
-  function computedShake(res) {
+  function computedShake(res: UniApp.OnAccelerometerChangeSuccess) {
     const currentTime = new Date().getTime()
     const deltaTime = currentTime - lastTime
     lastTime = currentTime
