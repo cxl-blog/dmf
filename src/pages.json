@@ -12,7 +12,7 @@
       "path": "pages/index/index",
       "type": "home",
       "style": {
-        "navigationBarTitleText": "预测卦象"
+        "navigationBarTitleText": "学习易经"
       },
       "navbarDisableAutoBack": true
     },
@@ -27,7 +27,7 @@
       "path": "pages/divinatory-symbol/Detail",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "查看卦象"
+        "navigationBarTitleText": "查看详情"
       }
     },
     {

@@ -127,9 +127,7 @@ async function getDetail() {
           :fade="false"
           :lazyLoad="false"
         />
-        <text class="text-block block">{{
-          !divinationDetail.trigramsId ? t('起卦') : t('重新摇卦')
-        }}</text>
+        <text class="text-block block">{{ !divinationDetail.trigramsId ? '' : t('重启') }}</text>
       </view>
       <view
         v-show="divinationDetail.trigramsId"
@@ -137,7 +135,8 @@ async function getDetail() {
         @click="handleShowDetail"
       >
         <up-image :src="showDetailSrc" width="80px" height="80px" :fade="false" :lazyLoad="false" />
-        <text class="block">{{ t('查看卦象') }}</text>
+        <!-- <text class="block">{{ t('查看卦象') }}</text> -->
+        <text class="block">{{ t('查看详情') }}</text>
       </view>
     </view>
 
@@ -152,7 +151,12 @@ async function getDetail() {
       }"
       @close="showPopup = false"
     >
-      <Detail v-if="showPopup" :detail="detail" class="detail-item box-border h-100% pt-44px" />
+      <Detail
+        v-if="showPopup"
+        :show-page-tooltip="true"
+        :detail="detail"
+        class="detail-item box-border h-100% pt-44px"
+      />
     </u-popup>
   </view>
 </template>

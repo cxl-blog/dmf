@@ -92,7 +92,7 @@ onLoad(() => {
           <view class="loading-logo-center" />
         </view>
         <view class="loading-text">
-          <text>{{ t('卜算子') }}</text>
+          <text>{{ t('神卜谷') }}</text>
         </view>
       </view>
     </u-loading-page>
