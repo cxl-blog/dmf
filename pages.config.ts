@@ -16,8 +16,8 @@ export default defineUniPages({
     {
       path: 'pages/index/index',
       style: {
-        // navigationBarTitleText: '预测卦象'
-        navigationBarTitleText: '学习易经'
+        navigationBarTitleText: '预测卦象'
+        // navigationBarTitleText: '学习易经'
       },
       navbarDisableAutoBack: true
       // layout: false 不使用layout布局
@@ -31,8 +31,8 @@ export default defineUniPages({
     {
       path: 'pages/divinatory-symbol/Detail',
       style: {
-        // navigationBarTitleText: '查看卦象'
-        navigationBarTitleText: '查看详情'
+        navigationBarTitleText: '查看卦象'
+        // navigationBarTitleText: '查看详情'
       }
     },
     {
