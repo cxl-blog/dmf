@@ -117,7 +117,7 @@ function getWidth() {
                     <view
                       class="divination-name w-16px w-16px px-8px py-5px line-height-20px write-vertical-right write-orient-upright"
                     >
-                      <image :src="bgSrc" class="name-bg-image" mode="scaleToFill" />
+                      <img :src="bgSrc" class="name-bg-image" mode="scaleToFill" />
                       {{ t(`周易第${convertToChinaNum(detail.id!)}卦`) }}
                     </view>
                   </view>

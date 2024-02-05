@@ -116,7 +116,7 @@ async function getDetail() {
       </view>
     </view>
     <view class="content-center" :class="{ 'logo-start-animate': startLoading }">
-      <image :src="imgSrc" class="content-center-1" mode="scaleToFill" />
+      <img :src="imgSrc" class="content-center-1" mode="scaleToFill" />
     </view>
     <view class="content-footer w-100% flex justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">

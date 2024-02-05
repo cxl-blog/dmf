@@ -10,6 +10,7 @@ declare global {
       callContainer: (params: any) => Promise<any>
       init: (params: any) => void
     }
+    showShareMenu: Fn
   }
 
   declare interface IntrinsicElementAttributes {}
