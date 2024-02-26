@@ -10,7 +10,9 @@ export default {
 <script setup lang="ts">
 import { nextTick } from 'vue'
 import { customerTrigrams, divinationDetail as divinationDetailReq } from '@/api/divination'
-import imgSrc from '~@/static/imgs/logo_v1.png'
+
+// import imgSrc from '~@/static/imgs/logo_v1.png'
+import imgSrc from '~@/static/imgs/logo_v2_5x.png'
 import startSrc from '@/static/imgs/start.svg'
 import restartSrc from '@/static/imgs/restart.svg'
 import showDetailSrc from '@/static/imgs/show-detail.svg'
@@ -166,10 +168,11 @@ async function getDetail() {
 .content-center {
   position: relative;
   border-radius: 50%;
-  box-shadow: 0 0 15px 10px #ece5dd;
+  // box-shadow: 0 0 15px 10px #ece5dd;
   box-shadow: 0 0 20px 20px #ebe1d5;
   height: 70vw;
   width: 70vw;
+  overflow: hidden;
   margin: 50px 0;
 
   &.logo-start-animate {
@@ -207,7 +210,8 @@ async function getDetail() {
   height: 100%;
   border-radius: 50%;
   background-size: 100% 100%;
-  transform: scale(0.96);
+  // transform: scale(0.96);
+  transform: scale(1.25);
 }
 
 .text-area {
