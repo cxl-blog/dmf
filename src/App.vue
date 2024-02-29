@@ -18,6 +18,14 @@ onLaunch(() => {
       traceUser: true
     })
   }
+
+  // #ifdef MP-WEIXIN
+  wx.showShareMenu({
+    withShareTicket: true,
+    // 设置下方的Menus菜单，才能够让发送给朋友与分享到朋友圈两个按钮可以点击
+    menus: ['shareAppMessage', 'shareTimeline']
+  })
+  // #endif
 })
 onShow(() => {
   console.log('App Show')
@@ -26,16 +34,6 @@ onReady(() => {
   console.log('App Ready')
 })
 
-onLoad(() => {
-  // #ifdef MP-WEIXIN
-  wx.showShareMenu({
-    withShareTicket: true,
-    // 设置下方的Menus菜单，才能够让发送给朋友与分享到朋友圈两个按钮可以点击
-    menus: ['shareAppMessage', 'shareTimeline']
-  })
-
-  // #endif
-})
 onHide(() => {
   console.log('App Hide')
 })
