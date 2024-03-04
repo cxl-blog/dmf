@@ -29,6 +29,14 @@ onLaunch(() => {
 })
 onShow(() => {
   console.log('App Show')
+  // #ifdef MP-WEIXIN
+  // fix二次不能分享
+  wx.showShareMenu({
+    withShareTicket: true,
+    // 设置下方的Menus菜单，才能够让发送给朋友与分享到朋友圈两个按钮可以点击
+    menus: ['shareAppMessage', 'shareTimeline']
+  })
+  // #endif
 })
 onReady(() => {
   console.log('App Ready')

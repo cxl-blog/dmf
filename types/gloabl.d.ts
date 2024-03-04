@@ -11,6 +11,7 @@ declare global {
       init: (params: any) => void
     }
     showShareMenu: Fn
+    updateShareMenu: Fn
   }
 
   declare interface IntrinsicElementAttributes {}

@@ -39,20 +39,16 @@ watch(isShaking, val => {
   }
 
   if (val) {
-    showPopup.value = false
-    startLoading.value = true
-  } else {
-    uni.vibrateLong({
-      complete() {
-        handleShake()
-      }
-    })
+    uni.vibrateLong()
+    handleShakeWithDebounce()
   }
 })
 
 watch(mode, () => {
   reset()
 })
+
+const handleShakeWithDebounce = useDebounce(handleShake, 200, { leading: true })
 
 function reset() {
   for (const [key] of Object.entries(divinationDetail)) {
