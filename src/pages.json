@@ -14,21 +14,24 @@
       "style": {
         "navigationBarTitleText": "预测卦象"
       },
-      "navbarDisableAutoBack": true
+      "navbarDisableAutoBack": true,
+      "activeTabPath": "pages/index/index"
     },
     {
       "path": "pages/category/index",
       "type": "page",
       "style": {
         "navigationBarTitleText": "占事"
-      }
+      },
+      "activeTabPath": "pages/index/index"
     },
     {
       "path": "pages/divinatory-symbol/Detail",
       "type": "page",
       "style": {
         "navigationBarTitleText": "查看卦象"
-      }
+      },
+      "activeTabPath": "pages/index/index"
     },
     {
       "path": "pages/divinatory-symbol/List",
@@ -36,6 +39,15 @@
       "style": {
         "navigationBarTitleText": "卦象百科"
       }
+    },
+    {
+      "path": "pages/history/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "历史记录"
+      },
+      "navbarDisableAutoBack": true,
+      "activeTabPath": "pages/history/index"
     }
   ],
   "globalStyle": {

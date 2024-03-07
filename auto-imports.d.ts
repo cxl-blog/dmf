@@ -93,6 +93,7 @@ declare global {
   const useDebounce: typeof import('./src/hooks/useDebounce')['useDebounce']
   const useDivination: typeof import('./src/store/modules/divination')['useDivination']
   const useDivinationStore: typeof import('./src/store/modules/divination')['useDivinationStore']
+  const useHistory: typeof import('./src/hooks/useHistory')['useHistory']
   const useI18n: typeof import('vue-i18n')['useI18n']
   const useLocale: typeof import('./src/hooks/useLocale')['useLocale']
   const useRouteOptions: typeof import('./src/hooks/useRouteOptions')['useRouteOptions']
@@ -227,6 +228,7 @@ declare module 'vue' {
     readonly useDivinationStore: UnwrapRef<
       typeof import('./src/store/modules/divination')['useDivinationStore']
     >
+    readonly useHistory: UnwrapRef<typeof import('./src/hooks/useHistory')['useHistory']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useLocale: UnwrapRef<typeof import('./src/hooks/useLocale')['useLocale']>
     readonly useRouteOptions: UnwrapRef<
@@ -345,6 +347,7 @@ declare module '@vue/runtime-core' {
     readonly useDivinationStore: UnwrapRef<
       typeof import('./src/store/modules/divination')['useDivinationStore']
     >
+    readonly useHistory: UnwrapRef<typeof import('./src/hooks/useHistory')['useHistory']>
     readonly useI18n: UnwrapRef<typeof import('vue-i18n')['useI18n']>
     readonly useLocale: UnwrapRef<typeof import('./src/hooks/useLocale')['useLocale']>
     readonly useRouteOptions: UnwrapRef<

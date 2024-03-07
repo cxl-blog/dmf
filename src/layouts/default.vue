@@ -17,6 +17,20 @@ const { pages, pageLoading } = storeToRefs(useAppStore())
 const { mode } = storeToRefs(useDivinationStore())
 const statusBarHeight = ref(44)
 const navbarHeight = ref(44)
+const tabList = [
+  { name: t('首页'), path: 'pages/index/index', icon: 'home' },
+  { name: t('历史记录'), path: 'pages/history/index', icon: 'list' },
+  { name: t('设置'), path: 'pages/history/index', icon: 'setting' }
+]
+const tab = computed(() => {
+  const index = tabList.findIndex(item => item.path === pageConfig.value.activeTabPath)
+
+  return index
+})
+const tabRef = ref<any>(null)
+const tabHeight = computed(() => {
+  return unref(tabRef)?.placeholderHeight ? `${unref(tabRef)?.placeholderHeight}px` : '51px'
+})
 
 const statusHPx = computed(() => {
   return `${unref(statusBarHeight)}px`
@@ -57,6 +71,17 @@ onLoad(() => {
   navbarHeight.value = (menuButtonInfo.top - unref(statusBarHeight)) * 2 + menuButtonInfo.height
   // #endif
 })
+
+function handleTabChange(val) {
+  const item = tabList[val]
+  try {
+    uni.reLaunch({
+      url: `/${item.path}`,
+      animationType: 'slide-in-right',
+      animationDuration: 300
+    })
+  } catch (error) {}
+}
 </script>
 
 <template>
@@ -78,6 +103,19 @@ onLoad(() => {
       </view>
       <PageTooltip />
     </view>
+    <u-tabbar
+      ref="tabRef"
+      :value="tab"
+      :fixed="true"
+      class="min-h-0 flex-1!"
+      :placeholder="true"
+      activeColor="#b97d2d"
+      :safeAreaInsetBottom="true"
+      @change="handleTabChange"
+    >
+      <u-tabbar-item v-for="item in tabList" :key="item.name" :text="item.name" :icon="item.icon" />
+    </u-tabbar>
+
     <u-loading-page
       class="page-loading"
       bg-color="rgba(17,14,12,0.70);"
@@ -115,9 +153,9 @@ onLoad(() => {
 }
 
 .app-main {
-  height: calc(100% - var(--status-bar-height));
+  height: calc(100% - var(--status-bar-height) - v-bind(tabHeight));
   // #ifdef MP-WEIXIN
-  height: calc(100vh - v-bind(statusHPx) - v-bind(titleHPx));
+  height: calc(100vh - v-bind(statusHPx) - v-bind(titleHPx) - v-bind(tabHeight));
   // #endif
   position: relative;
   background-color: $u-bg-color;

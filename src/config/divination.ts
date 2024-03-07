@@ -21,4 +21,5 @@ export type DivinationDetail = {
   symbolicExplanation: string
   generalExplanation: string
   imageURL: string | null
+  time?: Date | null
 }

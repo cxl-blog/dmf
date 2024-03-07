@@ -62,6 +62,7 @@
     "@uni-helper/uni-network": "^0.16.1",
     "@uni-helper/uni-use": "^0.16.0",
     "@vueuse/core": "^9.13.0",
+    "dayjs": "^1.11.10",
     "lodash-es": "^4.17.21",
     "pinia": "2.0.35",
     "qs": "^6.11.2",
@@ -125,6 +126,7 @@
     "optimizeDeps": {
       "include": [
         "@uni-helper/uni-network",
+        "dayjs",
         "qs",
         "uview-plus/components/u-scroll-list/props.js",
         "uview-plus/libs/mixin/mixin.js",

@@ -19,21 +19,32 @@ export default defineUniPages({
         navigationBarTitleText: '预测卦象'
         // navigationBarTitleText: '学习易经'
       },
-      navbarDisableAutoBack: true
+      navbarDisableAutoBack: true,
+      activeTabPath: 'pages/index/index'
       // layout: false 不使用layout布局
     },
     {
       path: 'pages/category/index',
       style: {
         navigationBarTitleText: '占事'
-      }
+      },
+      activeTabPath: 'pages/index/index'
+    },
+    {
+      path: 'pages/history/index',
+      style: {
+        navigationBarTitleText: '历史记录'
+      },
+      navbarDisableAutoBack: true,
+      activeTabPath: 'pages/history/index'
     },
     {
       path: 'pages/divinatory-symbol/Detail',
       style: {
         navigationBarTitleText: '查看卦象'
         // navigationBarTitleText: '查看详情'
-      }
+      },
+      activeTabPath: 'pages/index/index'
     },
     {
       path: 'pages/divinatory-symbol/List',

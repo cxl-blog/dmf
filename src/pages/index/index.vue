@@ -32,6 +32,7 @@ const startLoading = ref(false)
 const showPopup = ref(false)
 const { isShaking } = useShake()
 const loadingData = ref(false)
+const { addItem } = useHistory()
 
 watch(isShaking, val => {
   if (loadingData.value || showPopup.value) {
@@ -95,6 +96,7 @@ async function getDetail() {
   await divinationDetailReq(divinationDetail.trigramsId, { categoryIndex: category.value })
     .then(res => {
       Object.assign(detail, res)
+      addItem({ ...res, time: Date() })
     })
     .finally(() => {
       showPopup.value = true
@@ -126,7 +128,7 @@ async function getDetail() {
           :lazyLoad="false"
         />
         <text class="text-block block">{{
-          !divinationDetail.trigramsId ? t('起卦') : t('重新摇卦')
+          !divinationDetail.trigramsId ? t('摇一次') : t('再来一次')
         }}</text>
       </view>
       <view
@@ -135,7 +137,7 @@ async function getDetail() {
         @click="handleShowDetail"
       >
         <up-image :src="showDetailSrc" width="80px" height="80px" :fade="false" :lazyLoad="false" />
-        <text class="block">{{ t('查看卦象') }}</text>
+        <text class="block">{{ t('查看详情') }}</text>
       </view>
     </view>
 

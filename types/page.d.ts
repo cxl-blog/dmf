@@ -4,5 +4,6 @@ declare global {
   declare type PageConfig = PageMetaDatum & {
     navbarTitle: string
     navbarDisableAutoBack: boolean
+    activeTabPath: string
   }
 }

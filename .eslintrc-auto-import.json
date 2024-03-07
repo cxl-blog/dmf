@@ -107,6 +107,7 @@
     "useAppStoreWithout": true,
     "useRouteOptions": true,
     "useShake": true,
-    "useDebounce": true
+    "useDebounce": true,
+    "useHistory": true
   }
 }

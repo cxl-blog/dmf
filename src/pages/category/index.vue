@@ -46,7 +46,7 @@ function getCategories() {
         </up-list-item>
       </up-list>
     </view>
-    <view v-else class="">
+    <view v-else class="mt-20px">
       <u-loading-icon :text="t('获取分类中...')" textSize="14" />
     </view>
   </view>
