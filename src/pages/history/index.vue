@@ -12,7 +12,7 @@ import dayjs from 'dayjs'
 import SymbolImg from '@/components/divination-symbol/index.vue'
 import type { DivinationDetail } from '@/config/divination'
 import { DIVINATION_SYMBOL } from '@/constants/divination'
-import Detail from '@/components/divination-symbol/Detail.vue'
+import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
 
 const data = ref<DivinationDetail[]>([])
 
@@ -35,7 +35,7 @@ function handleShowDetail(item: DivinationDetail) {
   const timer = setTimeout(() => {
     isClick.value = false
     clearTimeout(timer)
-  }, 100)
+  }, 200)
 }
 </script>
 
@@ -83,24 +83,7 @@ function handleShowDetail(item: DivinationDetail) {
       </view>
     </scroll-view>
 
-    <u-popup
-      :show="showPopup"
-      :round="10"
-      mode="bottom"
-      closeable
-      :customStyle="{
-        height: '75%',
-        background: '#f7f5f1'
-      }"
-      @close="showPopup = false"
-    >
-      <Detail
-        v-if="showPopup"
-        :show-page-tooltip="true"
-        :detail="detail"
-        class="detail-item box-border h-75vh pt-44px"
-      />
-    </u-popup>
+    <DetailPopup v-model="showPopup" :detail="detail as DivinationDetail" />
   </view>
 </template>
 

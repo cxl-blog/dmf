@@ -11,13 +11,12 @@ export default {
 import { nextTick } from 'vue'
 import { customerTrigrams, divinationDetail as divinationDetailReq } from '@/api/divination'
 
-// import imgSrc from '~@/static/imgs/logo_v1.png'
 import imgSrc from '~@/static/imgs/logo_v2_5x.png'
 import startSrc from '@/static/imgs/start.svg'
 import restartSrc from '@/static/imgs/restart.svg'
 import showDetailSrc from '@/static/imgs/show-detail.svg'
 import type { DivinationDetail } from '@/config/divination'
-import Detail from '@/components/divination-symbol/Detail.vue'
+import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
 
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
@@ -118,7 +117,7 @@ async function getDetail() {
     <view class="content-center" :class="{ 'logo-start-animate': startLoading }">
       <img :src="imgSrc" class="content-center-1" mode="scaleToFill" />
     </view>
-    <view class="content-footer w-100% flex justify-between">
+    <view class="content-footer w-100% flex flex-1 justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
         <up-image
           :src="!divinationDetail.trigramsId ? startSrc : restartSrc"
@@ -141,24 +140,7 @@ async function getDetail() {
       </view>
     </view>
 
-    <u-popup
-      :show="showPopup"
-      :round="10"
-      mode="bottom"
-      closeable
-      :customStyle="{
-        height: '75%',
-        background: '#f7f5f1'
-      }"
-      @close="showPopup = false"
-    >
-      <Detail
-        v-if="showPopup"
-        :show-page-tooltip="true"
-        :detail="detail"
-        class="detail-item box-border h-100% pt-44px"
-      />
-    </u-popup>
+    <DetailPopup v-model="showPopup" :detail="detail as DivinationDetail" />
   </view>
 </template>
 
@@ -193,12 +175,6 @@ async function getDetail() {
 
   :deep() .popup__content__close--top-right {
     padding: 5px;
-  }
-}
-
-.detail-item {
-  :deep() .divination-detail-container {
-    padding-top: 0;
   }
 }
 
