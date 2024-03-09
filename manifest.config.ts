@@ -57,9 +57,9 @@ export default defineManifestConfig({
       urlCheck: false,
       es6: true,
       minified: true,
-      bigPackageSizeSupport: true,
-      ignoreDevUnusedFiles: false,
-      ignoreUploadUnusedFiles: false
+      bigPackageSizeSupport: false,
+      ignoreDevUnusedFiles: true,
+      ignoreUploadUnusedFiles: true
     },
     usingComponents: true
   },

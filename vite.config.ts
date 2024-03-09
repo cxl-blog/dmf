@@ -7,6 +7,8 @@ import UniLayouts from '@uni-helper/vite-plugin-uni-layouts'
 import UniPages from '@uni-helper/vite-plugin-uni-pages'
 import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import Unocss from 'unocss/vite'
+import viteImagemin from 'vite-plugin-imagemin'
+import visualizer from 'rollup-plugin-visualizer'
 import { VitePluginOptimize, VitePluginPkgConfig } from './plugins/vite-plugin-optimize'
 
 let PROXY_ENV = 'dev'
@@ -59,6 +61,34 @@ export default defineConfig(({ mode }) => {
         },
         dts: './auto-imports.d.ts',
         vueTemplate: true
+      }),
+      visualizer({ open: true }),
+      viteImagemin({
+        gifsicle: {
+          optimizationLevel: 7,
+          interlaced: false
+        },
+        optipng: {
+          optimizationLevel: 7
+        },
+        mozjpeg: {
+          quality: 20
+        },
+        pngquant: {
+          quality: [0.8, 0.9],
+          speed: 4
+        },
+        svgo: {
+          plugins: [
+            {
+              name: 'removeViewBox'
+            },
+            {
+              name: 'removeEmptyAttrs',
+              active: false
+            }
+          ]
+        }
       })
     ],
     assetsInclude: ['./src/static/**'],

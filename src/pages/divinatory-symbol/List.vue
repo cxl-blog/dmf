@@ -263,15 +263,10 @@ const list = ref([
 </script>
 
 <template>
-  <scroll-view
-    scroll-y
-    class="[&_.u-row]:box-border h-100%! [&_.u-row]:flex-wrap [&_.u-row]:p-16px"
-  >
-    <up-row :gutter="20">
-      <up-col v-for="item in list" :key="item.key" :span="6">
-        <view
-          class="symbol-item relative mb-20px b-[1px_solid_#ccc] b-rd-10px bg-[#ffffff] py-16px"
-        >
+  <scroll-view scroll-y class="box-border h-100% p-[0_16px_0_16px]">
+    <view class="pt-16px container">
+      <template v-for="item in list" :key="item.key">
+        <view class="symbol-item relative b-[1px_solid_#ccc] b-rd-10px bg-[#ffffff] py-16px">
           <view class="item-name">
             <text>{{ item.name }}</text>
           </view>
@@ -285,12 +280,18 @@ const list = ref([
             />
           </view>
         </view>
-      </up-col>
-    </up-row>
+      </template>
+    </view>
   </scroll-view>
 </template>
 
 <style scoped lang="scss">
+.container {
+  display: grid;
+  /*  声明列的宽度  */
+  grid-template-columns: repeat(2, auto);
+  grid-gap: 20px;
+}
 .symbol-item {
   box-shadow: 0 0 2px 3px #eee;
 }
