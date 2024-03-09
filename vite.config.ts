@@ -8,7 +8,8 @@ import UniPages from '@uni-helper/vite-plugin-uni-pages'
 import UniManifest from '@uni-helper/vite-plugin-uni-manifest'
 import Unocss from 'unocss/vite'
 import viteImagemin from 'vite-plugin-imagemin'
-import visualizer from 'rollup-plugin-visualizer'
+
+// import visualizer from 'rollup-plugin-visualizer'
 import { VitePluginOptimize, VitePluginPkgConfig } from './plugins/vite-plugin-optimize'
 
 let PROXY_ENV = 'dev'
@@ -62,7 +63,7 @@ export default defineConfig(({ mode }) => {
         dts: './auto-imports.d.ts',
         vueTemplate: true
       }),
-      visualizer({ open: true }),
+      // visualizer({ open: false }),
       viteImagemin({
         gifsicle: {
           optimizationLevel: 7,

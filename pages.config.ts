@@ -22,13 +22,13 @@ export default defineUniPages({
       activeTabPath: 'pages/index/index'
       // layout: false 不使用layout布局
     },
-    {
-      path: 'pages/category/index',
-      style: {
-        navigationBarTitleText: '占事'
-      },
-      activeTabPath: 'pages/index/index'
-    },
+    // {
+    //   path: 'pages/category/index',
+    //   style: {
+    //     navigationBarTitleText: '占事'
+    //   },
+    //   activeTabPath: 'pages/index/index'
+    // },
     {
       path: 'pages/history/index',
       style: {
@@ -37,13 +37,13 @@ export default defineUniPages({
       navbarDisableAutoBack: true,
       activeTabPath: 'pages/history/index'
     },
-    {
-      path: 'pages/divinatory-symbol/Detail',
-      style: {
-        navigationBarTitleText: '查看卦象'
-      },
-      activeTabPath: 'pages/index/index'
-    },
+    // {
+    //   path: 'pages/divinatory-symbol/Detail',
+    //   style: {
+    //     navigationBarTitleText: '查看卦象'
+    //   },
+    //   activeTabPath: 'pages/index/index'
+    // },
     {
       path: 'pages/divinatory-symbol/List',
       style: {
@@ -62,6 +62,27 @@ export default defineUniPages({
       navbarDisabled: true
     }
   ] as PageConfig[],
+  subPackages: [
+    {
+      root: 'pages-other',
+      pages: [
+        {
+          path: 'category/index',
+          style: {
+            navigationBarTitleText: '占事'
+          },
+          activeTabPath: 'pages/index/index'
+        },
+        {
+          path: 'divinatory-symbol/Detail',
+          style: {
+            navigationBarTitleText: '查看卦象'
+          },
+          activeTabPath: 'pages/index/index'
+        }
+      ] as PageConfig[]
+    }
+  ],
   globalStyle: {
     // navigationBarTextStyle: 'black',
     // navigationBarBackgroundColor: '#f7f5f1',

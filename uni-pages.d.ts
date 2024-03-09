@@ -9,7 +9,9 @@ interface NavigateToOptions {
        "pages/divinatory-symbol/Detail" |
        "pages/divinatory-symbol/List" |
        "pages/history/index" |
-       "pages/setting/index";
+       "pages/setting/index" |
+       "pages-other/category/index" |
+       "pages-other/divinatory-symbol/Detail";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

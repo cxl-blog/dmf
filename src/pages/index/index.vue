@@ -57,12 +57,12 @@ function reset() {
 }
 
 function jumpTo() {
-  uni.navigateTo({ url: '/pages/category/index' })
+  uni.navigateTo({ url: '/pages-other/category/index' })
 }
 
 function handleShowDetail() {
   uni.navigateTo({
-    url: `/pages/divinatory-symbol/Detail?trigramsId=${divinationDetail.trigramsId}`,
+    url: `/pages-other/divinatory-symbol/Detail?trigramsId=${divinationDetail.trigramsId}`,
     animationType: 'slide-in-right',
     animationDuration: 300
   })

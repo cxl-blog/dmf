@@ -20,18 +20,12 @@
     {
       "path": "pages/category/index",
       "type": "page",
-      "style": {
-        "navigationBarTitleText": "占事"
-      },
-      "activeTabPath": "pages/index/index"
+      "style": {}
     },
     {
       "path": "pages/divinatory-symbol/Detail",
       "type": "page",
-      "style": {
-        "navigationBarTitleText": "查看卦象"
-      },
-      "activeTabPath": "pages/index/index"
+      "style": {}
     },
     {
       "path": "pages/divinatory-symbol/List",
@@ -62,9 +56,29 @@
       "navbarDisabled": true
     }
   ],
+  "subPackages": [
+    {
+      "root": "pages-other",
+      "pages": [
+        {
+          "path": "category/index",
+          "style": {
+            "navigationBarTitleText": "占事"
+          },
+          "activeTabPath": "pages/index/index"
+        },
+        {
+          "path": "divinatory-symbol/Detail",
+          "style": {
+            "navigationBarTitleText": "查看卦象"
+          },
+          "activeTabPath": "pages/index/index"
+        }
+      ]
+    }
+  ],
   "globalStyle": {
     "navigationStyle": "custom",
     "mp-weixin": {}
-  },
-  "subPackages": []
+  }
 }
