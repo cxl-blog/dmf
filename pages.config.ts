@@ -48,7 +48,9 @@ export default defineUniPages({
       path: 'pages/divinatory-symbol/List',
       style: {
         navigationBarTitleText: '卦象百科'
-      }
+      },
+      activeTabPath: 'pages/divinatory-symbol/List',
+      navbarDisableAutoBack: true
     },
     {
       path: 'pages/setting/index',

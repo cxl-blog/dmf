@@ -21,6 +21,7 @@ const navbarHeight = ref(44)
 const tabList = [
   { name: t('首页'), path: 'pages/index/index', icon: 'home' },
   { name: t('历史记录'), path: 'pages/history/index', icon: 'list' },
+  { name: t('卦象百科'), path: 'pages/divinatory-symbol/List', icon: 'coupon' },
   { name: t('设置'), path: 'pages/setting/index', icon: 'setting' }
 ]
 const tab = computed(() => {

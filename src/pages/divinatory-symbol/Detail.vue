@@ -32,19 +32,6 @@ function getDetail() {
       })
     })
 }
-
-// async function computedNameRect() {
-//   return new Promise(resolve => {
-//     uni
-//       .createSelectorQuery()
-//       .select('.divination-detail-container .divination-name')
-//       .boundingClientRect(data => {
-//         Object.assign(nameRect, data)
-//         resolve(null)
-//       })
-//       .exec()
-//   })
-// }
 </script>
 
 <template>

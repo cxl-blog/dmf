@@ -263,18 +263,25 @@ const list = ref([
 </script>
 
 <template>
-  <scroll-view scroll-y>
-    <up-row :gutter="20" class="box-border flex-wrap p-16px">
-      <up-col v-for="(item, index) in list" :key="item.key" :span="6" class="mb-20px">
-        <view class="symbol-item b-rd-10px bg-white">
-          <view class="b-[1px_solid_#ccc] p-12px">
-            <text>{{ index + 1 }}.{{ item.name }}</text>
+  <scroll-view
+    scroll-y
+    class="[&_.u-row]:box-border h-100%! [&_.u-row]:flex-wrap [&_.u-row]:p-16px"
+  >
+    <up-row :gutter="20">
+      <up-col v-for="item in list" :key="item.key" :span="6">
+        <view
+          class="symbol-item relative mb-20px b-[1px_solid_#ccc] b-rd-10px bg-[#ffffff] py-16px"
+        >
+          <view class="item-name">
+            <text>{{ item.name }}</text>
           </view>
-          <view class="flex items-center justify-center px-12px pb-20px pt-10px">
+          <view class="flex items-center justify-center">
             <SymbolImg
+              class="h-100% w-80% opacity-50"
+              inactive-bg-color="#ffffff"
               :symbol-name="(item.key as DivinationSymbolType)"
-              inactive-bg-color="#fff"
-              class="w-65%"
+              :offsetItemY="8"
+              active-bg-color="rgba(0,0,0,0.15)"
             />
           </view>
         </view>
@@ -286,5 +293,21 @@ const list = ref([
 <style scoped lang="scss">
 .symbol-item {
   box-shadow: 0 0 2px 3px #eee;
+}
+
+.item-name {
+  position: absolute;
+  font-size: 36px;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50%;
+  border: 1px solid #745224;
+  height: 80px;
+  box-sizing: border-box;
+  width: 80px;
+  line-height: 80px;
+  text-align: center;
 }
 </style>
