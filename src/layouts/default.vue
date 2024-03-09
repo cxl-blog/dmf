@@ -173,7 +173,6 @@ function handleTabChange(val) {
 }
 
 .app-main {
-  // height: calc(100% - var(--status-bar-height) - v-bind(tabHeight));
   height: v-bind(appMainH);
   position: relative;
   background-color: $u-bg-color;
