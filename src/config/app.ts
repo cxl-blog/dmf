@@ -3,8 +3,14 @@ export type AppState = {
   pages: PageConfig[]
   pageLoading: boolean
   scheme: 'light' | 'dark' | undefined
-  /**
-   * @description 导航高度
-   */
-  navbarHeight: number
+  layout: {
+    /**
+     * @description 导航头部高度
+     */
+    navbarHeight: number
+    /**
+     * @description 手机状态栏高度
+     */
+    statusHeight: number
+  }
 }

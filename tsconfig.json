@@ -43,6 +43,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "types/**/*.d.ts",
+    "pages.config.ts",
     "./auto-imports.d.ts"
   ],
   "exclude": ["node_modules", "dist", "src/**/*.nvue"]

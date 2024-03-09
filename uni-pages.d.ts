@@ -8,7 +8,8 @@ interface NavigateToOptions {
        "pages/category/index" |
        "pages/divinatory-symbol/Detail" |
        "pages/divinatory-symbol/List" |
-       "pages/history/index";
+       "pages/history/index" |
+       "pages/setting/index";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

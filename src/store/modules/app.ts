@@ -9,7 +9,10 @@ export const useAppStore = defineStore('app', {
       pages,
       pageLoading: false,
       scheme: uni.getSystemInfoSync().hostTheme as any,
-      navbarHeight: 0
+      layout: {
+        navbarHeight: 0,
+        statusHeight: 0
+      }
     }
   },
   actions: {
@@ -18,6 +21,9 @@ export const useAppStore = defineStore('app', {
     },
     endLoading() {
       this.pageLoading = false
+    },
+    updateLayout(data: Partial<AppState['layout']>) {
+      Object.assign(this.layout, data)
     }
   }
 })

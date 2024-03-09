@@ -48,6 +48,16 @@
       },
       "navbarDisableAutoBack": true,
       "activeTabPath": "pages/history/index"
+    },
+    {
+      "path": "pages/setting/index",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "设置"
+      },
+      "navbarDisableAutoBack": true,
+      "activeTabPath": "pages/setting/index",
+      "navbarDisabled": true
     }
   ],
   "globalStyle": {

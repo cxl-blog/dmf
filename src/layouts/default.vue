@@ -13,14 +13,15 @@ import PageTooltip from '@/components/page-tooltip/index.vue'
 
 const page = usePage()
 const { t } = useI18n()
-const { pages, pageLoading } = storeToRefs(useAppStore())
+const appStore = useAppStore()
+const { pages, pageLoading, layout } = storeToRefs(appStore)
 const { mode } = storeToRefs(useDivinationStore())
 const statusBarHeight = ref(44)
 const navbarHeight = ref(44)
 const tabList = [
   { name: t('首页'), path: 'pages/index/index', icon: 'home' },
   { name: t('历史记录'), path: 'pages/history/index', icon: 'list' },
-  { name: t('设置'), path: 'pages/history/index', icon: 'setting' }
+  { name: t('设置'), path: 'pages/setting/index', icon: 'setting' }
 ]
 const tab = computed(() => {
   const index = tabList.findIndex(item => item.path === pageConfig.value.activeTabPath)
@@ -32,11 +33,21 @@ const tabHeight = computed(() => {
   return unref(tabRef)?.placeholderHeight ? `${unref(tabRef)?.placeholderHeight}px` : '51px'
 })
 
-const statusHPx = computed(() => {
-  return `${unref(statusBarHeight)}px`
-})
-const titleHPx = computed(() => {
-  return `${unref(navbarHeight)}px`
+const appMainH = computed(() => {
+  if (unref(navbarDisabled)) {
+    let h = `calc(100vh - ${unref(tabHeight)})`
+    // #ifdef MP-WEIXIN
+    h = `calc(100vh - ${unref(tabHeight)})`
+    // #endif
+
+    return h
+  } else {
+    let h = `calc(100vh - ${unref(statusBarHeight)}px - ${unref(tabHeight)})`
+    // #ifdef MP-WEIXIN
+    h = `calc(100vh - ${unref(statusBarHeight)}px - ${unref(navbarHeight)}px - ${unref(tabHeight)})`
+    // #endif
+    return h
+  }
 })
 
 const pageConfig = computed<Partial<PageConfig>>(() => {
@@ -49,6 +60,10 @@ const title = computed(() => {
     (unref(pageConfig)?.style?.navigationBarTitleText || '命运大师')
 
   return pageConfig.value.path === 'pages/category/index' ? t(unref(mode)) : t(name)
+})
+
+const navbarDisabled = computed(() => {
+  return unref(pageConfig).navbarDisabled ?? false
 })
 
 const autoBack = computed(() => {
@@ -69,6 +84,10 @@ onLoad(() => {
   statusBarHeight.value = systemInfo.statusBarHeight as number
   const menuButtonInfo = uni.getMenuButtonBoundingClientRect()
   navbarHeight.value = (menuButtonInfo.top - unref(statusBarHeight)) * 2 + menuButtonInfo.height
+  layout.value = Object.assign(layout.value, {
+    navbarHeight: navbarHeight.value,
+    statusHeight: statusBarHeight.value
+  })
   // #endif
 })
 
@@ -88,6 +107,7 @@ function handleTabChange(val) {
   <view class="app-layout h-100% bg-[#f7f5f1]">
     <!-- 状态栏 -->
     <up-navbar
+      v-if="!navbarDisabled"
       class="app-navbar"
       :title="title"
       :auto-back="autoBack"
@@ -153,10 +173,8 @@ function handleTabChange(val) {
 }
 
 .app-main {
-  height: calc(100% - var(--status-bar-height) - v-bind(tabHeight));
-  // #ifdef MP-WEIXIN
-  height: calc(100vh - v-bind(statusHPx) - v-bind(titleHPx) - v-bind(tabHeight));
-  // #endif
+  // height: calc(100% - var(--status-bar-height) - v-bind(tabHeight));
+  height: v-bind(appMainH);
   position: relative;
   background-color: $u-bg-color;
 }
