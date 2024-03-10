@@ -276,7 +276,7 @@ const list = ref([
               inactive-bg-color="#ffffff"
               :symbol-name="(item.key as DivinationSymbolType)"
               :offsetItemY="8"
-              active-bg-color="rgba(0,0,0,0.15)"
+              active-bg-color="#dbbd95"
             />
           </view>
         </view>
@@ -304,11 +304,12 @@ const list = ref([
   z-index: 1;
   transform: translateX(-50%) translateY(-50%);
   border-radius: 50%;
-  border: 1px solid #745224;
+  border: 2px solid #dbbd95;
   height: 80px;
   box-sizing: border-box;
   width: 80px;
   line-height: 80px;
   text-align: center;
+  color: #b2a7a7;
 }
 </style>

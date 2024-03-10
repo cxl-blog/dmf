@@ -56,9 +56,7 @@ const pageConfig = computed<Partial<PageConfig>>(() => {
 })
 
 const title = computed(() => {
-  const name =
-    unref(pageConfig)?.navbarTitle ??
-    (unref(pageConfig)?.style?.navigationBarTitleText || '命运大师')
+  const name = unref(pageConfig)?.style?.navigationBarTitleText || '神卜谷'
 
   return pageConfig.value.path === 'pages/category/index' ? t(unref(mode)) : t(name)
 })
