@@ -32,6 +32,7 @@ const showPopup = ref(false)
 const { isShaking } = useShake()
 const loadingData = ref(false)
 const { addItem } = useHistory()
+const list = ref(['神卜', t('黄历')])
 appStore.startLoading()
 
 watch(isShaking, val => {
@@ -111,6 +112,9 @@ async function getDetail() {
 
 <template>
   <view class="content box-border h-100% w-100% p-20px">
+    <view class="mb-16px w-100%">
+      <u-subsection :list="list" :current="0" :active-color="__CSS_THEME_COLOR__" />
+    </view>
     <view class="header w-100% flex justify-between">
       <view class="header-left color-gray">
         <text>{{ mode }}</text>

@@ -13,7 +13,6 @@ import SymbolImg from '@/components/divination-symbol/index.vue'
 import type { DivinationDetail } from '@/config/divination'
 import { DIVINATION_SYMBOL } from '@/constants/divination'
 import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
-import CustomCalendar from '@/components/custom-calendar/index.vue'
 
 const data = ref<DivinationDetail[]>([])
 
@@ -26,7 +25,6 @@ const appStore = useAppStore()
 appStore.startLoading()
 
 const isClick = ref(false)
-const maxDate = dayjs().add(1, 'day').format('YYYY-MM-DD')
 
 onBeforeMount(() => {
   data.value = getData().reverse()
@@ -50,9 +48,6 @@ function handleShowDetail(item: DivinationDetail) {
 <template>
   <view class="relative h-100% flex flex-col">
     <scroll-view scroll-y class="h-100%!">
-      <view class="">
-        <CustomCalendar showLunar color="#dfb986" :maxDate="maxDate" />
-      </view>
       <view v-if="init" class="list-content h-100% p-16px">
         <template v-if="data.length">
           <template v-for="item in data" :key="item.id">

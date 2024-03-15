@@ -1,8 +1,26 @@
 import { UnConfig } from '@uni-helper/uni-network'
 
 declare global {
-  declare const process: {
-    env: NodeJS.ProcessEnv
+  /**
+   * vite 注入的变量
+   * @description css变量前缀
+   * @default 'dmf'
+   */
+  declare const __CSS_NAMESPACE__: string
+
+  /**
+   * @description 主题色
+   */
+  declare const __CSS_THEME_COLOR__: string
+
+  declare namespace NodeJS {
+    interface ProcessEnv {
+      NODE_ENV: 'development' | 'production'
+      /**
+       * @default 'dmf'
+       */
+      VITE_CSS_NAMESPACE?: string
+    }
   }
 
   declare const wx: {
@@ -80,6 +98,8 @@ declare global {
     VITE_API_BASE_PATH: string
     VITE_WEIXIN_CLOUD_ENV: string
     VITE_X_WX_SERVICE: string
+    VITE_CSS_THEME_COLOR: string
+    VITE_CSS_NAMESPACE: string
   }
 }
 

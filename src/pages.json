@@ -18,6 +18,11 @@
       "activeTabPath": "pages/index/index"
     },
     {
+      "path": "pages/calendar/index",
+      "type": "page",
+      "style": {}
+    },
+    {
       "path": "pages/category/index",
       "type": "page",
       "style": {}

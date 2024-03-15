@@ -28,7 +28,9 @@ const root = process.cwd()
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  const env = loadEnv(mode, root)
+  const env = loadEnv(mode, root) as ImportMetaEnv
+
+  process.env.VITE_CSS_NAMESPACE = env.VITE_CSS_NAMESPACE
 
   return {
     base: env.VITE_BASE_PATH,
@@ -95,7 +97,7 @@ export default defineConfig(({ mode }) => {
     assetsInclude: ['./src/static/**'],
     esbuild: {
       // 微信调试
-      // pure: ['console.log'],
+      pure: ['console.log'],
       drop: ['debugger']
     },
     resolve: {
@@ -104,7 +106,9 @@ export default defineConfig(({ mode }) => {
       }
     },
     define: {
-      'process.env': process.env
+      'process.env': process.env,
+      __CSS_NAMESPACE__: JSON.stringify(env.VITE_CSS_NAMESPACE),
+      __CSS_THEME_COLOR__: JSON.stringify(env.VITE_CSS_THEME_COLOR)
     },
     css: {
       preprocessorOptions: {
