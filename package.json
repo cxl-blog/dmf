@@ -130,11 +130,14 @@
       "include": [
         "@uni-helper/uni-network",
         "dayjs",
+        "dayjs/esm/index",
         "lunar-typescript",
         "qs",
+        "uview-plus/components/u-calendar/props.js",
         "uview-plus/components/u-scroll-list/props.js",
         "uview-plus/libs/mixin/mixin.js",
-        "uview-plus/libs/mixin/mpMixin.js"
+        "uview-plus/libs/mixin/mpMixin.js",
+        "uview-plus/libs/util/calendar.js"
       ]
     }
   }

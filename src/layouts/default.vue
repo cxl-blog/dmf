@@ -178,6 +178,8 @@ function handleTabChange(val) {
 }
 
 .page-loading {
+  position: relative;
+  z-index: 2000;
   background-color: rgba(17, 14, 12, 0.7);
   :deep() .u-loading-page__warpper__loading-icon {
     display: none;

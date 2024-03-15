@@ -32,6 +32,7 @@ const showPopup = ref(false)
 const { isShaking } = useShake()
 const loadingData = ref(false)
 const { addItem } = useHistory()
+appStore.startLoading()
 
 watch(isShaking, val => {
   if (loadingData.value || showPopup.value) {
@@ -49,6 +50,10 @@ watch(mode, () => {
 })
 
 const handleShakeWithDebounce = useDebounce(handleShake, 200, { leading: true })
+
+onMounted(() => {
+  appStore.endLoading()
+})
 
 function reset() {
   for (const [key] of Object.entries(divinationDetail)) {

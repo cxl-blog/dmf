@@ -13,14 +13,20 @@ import imgSrc from '~@/static/imgs/logo_v2.png'
 
 const { t } = useI18n()
 const { layout } = storeToRefs(useAppStore())
+const appStore = useAppStore()
 const lunar = Lunar.fromDate(new Date())
 const offsetTop = computed(() => {
   return layout.value.statusHeight + layout.value.navbarHeight || 0
 })
+appStore.startLoading()
 
 // const headerHpx = computed(() => {
 //   return `${unref(offsetTop)}px`
 // })
+
+onMounted(() => {
+  appStore.endLoading()
+})
 
 const headerTpx = computed(() => {
   return `${unref(offsetTop) + 20}px`
