@@ -61,6 +61,7 @@
     "@dcloudio/uni-quickapp-webview": "3.0.0-3090820231124001",
     "@uni-helper/uni-network": "^0.16.1",
     "@uni-helper/uni-use": "^0.16.0",
+    "@vueuse/components": "^10.9.0",
     "@vueuse/core": "^9.13.0",
     "dayjs": "^1.11.10",
     "lodash-es": "^4.17.21",
@@ -129,6 +130,7 @@
     "optimizeDeps": {
       "include": [
         "@uni-helper/uni-network",
+        "@vueuse/components",
         "dayjs",
         "lunar-typescript",
         "qs",

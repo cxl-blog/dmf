@@ -1,11 +1,15 @@
 <script setup lang="ts">
+import { vIntersectionObserver } from '@vueuse/components'
 import { trigrams } from '@/api/divination'
 import SymbolImg from '@/components/divination-symbol/index.vue'
 import type { DivinationDetail } from '@/config/divination'
 import { DIVINATION_SYMBOL } from '@/constants/divination'
 
-const list = ref<DivinationDetail[]>([])
+type Data = DivinationDetail & { showed: boolean }
+
+const list = ref<Data[]>([])
 const appStore = useAppStore()
+const rootRef = ref()
 appStore.startLoading()
 onBeforeMount(() => {
   getList()
@@ -21,13 +25,23 @@ function getList() {
       nextTick(appStore.endLoading)
     })
 }
+
+function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[], item: Data) {
+  if (isIntersecting) {
+    item.showed = true
+  }
+}
 </script>
 
 <template>
-  <scroll-view scroll-y class="box-border h-100% p-[0_16px_0_16px]">
+  <scroll-view ref="rootRef" scroll-y class="box-border h-100% p-[0_16px_0_16px]">
     <view class="pt-16px container">
       <template v-for="item in list" :key="item.key">
-        <view class="symbol-item relative b-[1px_solid_#ccc] b-rd-10px bg-[#ffffff] py-16px">
+        <view
+          v-intersection-observer="data => onIntersectionObserver(data, item)"
+          class="symbol-item relative b-[1px_solid_#ccc] b-rd-10px bg-[#ffffff] py-16px"
+          :class="{ showed: item.showed }"
+        >
           <view class="item-name">
             <text>{{ item.name }}</text>
           </view>
@@ -73,6 +87,29 @@ function getList() {
   margin-bottom: 20px;
   box-shadow: 0 0 2px 3px #eee;
   position: relative;
+
+  opacity: 0;
+  top: 40px;
+  position: relative;
+
+  &:nth-child(n + 1) {
+    right: 40px;
+  }
+  &:nth-child(2n) {
+    left: 40px;
+  }
+
+  &.showed {
+    transition: 0.4s all ease;
+    opacity: 1;
+    top: 0;
+    &:nth-child(n + 1) {
+      right: 0;
+    }
+    &:nth-child(2n) {
+      left: 0;
+    }
+  }
 }
 
 .item-name {
