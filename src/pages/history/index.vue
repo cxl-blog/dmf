@@ -68,7 +68,7 @@ function handleShowDetail(item: DivinationDetail) {
                 <text class="text-16px font-bold">{{ item.name }}/{{ item.alias }}</text>
               </view>
               <view>
-                <text class="text-12px color-gray">
+                <text class="inline-block pr-65px text-12px color-gray">
                   {{ item.symbol }}
                 </text>
               </view>

@@ -8,6 +8,7 @@ export default {
 // #endif
 
 <script setup lang="ts">
+import dayjs from 'dayjs'
 import { Lunar } from 'lunar-typescript'
 import imgSrc from '~@/static/imgs/logo_v2.png'
 
@@ -33,7 +34,7 @@ const headerTpx = computed(() => {
 })
 
 const setting = reactive({
-  openModel: false
+  openModel: true
 })
 </script>
 
@@ -54,7 +55,11 @@ const setting = reactive({
             <text>
               {{ lunar.toString() }}
             </text>
+            <view class="mt-5px text-12px">
+              {{ dayjs().format('YYYY-MM-DD') }}
+            </view>
           </view>
+
           <view class="mb-10px flex text-12px">
             <u-tag :text="t('宜')" type="success" plain size="mini" />
             <text class="ml-10px">{{ lunar.getDayYi().toString() }}</text>
@@ -69,13 +74,13 @@ const setting = reactive({
             <text class="color-gray">{{ t('基本设置') }}</text>
           </view>
           <u-cell-group>
-            <u-cell
+            <!-- <u-cell
               icon="setting-fill"
               :title="t('个人设置')"
               :isLink="true"
               arrow-direction="right"
-            />
-            <u-cell icon="heart-fill" :title="t('模式选择')">
+            /> -->
+            <u-cell icon="heart-fill" :title="t('模式选择')" disabled>
               <template #value>
                 <view class="flex items-center">
                   <text class="mr-5px color-gray">
@@ -85,6 +90,7 @@ const setting = reactive({
                     v-model="setting.openModel"
                     space="2"
                     activeColor="#f9ae3d"
+                    disabled
                     inactiveColor="rgb(230, 230, 230)"
                   />
                 </view>
