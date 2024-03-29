@@ -20,7 +20,10 @@
     {
       "path": "pages/calendar/index",
       "type": "page",
-      "style": {}
+      "style": {
+        "navigationBarTitleText": "黄历"
+      },
+      "activeTabPath": "pages/index/index"
     },
     {
       "path": "pages/category/index",

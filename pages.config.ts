@@ -60,6 +60,13 @@ export default defineUniPages({
       navbarDisableAutoBack: true,
       activeTabPath: 'pages/setting/index',
       navbarDisabled: true
+    },
+    {
+      path: 'pages/calendar/index',
+      style: {
+        navigationBarTitleText: '黄历'
+      },
+      activeTabPath: 'pages/index/index'
     }
   ] as PageConfig[],
   subPackages: [

@@ -58,7 +58,9 @@ import mixin from 'uview-plus/libs/mixin/mixin.js'
 import props from 'uview-plus/components/u-calendar/props.js'
 import Calendar from 'uview-plus/libs/util/calendar.js'
 import mpMixin from 'uview-plus/libs/mixin/mpMixin.js'
-import uMonth from 'uview-plus/components/u-calendar/month.vue'
+
+// import uMonth from 'uview-plus/components/u-calendar/month.vue'
+import uMonth from './month.vue'
 
 // import uHeader from './header.vue'
 

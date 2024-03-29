@@ -9,6 +9,7 @@ export default {
 
 <script setup lang="ts">
 import { nextTick } from 'vue'
+import { usePage } from '@uni-helper/uni-use'
 import { customerTrigrams, divinationDetail as divinationDetailReq } from '@/api/divination'
 
 import imgSrc from '~@/static/imgs/logo_v2_5x.png'
@@ -27,16 +28,37 @@ const divinationDetail = reactive({
 const { category } = storeToRefs(useDivinationStore())
 const detail = reactive<Partial<DivinationDetail>>({})
 const appStore = useAppStore()
+const page = usePage()
 const startLoading = ref(false)
 const showPopup = ref(false)
 const { isShaking } = useShake()
 const loadingData = ref(false)
 const { addItem } = useHistory()
 const list = ref(['神卜', t('黄历')])
+const currentTab = ref(0)
+const init = ref(false)
+const autoStart = ref(false)
 appStore.startLoading()
 
+watch(
+  () => page.value.route as string,
+  val => {
+    if ('pages/index/index'.includes(val)) {
+      currentTab.value = 0
+    }
+
+    if ('pages/calendar/index'.includes(val)) {
+      currentTab.value = 1
+    }
+  }
+)
+
+watch(mode, () => {
+  reset()
+})
+
 watch(isShaking, val => {
-  if (loadingData.value || showPopup.value) {
+  if (loadingData.value || showPopup.value || !init) {
     return
   }
 
@@ -46,14 +68,21 @@ watch(isShaking, val => {
   }
 })
 
-watch(mode, () => {
-  reset()
-})
-
 const handleShakeWithDebounce = useDebounce(handleShake, 200, { leading: true })
+
+onLoad(option => {
+  autoStart.value = option!.autoStart === 'true'
+})
 
 onMounted(() => {
   appStore.endLoading()
+  setTimeout(() => {
+    init.value = true
+  }, 200)
+
+  if (unref(autoStart)) {
+    start()
+  }
 })
 
 function reset() {
@@ -108,12 +137,33 @@ async function getDetail() {
       appStore.endLoading()
     })
 }
+
+function handleTabChange(index: number) {
+  if (index) {
+    uni.navigateTo({
+      url: `/pages/calendar/index`,
+      animationType: 'slide-in-right',
+      animationDuration: 300
+    })
+  } else {
+    uni.navigateTo({
+      url: `/pages/index/index`,
+      animationType: 'slide-in-right',
+      animationDuration: 300
+    })
+  }
+}
 </script>
 
 <template>
   <view class="content box-border h-100% w-100% p-20px">
     <view class="mb-16px w-100%">
-      <u-subsection :list="list" :current="0" :active-color="__CSS_THEME_COLOR__" />
+      <u-subsection
+        :list="list"
+        :current="currentTab"
+        :active-color="__CSS_THEME_COLOR__"
+        @change="handleTabChange"
+      />
     </view>
     <view class="header w-100% flex justify-between">
       <view class="header-left color-gray">
