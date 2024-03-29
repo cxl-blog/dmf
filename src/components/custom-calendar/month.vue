@@ -26,9 +26,12 @@
             class="u-calendar-month__days__day__select"
             :style="[daySelectStyle(index, index1, item1)]"
           >
-            <text class="u-calendar-month__days__day__select__info" :style="[textStyle(item1)]">{{
-              item1.day
-            }}</text>
+            <text
+              class="u-calendar-month__days__day__select__info"
+              :class="[item1.disabled && 'u-calendar-month__days__day__select__info--disabled']"
+              :style="[textStyle(item1)]"
+              >{{ item1.day }}</text
+            >
             <text
               v-if="getBottomInfo(index, index1, item1)"
               class="u-calendar-month__days__day__select__buttom-info"
@@ -373,16 +376,6 @@ export default {
       return new Promise(resolve => {
         this.$uGetRect(`.${el}`).then(size => {
           resolve(size)
-        })
-      })
-      // #endif
-
-      // #ifdef APP-NVUE
-      // nvue下，使用dom模块查询元素高度
-      // 返回一个promise，让调用此方法的主体能使用then回调
-      return new Promise(resolve => {
-        dom.getComponentRect(this.$refs[el][0], res => {
-          resolve(res.size)
         })
       })
       // #endif

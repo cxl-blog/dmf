@@ -12,17 +12,24 @@ import dayjs from 'dayjs'
 import { Lunar } from 'lunar-typescript'
 import CustomCalendar from '@/components/custom-calendar/index.vue'
 import type { DivinationDetail } from '@/config/divination'
+import { DIVINATION_SYMBOL } from '@/constants/divination'
+import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
 
 const appStore = useAppStore()
 const { getData } = useHistory()
 const historyList = ref<DivinationDetail[]>(getData().reverse())
-const list = ref<DivinationDetail[]>([])
+const list = ref<DivinationDetail[]>(
+  unref(historyList).filter(item => {
+    return dayjs(item.time).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD')
+  }) || []
+)
 appStore.startLoading()
 const lunar = Lunar.fromDate(new Date())
 const { t } = useI18n()
 const calendarRef = ref()
-
 const maxDate = dayjs().add(1, 'day').format('YYYY-MM-DD')
+const detail = reactive<Partial<DivinationDetail>>({})
+const showPopup = ref(false)
 
 onMounted(() => {
   appStore.endLoading()
@@ -51,6 +58,10 @@ function formatter(day: { bottomInfo: string; dot: boolean; disabled: boolean; d
     day.dot = true
     day.disabled = false
     day.bottomInfo += '/卜'
+  } else if (dayjs(day.date).format('YYYY-MM-DD') !== dayjs().format('YYYY-MM-DD')) {
+    day.disabled = true
+  } else {
+    day.bottomInfo += '/今日'
   }
 
   return day
@@ -62,6 +73,17 @@ function handleConfirm(data) {
     unref(historyList).filter(item => {
       return dayjs(item.time).format('YYYY-MM-DD') === date
     }) || []
+}
+
+const isClick = ref(false)
+function handleShowDetail(item: DivinationDetail) {
+  Object.assign(detail, item)
+  isClick.value = true
+  showPopup.value = true
+  const timer = setTimeout(() => {
+    isClick.value = false
+    clearTimeout(timer)
+  }, 200)
 }
 </script>
 
@@ -89,8 +111,8 @@ function handleConfirm(data) {
         @confirm="handleConfirm"
       />
     </view>
-    <view class="mt-20px px-16px">
-      <view class="date-card">
+    <view class="my-20px px-16px">
+      <view v-if="!list.length" class="date-card">
         <view class="mb-10px flex text-12px">
           <u-tag :text="t('宜')" type="success" size="mini" />
           <text class="ml-10px text-14px">{{ lunar.getDayYi().toString() }}</text>
@@ -117,7 +139,42 @@ function handleConfirm(data) {
         </view>
       </view>
     </view>
+
+    <view class="px-16px">
+      <template v-for="item in list" :key="item.id">
+        <view
+          class="item-container border-bottom relative z-2 px-16px py-10px"
+          :class="{
+            active: isClick && detail.id === item.id
+          }"
+          @click="handleShowDetail(item)"
+        >
+          <view class="mb-10px flex items-center justify-between">
+            <u-tag :text="item.category" plain size="mini" type="warning" />
+            <view class="text-12px color-gray">{{
+              dayjs(item.time).format('YYYY-MM-DD HH:mm')
+            }}</view>
+          </view>
+          <view>
+            <text class="text-16px font-bold">{{ item.name }}/{{ item.alias }}</text>
+          </view>
+          <view>
+            <text class="inline-block pr-65px text-12px color-gray">
+              {{ item.symbol }}
+            </text>
+          </view>
+          <SymbolImg
+            :symbol-name="DIVINATION_SYMBOL[item.id!]?.key"
+            inactiveBgColor="#ffffff"
+            :offsetItemY="4"
+            active-bg-color="rgba(0,0,0,0.15)"
+            class="symbol-item"
+          />
+        </view>
+      </template>
+    </view>
   </scroll-view>
+  <DetailPopup v-model="showPopup" :detail="detail as DivinationDetail" />
 </template>
 
 <style scoped lang="scss">
@@ -127,5 +184,17 @@ function handleConfirm(data) {
   border-radius: 10px;
   padding: 16px;
   box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
+.item-container {
+  background-color: #ffffff;
+  border-radius: 8px;
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
+  &.active {
+    background-color: #ebe1d5;
+  }
 }
 </style>

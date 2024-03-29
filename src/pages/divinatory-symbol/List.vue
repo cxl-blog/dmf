@@ -92,10 +92,10 @@ function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[
   top: 40px;
   position: relative;
 
-  &:nth-child(n + 1) {
+  &:nth-child(odd) {
     right: 40px;
   }
-  &:nth-child(2n) {
+  &:nth-child(even) {
     left: 40px;
   }
 
@@ -103,10 +103,10 @@ function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[
     transition: 0.4s all ease;
     opacity: 1;
     top: 0;
-    &:nth-child(n + 1) {
+    &:nth-child(odd) {
       right: 0;
     }
-    &:nth-child(2n) {
+    &:nth-child(even) {
       left: 0;
     }
   }
