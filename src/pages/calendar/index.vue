@@ -123,12 +123,14 @@ function handleShowDetail(item: DivinationDetail) {
         </view>
 
         <view class="mt-24px flex flex-col items-center text-center">
-          <view class="w-100%">
+          <view class="btn-container w-100%">
             <up-button
               :text="t('卜一卦')"
               shape="circle"
-              :customStyle="{ border: '1px solid #dfb986' }"
-              color="linear-gradient(140deg, #dfb986, #ffe59c63)"
+              :customStyle="{
+                border: '1px solid #dfb986',
+                background: '#fff'
+              }"
               @click="handleJumpShake"
             />
           </view>
@@ -195,6 +197,35 @@ function handleShowDetail(item: DivinationDetail) {
 
   &.active {
     background-color: #ebe1d5;
+  }
+}
+
+.btn-container {
+  position: relative;
+  border-radius: 100px;
+  overflow: hidden;
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, hsla(34.5, 100%, 41%, 0.5), transparent);
+    transform: translateX(-100%);
+    z-index: 1;
+    //transition: 0.6s;
+    animation: 2s both btn-active-move infinite 0.3s;
+  }
+}
+
+@keyframes btn-active-move {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
   }
 }
 </style>
