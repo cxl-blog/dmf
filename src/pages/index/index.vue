@@ -18,6 +18,7 @@ import restartSrc from '@/static/imgs/restart.svg'
 import showDetailSrc from '@/static/imgs/show-detail.svg'
 import type { DivinationDetail } from '@/config/divination'
 import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
+import WritingCeremony from '@/components/writing-ceremony/index.vue'
 
 const { mode } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
@@ -38,6 +39,8 @@ const list = ref(['神卜', t('黄历')])
 const currentTab = ref(0)
 const init = ref(false)
 const autoStart = ref(false)
+const writingRef = ref<ComponentRef<typeof WritingCeremony>>()
+const centerAnimateTime = ref('1.5s')
 appStore.startLoading()
 
 watch(
@@ -122,7 +125,7 @@ function handleShake() {
     await getDetail()
     loadingData.value = false
     clearTimeout(timer)
-  }, 1000)
+  }, unref(writingRef)!.totalTime * 1000 || 1500)
 }
 
 async function getDetail() {
@@ -176,6 +179,9 @@ function handleTabChange(index: number) {
     <view class="content-center" :class="{ 'logo-start-animate': startLoading }">
       <img :src="imgSrc" class="content-center-1" mode="scaleToFill" />
     </view>
+
+    <WritingCeremony ref="writingRef" class="mb-20px" :active="startLoading" />
+
     <view class="content-footer w-100% flex flex-1 justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
         <up-image
@@ -212,10 +218,13 @@ function handleTabChange(index: number) {
   height: 70vw;
   width: 70vw;
   overflow: hidden;
-  margin: 50px 0;
+  //margin: 50px 0;
+  margin-top: 50px;
+  margin-bottom: 24px;
+  transition: 0.3s all ease;
 
   &.logo-start-animate {
-    animation: content1 1.5s linear infinite forwards;
+    animation: content1 v-bind(centerAnimateTime) linear infinite forwards;
   }
 }
 .content {
@@ -223,6 +232,7 @@ function handleTabChange(index: number) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: 0.3 all ease;
 
   :deep() .u-slide-up-enter-to {
     height: 75%;
