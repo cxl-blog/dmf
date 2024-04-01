@@ -81,7 +81,7 @@ onMounted(() => {
   appStore.endLoading()
   setTimeout(() => {
     init.value = true
-  }, 200)
+  }, 1000)
 
   if (unref(autoStart)) {
     start()
