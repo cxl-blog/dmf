@@ -9,7 +9,7 @@ export default {
 
 <script setup lang="ts">
 import dayjs from 'dayjs'
-import { vIntersectionObserver } from '@vueuse/components'
+import { useIntersectionObserver } from '@vueuse/core'
 import SymbolImg from '@/components/divination-symbol/index.vue'
 import type { DivinationDetail } from '@/config/divination'
 import { DIVINATION_SYMBOL } from '@/constants/divination'
@@ -48,10 +48,31 @@ function handleShowDetail(item: Data) {
   }, 200)
 }
 
-function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[], item: Data) {
-  if (isIntersecting) {
-    item.showed = true
+// todo uniapp 不支持指令
+// function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[], item: Data) {
+//   if (isIntersecting) {
+//     item.showed = true
+//   }
+// }
+
+function initObserver(node, item: Data) {
+  if (item.showed || !node) {
+    return
   }
+
+  const { stop } = useIntersectionObserver(
+    node.$el,
+    ([{ isIntersecting }]) => {
+      if (isIntersecting) {
+        item.showed = true
+        stop()
+      }
+    },
+    {
+      root: unref(rootRef)?.$el,
+      rootMargin: '0px 0px 40px 0px'
+    }
+  )
 }
 </script>
 
@@ -62,8 +83,8 @@ function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[
         <template v-if="data.length">
           <template v-for="item in data" :key="item.id">
             <view
-              v-intersection-observer="data => onIntersectionObserver(data, item)"
-              class="item-container border-bottom relative z-2 px-16px py-10px"
+              :ref="ref => initObserver(ref, item)"
+              class="item-container border-bottom relative px-16px py-10px"
               :class="{
                 active: isClick && detail.id === item.id,
                 showed: item.showed
@@ -117,6 +138,7 @@ function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[
     background-color: #ebe1d5;
   }
 
+  /* #ifndef MP-WEIXIN */
   transform: scale(1.08) translateY(40px);
   opacity: 0;
 
@@ -125,6 +147,7 @@ function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[
     opacity: 1;
     transform: scale(1) translateY(0);
   }
+  /* #endif */
 }
 
 .symbol-item {
@@ -134,6 +157,5 @@ function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[
   width: 50px;
   opacity: 0.5;
   pointer-events: none;
-  z-index: 1;
 }
 </style>

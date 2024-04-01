@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { vIntersectionObserver } from '@vueuse/components'
+import { useIntersectionObserver } from '@vueuse/core'
 import { trigrams } from '@/api/divination'
 import SymbolImg from '@/components/divination-symbol/index.vue'
 import type { DivinationDetail } from '@/config/divination'
@@ -18,7 +18,6 @@ onBeforeMount(() => {
 function getList() {
   trigrams()
     .then(res => {
-      console.log({ res })
       list.value = res.trigrams
     })
     .finally(() => {
@@ -26,10 +25,31 @@ function getList() {
     })
 }
 
-function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[], item: Data) {
-  if (isIntersecting) {
-    item.showed = true
+// todo 小程序无法构建
+// function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[], item: Data) {
+//   if (isIntersecting) {
+//     item.showed = true
+//   }
+// }
+
+function initObserver(node, item: Data) {
+  if (item.showed || !node) {
+    return
   }
+
+  const { stop } = useIntersectionObserver(
+    node.$el,
+    ([{ isIntersecting }]) => {
+      if (isIntersecting) {
+        item.showed = true
+        stop()
+      }
+    },
+    {
+      root: unref(rootRef).$el,
+      rootMargin: '0px 0px 40px 0px'
+    }
+  )
 }
 </script>
 
@@ -38,7 +58,7 @@ function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[
     <view class="pt-16px container">
       <template v-for="item in list" :key="item.key">
         <view
-          v-intersection-observer="data => onIntersectionObserver(data, item)"
+          :ref="ref => initObserver(ref, item)"
           class="symbol-item relative b-[1px_solid_#ccc] b-rd-10px bg-[#ffffff] py-16px"
           :class="{ showed: item.showed }"
         >
@@ -88,6 +108,7 @@ function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[
   box-shadow: 0 0 2px 3px #eee;
   position: relative;
 
+  /* #ifndef MP-WEIXIN */
   opacity: 0;
   top: 40px;
   position: relative;
@@ -110,6 +131,7 @@ function onIntersectionObserver([{ isIntersecting }]: IntersectionObserverEntry[
       left: 0;
     }
   }
+  /* #endif */
 }
 
 .item-name {

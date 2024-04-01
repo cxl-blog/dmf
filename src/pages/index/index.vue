@@ -180,7 +180,7 @@ function handleTabChange(index: number) {
       <img :src="imgSrc" class="content-center-1" mode="scaleToFill" />
     </view>
 
-    <WritingCeremony ref="writingRef" class="mb-20px" :active="startLoading" />
+    <WritingCeremony ref="writingRef" class="relative mb-20px w-100%" :active="startLoading" />
 
     <view class="content-footer w-100% flex flex-1 justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
@@ -211,6 +211,7 @@ function handleTabChange(index: number) {
 
 <style lang="scss" scoped>
 .content-center {
+  flex-shrink: 0;
   position: relative;
   border-radius: 50%;
   // box-shadow: 0 0 15px 10px #ece5dd;

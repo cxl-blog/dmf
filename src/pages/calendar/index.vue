@@ -145,7 +145,7 @@ function handleShowDetail(item: DivinationDetail) {
     <view class="px-16px">
       <template v-for="item in list" :key="item.id">
         <view
-          class="item-container border-bottom relative z-2 px-16px py-10px"
+          class="item-container border-bottom relative px-16px py-10px"
           :class="{
             active: isClick && detail.id === item.id
           }"
@@ -213,7 +213,6 @@ function handleShowDetail(item: DivinationDetail) {
     height: 100%;
     background: linear-gradient(120deg, transparent, hsla(34.5, 100%, 41%, 0.5), transparent);
     transform: translateX(-100%);
-    z-index: 1;
     //transition: 0.6s;
     animation: 2s both btn-active-move infinite 0.3s;
   }
