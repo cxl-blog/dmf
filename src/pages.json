@@ -21,9 +21,9 @@
       "path": "pages/calendar/index",
       "type": "page",
       "style": {
-        "navigationBarTitleText": "黄历"
+        "navigationBarTitleText": "日历"
       },
-      "activeTabPath": "pages/index/index"
+      "activeTabPath": "pages/calendar/index"
     },
     {
       "path": "pages/category/index",

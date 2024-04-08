@@ -18,7 +18,6 @@ onBeforeMount(() => {
 function getList() {
   trigrams()
     .then(res => {
-      console.log({ res })
       list.value = res.trigrams
     })
     .finally(() => {

@@ -64,9 +64,9 @@ export default defineUniPages({
     {
       path: 'pages/calendar/index',
       style: {
-        navigationBarTitleText: '黄历'
+        navigationBarTitleText: '日历'
       },
-      activeTabPath: 'pages/index/index'
+      activeTabPath: 'pages/calendar/index'
     }
   ] as PageConfig[],
   subPackages: [
