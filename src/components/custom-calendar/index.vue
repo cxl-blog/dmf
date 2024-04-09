@@ -111,6 +111,12 @@ export default {
     UMonth: uMonth
   },
   mixins: [mpMixin, mixin, props],
+  props: {
+    color: {
+      type: String,
+      default: '#dfb986'
+    }
+  },
   emits: ['confirm', 'close'],
   data() {
     return {

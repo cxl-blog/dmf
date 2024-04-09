@@ -19,7 +19,8 @@ module.exports = defineConfig({
     }
   },
   globals: {
-    'process.env': 'readonly'
+    'process.env': 'readonly',
+    __CSS_THEME_COLOR__: 'readonly'
   },
   extends: [
     './.eslintrc-auto-import.json',

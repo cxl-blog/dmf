@@ -123,7 +123,7 @@ function handleShowDetail(item: DivinationDetail) {
         </view>
 
         <view class="mt-24px flex flex-col items-center text-center">
-          <view class="btn-container w-100%">
+          <view class="btn-container w-100%" @click="handleJumpShake">
             <up-button
               :text="t('卜一卦')"
               shape="circle"
@@ -131,7 +131,6 @@ function handleShowDetail(item: DivinationDetail) {
                 border: '1px solid #dfb986',
                 background: '#fff'
               }"
-              @click="handleJumpShake"
             />
           </view>
 
@@ -145,7 +144,7 @@ function handleShowDetail(item: DivinationDetail) {
     <view class="px-16px">
       <template v-for="item in list" :key="item.id">
         <view
-          class="item-container border-bottom relative z-2 px-16px py-10px"
+          class="item-container border-bottom relative px-16px py-10px"
           :class="{
             active: isClick && detail.id === item.id
           }"
@@ -207,13 +206,13 @@ function handleShowDetail(item: DivinationDetail) {
   &::before {
     position: absolute;
     content: '';
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background: linear-gradient(120deg, transparent, hsla(34.5, 100%, 41%, 0.5), transparent);
     transform: translateX(-100%);
-    z-index: 1;
     //transition: 0.6s;
     animation: 2s both btn-active-move infinite 0.3s;
   }

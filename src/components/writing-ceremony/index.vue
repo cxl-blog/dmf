@@ -27,7 +27,7 @@ defineExpose({
 </script>
 
 <template>
-  <view class="list relative h-28px w-100% px-16px text-center line-height-[normal]">
+  <view class="list relative box-border h-28px w-100% px-16px text-center line-height-[normal]">
     <template v-if="active">
       <view
         v-for="(item, index) in textArr"
