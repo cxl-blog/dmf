@@ -35,7 +35,7 @@ const showPopup = ref(false)
 const { isShaking } = useShake()
 const loadingData = ref(false)
 const { addItem } = useHistory()
-const list = ref(['神卜', t('黄历')])
+// const list = ref(['神卜', t('黄历')])
 const currentTab = ref(0)
 const init = ref(false)
 const autoStart = ref(false)
@@ -141,33 +141,33 @@ async function getDetail() {
     })
 }
 
-function handleTabChange(index: number) {
-  if (index) {
-    uni.navigateTo({
-      url: `/pages/calendar/index`,
-      animationType: 'slide-in-right',
-      animationDuration: 300
-    })
-  } else {
-    uni.navigateTo({
-      url: `/pages/index/index`,
-      animationType: 'slide-in-right',
-      animationDuration: 300
-    })
-  }
-}
+// function handleTabChange(index: number) {
+//   if (index) {
+//     uni.navigateTo({
+//       url: `/pages/calendar/index`,
+//       animationType: 'slide-in-right',
+//       animationDuration: 300
+//     })
+//   } else {
+//     uni.navigateTo({
+//       url: `/pages/index/index`,
+//       animationType: 'slide-in-right',
+//       animationDuration: 300
+//     })
+//   }
+// }
 </script>
 
 <template>
   <view class="content box-border h-100% w-100% p-20px">
-    <view class="mb-16px w-100%">
+    <!-- <view class="mb-16px w-100%">
       <u-subsection
         :list="list"
         :current="currentTab"
         :active-color="__CSS_THEME_COLOR__"
         @change="handleTabChange"
       />
-    </view>
+    </view> -->
     <view class="header w-100% flex justify-between">
       <view class="header-left color-gray">
         <text>{{ mode }}</text>

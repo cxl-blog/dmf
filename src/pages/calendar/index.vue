@@ -123,7 +123,7 @@ function handleShowDetail(item: DivinationDetail) {
         </view>
 
         <view class="mt-24px flex flex-col items-center text-center">
-          <view class="btn-container w-100%">
+          <view class="btn-container w-100%" @click="handleJumpShake">
             <up-button
               :text="t('卜一卦')"
               shape="circle"
@@ -131,7 +131,6 @@ function handleShowDetail(item: DivinationDetail) {
                 border: '1px solid #dfb986',
                 background: '#fff'
               }"
-              @click="handleJumpShake"
             />
           </view>
 
@@ -207,6 +206,7 @@ function handleShowDetail(item: DivinationDetail) {
   &::before {
     position: absolute;
     content: '';
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
