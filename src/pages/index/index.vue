@@ -205,7 +205,7 @@ async function getDetail() {
       </view>
     </view>
 
-    <DetailPopup v-model="showPopup" :detail="detail as DivinationDetail" />
+    <DetailPopup v-model="showPopup" :detail="(detail as DivinationDetail)" />
   </view>
 </template>
 
