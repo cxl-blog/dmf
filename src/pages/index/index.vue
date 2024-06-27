@@ -20,13 +20,12 @@ import type { DivinationDetail } from '@/config/divination'
 import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
 import WritingCeremony from '@/components/writing-ceremony/index.vue'
 
-const { mode } = storeToRefs(useDivinationStore())
+const { mode, category } = storeToRefs(useDivinationStore())
 const { t } = useI18n()
 const divinationDetail = reactive({
   id: '',
   trigramsId: ''
 })
-const { category } = storeToRefs(useDivinationStore())
 const detail = reactive<Partial<DivinationDetail>>({})
 const appStore = useAppStore()
 const page = usePage()
@@ -118,7 +117,10 @@ function handleShake() {
   startLoading.value = true
   loadingData.value = true
   const timer = setTimeout(async () => {
-    const res = await customerTrigrams()
+    const res = await customerTrigrams({
+      categoryIndex: category.value,
+      auspiciousOrNormal: true
+    })
     Object.assign(divinationDetail, res)
     await nextTick()
     startLoading.value = false

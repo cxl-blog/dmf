@@ -16,7 +16,7 @@ let PROXY_ENV = 'dev'
 
 const targetMaps = {
   dev: {
-    target: 'https://springboot-5thz-84626-6-1322169562.sh.run.tcloudbase.com'
+    target: 'https://springboot-gqay-109487-4-1322169562.sh.run.tcloudbase.com'
   }
 }
 

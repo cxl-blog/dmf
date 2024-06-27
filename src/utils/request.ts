@@ -84,9 +84,9 @@ const timeout = 10000
 // eslint-disable-next-line prefer-const
 weixinRequestInstance = async ({ url, method, params, data, ...others }) => {
   const res = await wx.cloud.callContainer({
-    config: { env: 'prod-8ge16jg5afdf6cc6' },
+    config: { env: import.meta.env.VITE_WEIXIN_CLOUD_ENV },
     header: {
-      'X-WX-SERVICE': 'springboot-5thz',
+      'X-WX-SERVICE': import.meta.env.VITE_X_WX_SERVICE,
       'content-type': 'application/json',
       'X-WX-EXCLUDE-CREDENTIALS': 'unionid, cloudbase-access-token, openid'
     },
