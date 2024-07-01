@@ -10,7 +10,7 @@ export default {
 <script setup lang="ts">
 import dayjs from 'dayjs'
 import { Lunar } from 'lunar-typescript'
-import imgSrc from '~@/static/imgs/logo_v2.png'
+import imgSrc from '@/static/imgs/logo_v2.png'
 
 const { t } = useI18n()
 const { layout } = storeToRefs(useAppStore())

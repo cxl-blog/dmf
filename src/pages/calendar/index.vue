@@ -14,6 +14,7 @@ import CustomCalendar from '@/components/custom-calendar/index.vue'
 import type { DivinationDetail } from '@/config/divination'
 import { DIVINATION_SYMBOL } from '@/constants/divination'
 import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
+import { toggles } from '@/api/divination'
 
 const appStore = useAppStore()
 const { getData } = useHistory()
@@ -30,9 +31,18 @@ const calendarRef = ref()
 const maxDate = dayjs().add(1, 'day').format('YYYY-MM-DD')
 const detail = reactive<Partial<DivinationDetail>>({})
 const showPopup = ref(false)
+const config = reactive({
+  checker: true
+})
 
 onMounted(() => {
-  appStore.endLoading()
+  toggles()
+    .then(res => {
+      Object.assign(config, res)
+    })
+    .finally(() => {
+      appStore.endLoading()
+    })
 })
 
 onReady(() => {
@@ -123,7 +133,7 @@ function handleShowDetail(item: DivinationDetail) {
         </view>
 
         <view class="mt-24px flex flex-col items-center text-center">
-          <view class="btn-container w-100%" @click="handleJumpShake">
+          <view v-if="config.checker" class="btn-container mb-10px w-100%" @click="handleJumpShake">
             <up-button
               :text="t('卜一卦')"
               shape="circle"
@@ -134,7 +144,7 @@ function handleShowDetail(item: DivinationDetail) {
             />
           </view>
 
-          <view class="mt-10px">
+          <view>
             <text class="text-center text-12px color-white">{{ t('今日还没有摇卦哦') }}</text>
           </view>
         </view>
@@ -211,7 +221,12 @@ function handleShowDetail(item: DivinationDetail) {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(120deg, transparent, hsla(34.5, 100%, 41%, 0.5), transparent);
+    background: linear-gradient(
+      120deg,
+      transparent 10%,
+      hsla(34.5, 100%, 41%, 0.5),
+      transparent 90%
+    );
     transform: translateX(-100%);
     //transition: 0.6s;
     animation: 2s both btn-active-move infinite 0.3s;

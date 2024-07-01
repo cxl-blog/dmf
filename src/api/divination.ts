@@ -7,3 +7,5 @@ export const divinationDetail = (id: string, data) => request.get(`/trigrams/${i
 export const customerTrigrams = data => request.post('/customer-trigrams', data)
 
 export const trigrams = () => request.get('/trigrams')
+
+export const toggles = () => request.get('/toggles')

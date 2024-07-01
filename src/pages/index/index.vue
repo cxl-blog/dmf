@@ -12,7 +12,7 @@ import { nextTick } from 'vue'
 import { usePage } from '@uni-helper/uni-use'
 import { customerTrigrams, divinationDetail as divinationDetailReq } from '@/api/divination'
 
-import imgSrc from '~@/static/imgs/logo_v2_5x.png'
+import imgSrc from '@/static/imgs/logo_v2_5x.png'
 import startSrc from '@/static/imgs/start.svg'
 import restartSrc from '@/static/imgs/restart.svg'
 import showDetailSrc from '@/static/imgs/show-detail.svg'
