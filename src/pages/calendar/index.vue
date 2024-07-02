@@ -32,7 +32,7 @@ const maxDate = dayjs().add(1, 'day').format('YYYY-MM-DD')
 const detail = reactive<Partial<DivinationDetail>>({})
 const showPopup = ref(false)
 const config = reactive({
-  checker: true
+  checker: false
 })
 
 onMounted(() => {

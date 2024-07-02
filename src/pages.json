@@ -38,11 +38,7 @@
     {
       "path": "pages/divinatory-symbol/List",
       "type": "page",
-      "style": {
-        "navigationBarTitleText": "卦象百科"
-      },
-      "activeTabPath": "pages/divinatory-symbol/List",
-      "navbarDisableAutoBack": true
+      "style": {}
     },
     {
       "path": "pages/history/index",

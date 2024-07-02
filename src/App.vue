@@ -9,7 +9,6 @@ export default {
 
 <script setup lang="ts">
 onLaunch(() => {
-  console.log('App Launch')
   if (!wx.cloud) {
     console.error('初始化失败')
   } else {
@@ -28,7 +27,6 @@ onLaunch(() => {
   // #endif
 })
 onShow(() => {
-  console.log('App Show')
   // #ifdef MP-WEIXIN
   // fix二次不能分享
   wx.showShareMenu({
@@ -39,15 +37,15 @@ onShow(() => {
   // #endif
 })
 onReady(() => {
-  console.log('App Ready')
+  console.debug('App Ready')
 })
 
 onHide(() => {
-  console.log('App Hide')
+  console.debug('App Hide')
 })
 
 onBeforeMount(() => {
-  console.log('vue before mounded')
+  console.debug('vue before mounded')
 })
 
 // #ifdef MP-WEIXIN

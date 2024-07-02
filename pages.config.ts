@@ -44,14 +44,14 @@ export default defineUniPages({
     //   },
     //   activeTabPath: 'pages/index/index'
     // },
-    {
-      path: 'pages/divinatory-symbol/List',
-      style: {
-        navigationBarTitleText: '卦象百科'
-      },
-      activeTabPath: 'pages/divinatory-symbol/List',
-      navbarDisableAutoBack: true
-    },
+    // {
+    //   path: 'pages/divinatory-symbol/List',
+    //   style: {
+    //     navigationBarTitleText: '卦象概览'
+    //   },
+    //   activeTabPath: 'pages/divinatory-symbol/List',
+    //   navbarDisableAutoBack: true
+    // },
     {
       path: 'pages/setting/index',
       style: {
