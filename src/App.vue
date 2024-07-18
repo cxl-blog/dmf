@@ -13,31 +13,10 @@ onLaunch(() => {
     console.error('初始化失败')
   } else {
     wx.cloud.init({
-      env: 'prod-8ge16jg5afdf6cc6',
+      env: import.meta.env.VITE_WEIXIN_CLOUD_ENV,
       traceUser: true
     })
   }
-
-  // #ifdef MP-WEIXIN
-  wx.showShareMenu({
-    withShareTicket: true,
-    // 设置下方的Menus菜单，才能够让发送给朋友与分享到朋友圈两个按钮可以点击
-    menus: ['shareAppMessage', 'shareTimeline']
-  })
-  // #endif
-})
-onShow(() => {
-  // #ifdef MP-WEIXIN
-  // fix二次不能分享
-  wx.showShareMenu({
-    withShareTicket: true,
-    // 设置下方的Menus菜单，才能够让发送给朋友与分享到朋友圈两个按钮可以点击
-    menus: ['shareAppMessage', 'shareTimeline']
-  })
-  // #endif
-})
-onReady(() => {
-  console.debug('App Ready')
 })
 
 onHide(() => {
@@ -47,24 +26,6 @@ onHide(() => {
 onBeforeMount(() => {
   console.debug('vue before mounded')
 })
-
-// #ifdef MP-WEIXIN
-onShareAppMessage(() => {
-  return {
-    title: '神卜谷', // 分享的名称
-    path: '/pages/index/index',
-    mpId: 'wx3bb12404cf91f8f4' // 此处配置微信小程序的AppId
-  }
-})
-
-onShareTimeline(() => {
-  return {
-    title: '神卜谷-弘扬国学易经，相信科学，仅供学习参考',
-    type: 0,
-    summary: ''
-  }
-})
-// #endif
 </script>
 
 <style lang="scss">

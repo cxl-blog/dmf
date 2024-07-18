@@ -7,6 +7,7 @@ interface NavigateToOptions {
   url: "pages/index/index" |
        "pages/calendar/index" |
        "pages/category/index" |
+       "pages/chat/index" |
        "pages/divinatory-symbol/Detail" |
        "pages/divinatory-symbol/List" |
        "pages/history/index" |

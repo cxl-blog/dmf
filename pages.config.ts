@@ -62,6 +62,15 @@ export default defineUniPages({
       navbarDisabled: true
     },
     {
+      path: 'pages/chat/index',
+      style: {
+        navigationBarTitleText: 'AI测算'
+      },
+      activeTabPath: 'pages/chat/index',
+      tabbarDisabled: true,
+      pageTooltipDisabled: true
+    },
+    {
       path: 'pages/calendar/index',
       style: {
         navigationBarTitleText: '日历'

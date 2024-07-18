@@ -5,14 +5,22 @@ declare global {
     /**
      * @description 是否关闭navbar
      */
-    navbarDisabled: boolean
+    navbarDisabled?: boolean
     /**
      * @description navbar左侧是否禁止出现返回图标
      */
-    navbarDisableAutoBack: boolean
+    navbarDisableAutoBack?: boolean
     /**
      * @description 底部活动路径
      */
-    activeTabPath: string
+    activeTabPath?: string
+    /**
+     * @description 底部是否禁用
+     */
+    tabbarDisabled?: boolean
+    /**
+     * @description 禁用page tooltip
+     */
+    pageTooltipDisabled?: boolean
   }
 }

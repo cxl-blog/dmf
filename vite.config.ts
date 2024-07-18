@@ -12,17 +12,17 @@ import viteImagemin from 'vite-plugin-imagemin'
 // import visualizer from 'rollup-plugin-visualizer'
 import { VitePluginOptimize, VitePluginPkgConfig } from './plugins/vite-plugin-optimize'
 
-let PROXY_ENV = 'dev'
+// let PROXY_ENV = 'dev'
 
-const targetMaps = {
-  dev: {
-    target: 'https://springboot-gqay-109487-4-1322169562.sh.run.tcloudbase.com'
-  }
-}
+// const targetMaps = {
+//   dev: {
+//     target: 'https://springboot-gqay-109487-4-1322169562.sh.run.tcloudbase.com'
+//   }
+// }
 
-if (process.env.npm_lifecycle_event && process.env.npm_lifecycle_event.match(/:(.+)/)) {
-  PROXY_ENV = process.env.npm_lifecycle_event.split(':')?.[0] || ''
-}
+// if (process.env.npm_lifecycle_event && process.env.npm_lifecycle_event.match(/:(.+)/)) {
+//   PROXY_ENV = process.env.npm_lifecycle_event.split(':')?.[0] || ''
+// }
 
 const root = process.cwd()
 
@@ -143,7 +143,20 @@ export default defineConfig(({ mode }) => {
 
             return env.VITE_API_BASE_PATH !== '/' ? path.replace(regexp, '') : path
           },
-          ...(targetMaps[PROXY_ENV] || {})
+          target: env.VITE_API_BASE_PATH
+        },
+        // 聊天
+        '/chat': {
+          ws: true,
+          changeOrigin: true,
+          secure: true,
+          // target: 'https://gateway.ai.cloudflare.com',
+          target: 'https://api.moonshot.cn',
+          rewrite: (path: string) => {
+            const regexp = /^\/chat/
+
+            return path.replace(regexp, '')
+          }
         }
       }
     },

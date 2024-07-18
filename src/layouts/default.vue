@@ -22,6 +22,7 @@ const tabList = [
   { name: t('首页'), path: 'pages/index/index', icon: 'home' },
   // { name: t('卦象百科'), path: 'pages/divinatory-symbol/List', icon: 'coupon' },
   { name: t('日历'), path: 'pages/calendar/index', icon: 'coupon' },
+  { name: t('AI测算'), path: 'pages/chat/index', icon: 'chat' },
   { name: t('历史记录'), path: 'pages/history/index', icon: 'list' },
   { name: t('设置'), path: 'pages/setting/index', icon: 'setting' }
 ]
@@ -40,6 +41,13 @@ const appMainH = computed(() => {
     let h = `calc(100vh - ${unref(tabHeight)})`
     // #ifdef MP-WEIXIN
     h = `calc(100vh - ${unref(tabHeight)})`
+    // #endif
+
+    return h
+  } else if (pageConfig.value.tabbarDisabled) {
+    let h = `calc(100vh - ${unref(statusBarHeight)}px)`
+    // #ifdef MP-WEIXIN
+    h = `calc(100vh - ${unref(statusBarHeight)}px - ${unref(navbarHeight)}px - 20px)`
     // #endif
 
     return h
@@ -91,6 +99,34 @@ onLoad(() => {
   // #endif
 })
 
+onReady(() => {
+  // #ifdef MP-WEIXIN
+  wx.showShareMenu({
+    withShareTicket: true,
+    // 设置下方的Menus菜单，才能够让发送给朋友与分享到朋友圈两个按钮可以点击
+    menus: ['shareAppMessage', 'shareTimeline']
+  })
+  // #endif
+})
+
+// #ifdef MP-WEIXIN
+onShareAppMessage(() => {
+  return {
+    title: '神卜谷', // 分享的名称
+    path: '/pages/index/index',
+    mpId: 'wx3bb12404cf91f8f4' // 此处配置微信小程序的AppId
+  }
+})
+
+onShareTimeline(() => {
+  return {
+    title: '神卜谷-弘扬国学易经，相信科学，仅供学习参考',
+    type: 0,
+    summary: ''
+  }
+})
+// #endif
+
 function handleTabChange(val) {
   const item = tabList[val]
   try {
@@ -100,6 +136,14 @@ function handleTabChange(val) {
       animationDuration: 300
     })
   } catch (error) {}
+}
+
+function handleLeftClick() {
+  if (unref(pageConfig).path === 'pages/chat/index') {
+    uni.navigateTo({ url: '/pages/index/index' })
+  }
+
+  return false
 }
 </script>
 
@@ -116,14 +160,16 @@ function handleTabChange(val) {
       placeholder
       :border="showBorder"
       :height="`${navbarHeight}px`"
+      @leftClick="handleLeftClick"
     />
     <view class="app-main flex flex-col">
       <view class="app-main__content min-h-0 flex-1">
         <slot></slot>
       </view>
-      <PageTooltip />
+      <PageTooltip v-if="!pageConfig.pageTooltipDisabled" />
     </view>
     <u-tabbar
+      v-if="!pageConfig.tabbarDisabled"
       ref="tabRef"
       :value="tab"
       :fixed="true"
@@ -133,7 +179,13 @@ function handleTabChange(val) {
       :safeAreaInsetBottom="true"
       @change="handleTabChange"
     >
-      <u-tabbar-item v-for="item in tabList" :key="item.name" :text="item.name" :icon="item.icon" />
+      <u-tabbar-item
+        v-for="item in tabList"
+        :key="item.name"
+        :class="{ 'chat-item': item.path === 'pages/chat/index' }"
+        :text="item.name"
+        :icon="item.icon"
+      />
     </u-tabbar>
 
     <u-loading-page

@@ -60,7 +60,7 @@ watch(mode, () => {
 })
 
 watch(isShaking, val => {
-  if (loadingData.value || showPopup.value || !init) {
+  if (loadingData.value || showPopup.value || !init.value) {
     return
   }
 
@@ -78,8 +78,9 @@ onLoad(option => {
 
 onMounted(() => {
   appStore.endLoading()
-  setTimeout(() => {
+  const timer = setTimeout(() => {
     init.value = true
+    clearTimeout(timer)
   }, 1000)
 
   if (unref(autoStart)) {
@@ -142,22 +143,6 @@ async function getDetail() {
       appStore.endLoading()
     })
 }
-
-// function handleTabChange(index: number) {
-//   if (index) {
-//     uni.navigateTo({
-//       url: `/pages/calendar/index`,
-//       animationType: 'slide-in-right',
-//       animationDuration: 300
-//     })
-//   } else {
-//     uni.navigateTo({
-//       url: `/pages/index/index`,
-//       animationType: 'slide-in-right',
-//       animationDuration: 300
-//     })
-//   }
-// }
 </script>
 
 <template>
@@ -254,6 +239,8 @@ async function getDetail() {
   position: absolute;
   width: 100%;
   height: 100%;
+  top: 0px;
+  left: 0px;
   border-radius: 50%;
   background-size: 100% 100%;
   // transform: scale(0.96);
