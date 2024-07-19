@@ -47,7 +47,7 @@ const appMainH = computed(() => {
   } else if (pageConfig.value.tabbarDisabled) {
     let h = `calc(100vh - ${unref(statusBarHeight)}px)`
     // #ifdef MP-WEIXIN
-    h = `calc(100vh - ${unref(statusBarHeight)}px - ${unref(navbarHeight)}px - 20px)`
+    h = `calc(100vh - ${unref(statusBarHeight)}px - ${unref(navbarHeight)}px)`
     // #endif
 
     return h
@@ -162,7 +162,7 @@ function handleLeftClick() {
       :height="`${navbarHeight}px`"
       @leftClick="handleLeftClick"
     />
-    <view class="app-main flex flex-col">
+    <view class="app-main flex flex-col" :class="{ 'bottom-bar': pageConfig.tabbarDisabled }">
       <view class="app-main__content min-h-0 flex-1">
         <slot></slot>
       </view>
@@ -237,6 +237,12 @@ function handleLeftClick() {
   :deep() .u-loading-page__warpper__loading-icon {
     display: none;
   }
+}
+
+.bottom-bar {
+  padding-bottom: env(safe-area-inset-bottom);
+  box-sizing: border-box;
+  background-color: #fff;
 }
 
 .loading-content {

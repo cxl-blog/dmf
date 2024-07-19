@@ -185,7 +185,7 @@ function handleShowDetail(item: DivinationDetail) {
       </template>
     </view>
   </scroll-view>
-  <DetailPopup v-model="showPopup" :detail="detail as DivinationDetail" />
+  <DetailPopup v-model="showPopup" :detail="(detail as DivinationDetail)" />
 </template>
 
 <style scoped lang="scss">

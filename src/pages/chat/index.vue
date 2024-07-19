@@ -10,16 +10,18 @@ const messageList = ref<Parameters<typeof chatPostMsg>[0]>([
     content: '您好，我是您的私人解卦专家，有什么可以帮您？'
   }
 ])
+const loading = ref(false)
 
 const displayMessageList = computed(() => {
   return [...messageList.value].reverse()
 })
 
 function handlePostMsg() {
-  if (!unref(inputText)) {
+  if (!unref(inputText) || unref(loading)) {
     return
   }
 
+  loading.value = true
   messageList.value.push({
     role: 'user',
     content: inputText.value
@@ -35,10 +37,12 @@ function handlePostMsg() {
         messageList.value.splice(messageList.value.length - 1, 1, message)
       }
     })
-    .catch(res => {
-      console.log({ res })
+    .catch(() => {
       inputText.value = text
-      messageList.value[-1].status = 'error'
+      messageList.value[messageList.value.length - 1].status = 'error'
+    })
+    .finally(() => {
+      loading.value = false
     })
   messageList.value.push({
     role: 'assistant',
@@ -81,7 +85,12 @@ function handlePostMsg() {
 
     <view class="input-container bg-[#f5f5f5] p-10px">
       <view class="flex items-center">
-        <up-input v-model.trim="inputText" shape="circle" :placeholder="t('请输入内容')" />
+        <up-input
+          v-model.trim="inputText"
+          :disabled="loading"
+          shape="circle"
+          :placeholder="t('请输入想要咨询的内容')"
+        />
         <view class="send-btn ml-10px cursor-pointer hover:color-[#b4a38c]" @click="handlePostMsg">
           <up-icon name="email" />
         </view>
@@ -95,7 +104,10 @@ function handlePostMsg() {
   display: flex;
   flex-direction: column;
   height: 100%;
+  box-sizing: border-box;
   position: relative;
+  background-color: $u-bg-color;
+  overflow: hidden;
 
   .message-wrap {
     flex: 1;
@@ -113,6 +125,7 @@ function handlePostMsg() {
 .input-container {
   background-color: #fff;
   z-index: 1;
+  // padding-bottom: env(safe-area-inset-bottom);
 }
 
 .send-btn {
