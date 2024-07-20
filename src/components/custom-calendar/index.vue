@@ -1,12 +1,12 @@
 <template>
   <view class="u-calendar">
-    <!-- <UHeader
+    <UHeader
       :title="title"
       :subtitle="subtitle"
       :showSubtitle="showSubtitle"
       :showTitle="showTitle"
-    /> -->
-    <!-- <scroll-view
+    />
+    <scroll-view
       :style="{
         height: $u.addUnit(listHeight)
       }"
@@ -14,32 +14,32 @@
       :scroll-top="scrollTop"
       :scrollIntoView="scrollIntoView"
       @scroll="onScroll"
-    > -->
-    <UMonth
-      ref="month"
-      :color="color"
-      :rowHeight="rowHeight"
-      :showMark="showMark"
-      :months="months"
-      :mode="mode"
-      :maxCount="maxCount"
-      :startText="startText"
-      :endText="endText"
-      :defaultDate="defaultDate"
-      :minDate="innerMinDate"
-      :maxDate="innerMaxDate"
-      :maxMonth="monthNum"
-      :readonly="readonly"
-      :maxRange="maxRange"
-      :rangePrompt="rangePrompt"
-      :showRangePrompt="showRangePrompt"
-      :allowSameDay="allowSameDay"
-      @monthSelected="monthSelected"
-      @updateMonthTop="updateMonthTop"
-    />
-    <!-- </scroll-view> -->
+    >
+      <UMonth
+        ref="month"
+        :color="color"
+        :rowHeight="rowHeight"
+        :showMark="showMark"
+        :months="months"
+        :mode="mode"
+        :maxCount="maxCount"
+        :startText="startText"
+        :endText="endText"
+        :defaultDate="defaultDate"
+        :minDate="innerMinDate"
+        :maxDate="innerMaxDate"
+        :maxMonth="monthNum"
+        :readonly="readonly"
+        :maxRange="maxRange"
+        :rangePrompt="rangePrompt"
+        :showRangePrompt="showRangePrompt"
+        :allowSameDay="allowSameDay"
+        @monthSelected="monthSelected"
+        @updateMonthTop="updateMonthTop"
+      />
+    </scroll-view>
     <slot v-if="showConfirm" name="footer">
-      <!-- <view class="u-calendar__confirm">
+      <view class="u-calendar__confirm">
         <u-button
           shape="circle"
           :text="buttonDisabled ? confirmDisabledText : confirmText"
@@ -47,7 +47,7 @@
           :disabled="buttonDisabled"
           @click="confirm"
         />
-      </view> -->
+      </view>
     </slot>
   </view>
 </template>

@@ -14,7 +14,6 @@ import CustomCalendar from '@/components/custom-calendar/index.vue'
 import type { DivinationDetail } from '@/config/divination'
 import { DIVINATION_SYMBOL } from '@/constants/divination'
 import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
-import { toggles } from '@/api/divination'
 
 const appStore = useAppStore()
 const { getData } = useHistory()
@@ -24,30 +23,32 @@ const list = ref<DivinationDetail[]>(
     return dayjs(item.time).format('YYYY-MM-DD') === dayjs().format('YYYY-MM-DD')
   }) || []
 )
+const currentDate = ref(dayjs().format('YYYY-MM-DD'))
 appStore.startLoading()
 const lunar = Lunar.fromDate(new Date())
 const { t } = useI18n()
 const calendarRef = ref()
-const maxDate = dayjs().add(1, 'day').format('YYYY-MM-DD')
+const maxDate = dayjs().add(90, 'day').format('YYYY-MM-DD')
 const detail = reactive<Partial<DivinationDetail>>({})
 const showPopup = ref(false)
-const config = reactive({
-  checker: false
+const { quickStart } = storeToRefs(useSystemStore())
+
+const yiJiArr = computed(() => {
+  const lunar = Lunar.fromDate(dayjs(currentDate.value).toDate())
+  return [lunar.getDayYi().toString(), lunar.getDayJi().toString()]
 })
 
-onMounted(() => {
-  toggles()
-    .then(res => {
-      Object.assign(config, res)
-    })
-    .finally(() => {
-      appStore.endLoading()
-    })
+const isCurrent = computed(() => {
+  return currentDate.value === dayjs().format('YYYY-MM-DD')
 })
 
 onReady(() => {
   // 如果需要兼容微信小程序的话，需要用此写法
   unref(calendarRef).setFormatter(formatter)
+})
+
+onMounted(() => {
+  appStore.endLoading()
 })
 
 function handleJumpShake() {
@@ -69,7 +70,7 @@ function formatter(day: { bottomInfo: string; dot: boolean; disabled: boolean; d
     day.disabled = false
     day.bottomInfo += '/卜'
   } else if (dayjs(day.date).format('YYYY-MM-DD') !== dayjs().format('YYYY-MM-DD')) {
-    day.disabled = true
+    // day.disabled = true
   } else {
     day.bottomInfo += '/今日'
   }
@@ -79,6 +80,7 @@ function formatter(day: { bottomInfo: string; dot: boolean; disabled: boolean; d
 
 function handleConfirm(data) {
   const date = data[0]
+  currentDate.value = date
   list.value =
     unref(historyList).filter(item => {
       return dayjs(item.time).format('YYYY-MM-DD') === date
@@ -113,8 +115,9 @@ function handleShowDetail(item: DivinationDetail) {
         showLunar
         :round="6"
         :row-height="56"
-        :monthNum="1"
+        :monthNum="3"
         :showConfirm="false"
+        :showTitle="false"
         :formatter="formatter"
         color="#dfb986"
         :maxDate="maxDate"
@@ -122,18 +125,21 @@ function handleShowDetail(item: DivinationDetail) {
       />
     </view>
     <view class="my-20px px-16px">
-      <view v-if="!list.length" class="date-card">
+      <view class="date-card">
         <view class="mb-10px flex text-12px">
           <u-tag :text="t('宜')" type="success" size="mini" />
-          <text class="ml-10px text-14px">{{ lunar.getDayYi().toString() }}</text>
+          <text class="ml-10px text-14px">{{ yiJiArr[0] }}</text>
         </view>
         <view class="flex text-12px">
           <u-tag :text="t('忌')" type="error" size="mini" />
-          <text class="ml-10px text-14px">{{ lunar.getDayJi().toString() }}</text>
+          <text class="ml-10px text-14px">{{ yiJiArr[1] }}</text>
         </view>
 
-        <view class="mt-24px flex flex-col items-center text-center">
-          <view v-if="config.checker" class="btn-container mb-10px w-100%" @click="handleJumpShake">
+        <view
+          v-if="isCurrent && !list.length"
+          class="mt-24px flex flex-col items-center text-center"
+        >
+          <view v-if="quickStart" class="btn-container mb-10px w-100%" @click="handleJumpShake">
             <up-button
               :text="t('卜一卦')"
               shape="circle"
@@ -151,7 +157,7 @@ function handleShowDetail(item: DivinationDetail) {
       </view>
     </view>
 
-    <view class="px-16px">
+    <view v-if="list.length" class="px-16px">
       <template v-for="item in list" :key="item.id">
         <view
           class="item-container border-bottom relative px-16px py-10px"

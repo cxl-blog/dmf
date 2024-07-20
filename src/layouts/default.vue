@@ -16,22 +16,28 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const { pages, pageLoading, layout } = storeToRefs(appStore)
 const { mode } = storeToRefs(useDivinationStore())
+const { aiChatEnabled } = storeToRefs(useSystemStore())
 const statusBarHeight = ref(44)
 const navbarHeight = ref(44)
-const tabList = [
+const tabRef = ref<any>(null)
+const tabList = ref([
   { name: t('首页'), path: 'pages/index/index', icon: 'home' },
   // { name: t('卦象百科'), path: 'pages/divinatory-symbol/List', icon: 'coupon' },
   { name: t('日历'), path: 'pages/calendar/index', icon: 'coupon' },
-  { name: t('AI测算'), path: 'pages/chat/index', icon: 'chat' },
+
   { name: t('历史记录'), path: 'pages/history/index', icon: 'list' },
   { name: t('设置'), path: 'pages/setting/index', icon: 'setting' }
-]
+])
+
+if (aiChatEnabled.value) {
+  tabList.value.splice(2, 0, { name: t('AI测算'), path: 'pages/chat/index', icon: 'chat' })
+}
+
 const tab = computed(() => {
-  const index = tabList.findIndex(item => item.path === pageConfig.value.activeTabPath)
+  const index = tabList.value.findIndex(item => item.path === pageConfig.value.activeTabPath)
 
   return index
 })
-const tabRef = ref<any>(null)
 const tabHeight = computed(() => {
   return unref(tabRef)?.placeholderHeight ? `${unref(tabRef)?.placeholderHeight}px` : '51px'
 })

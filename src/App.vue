@@ -8,6 +8,10 @@ export default {
 // #endif
 
 <script setup lang="ts">
+const systemStore = useSystemStore()
+
+systemStore.getToggles()
+
 onLaunch(() => {
   if (!wx.cloud) {
     console.error('初始化失败')
