@@ -118,14 +118,16 @@ function handleShake() {
   startLoading.value = true
   loadingData.value = true
   const timer = setTimeout(async () => {
-    const res = await customerTrigrams({
-      categoryIndex: category.value,
-      auspiciousOrNormal: true
-    })
-    Object.assign(divinationDetail, res)
-    await nextTick()
+    try {
+      const res = await customerTrigrams({
+        categoryIndex: category.value,
+        auspiciousOrNormal: true
+      })
+      Object.assign(divinationDetail, res)
+      await nextTick()
+      await getDetail()
+    } catch (error) {}
     startLoading.value = false
-    await getDetail()
     loadingData.value = false
     clearTimeout(timer)
   }, unref(writingRef)!.totalTime * 1000 || 1500)

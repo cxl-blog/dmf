@@ -114,7 +114,9 @@ function handlePostMsg() {
   gap: 10px;
   justify-content: center;
 
-  & > * {
+  .loading-1,
+  .loading-2,
+  .loading-3 {
     width: 10px;
     height: 10px;
     border-radius: 50%;

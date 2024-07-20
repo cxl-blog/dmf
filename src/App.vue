@@ -10,8 +10,6 @@ export default {
 <script setup lang="ts">
 const systemStore = useSystemStore()
 
-systemStore.getToggles()
-
 onLaunch(() => {
   if (!wx.cloud) {
     console.error('初始化失败')
@@ -21,6 +19,8 @@ onLaunch(() => {
       traceUser: true
     })
   }
+
+  systemStore.getToggles()
 })
 
 onHide(() => {

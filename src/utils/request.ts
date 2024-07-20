@@ -83,25 +83,32 @@ const timeout = 10000
 // #ifdef MP-WEIXIN
 // eslint-disable-next-line prefer-const
 weixinRequestInstance = async ({ url, method, params, data, ...others }) => {
-  const res = await wx.cloud.callContainer({
-    config: { env: import.meta.env.VITE_WEIXIN_CLOUD_ENV },
-    header: {
-      'X-WX-SERVICE': import.meta.env.VITE_X_WX_SERVICE,
-      'content-type': 'application/json',
-      'X-WX-EXCLUDE-CREDENTIALS': 'unionid, cloudbase-access-token, openid'
-    },
-    timeout,
-    ...others,
-    data: params ?? data,
-    path: url,
-    method
-  })
+  const res = await wx.cloud
+    .callContainer({
+      config: { env: import.meta.env.VITE_WEIXIN_CLOUD_ENV },
+      header: {
+        'X-WX-SERVICE': import.meta.env.VITE_X_WX_SERVICE,
+        'content-type': 'application/json',
+        'X-WX-EXCLUDE-CREDENTIALS': 'unionid, cloudbase-access-token, openid'
+      },
+      timeout,
+      ...others,
+      data: params ?? data,
+      path: url,
+      method
+    })
+    .catch(error => error)
 
   if (res.statusCode === HTTP_OK_STATUS) {
     return res.data
-  }
+  } else {
+    uni.showToast({
+      icon: 'error',
+      title: t('请求失败啦T_T')
+    })
 
-  return res
+    return Promise.reject(res)
+  }
 }
 // #endif
 
@@ -130,11 +137,18 @@ requestInstance.interceptors.request.use((config: UnConfig) => {
 
 requestInstance.interceptors.response.use(
   (response: UnResponse<AppResponse>) => {
-    // 微信小程序不能获取到config
-    const { config = {}, data } = response
+    const { config = {}, data, status } = response
 
     if ((config as UnCustomConfig)?.cancelable) {
       cancelUtil.removePendingList(config as UnCustomConfig)
+    }
+
+    if (status !== HTTP_OK_STATUS) {
+      uni.showToast({
+        icon: 'error',
+        title: t('请求失败啦T_T')
+      })
+      return Promise.reject(response)
     }
 
     // 二进制请求，不用处理，直接返回
