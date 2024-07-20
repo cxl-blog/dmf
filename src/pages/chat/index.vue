@@ -69,11 +69,16 @@ function handlePostMsg() {
             }"
           >
             <view class="message-icon">
-              <up-avatar :text="item.role" :size="35" />
+              <up-avatar :text="item.role === 'assistant' ? 'AI' : item.role" :size="35" />
             </view>
             <view class="message-text">
               <text v-if="item.status !== 'loading'">{{ item.content }}</text>
-              <up-loading-icon v-else :vertical="true" />
+              <view v-else class="loading-container">
+                <view class="loading-1" />
+                <view class="loading-2" />
+                <view class="loading-3" />
+              </view>
+              <!-- <up-loading-icon v-else :vertical="true" /> -->
             </view>
           </view>
         </template>
@@ -91,7 +96,10 @@ function handlePostMsg() {
           shape="circle"
           :placeholder="t('请输入想要咨询的内容')"
         />
-        <view class="send-btn ml-10px cursor-pointer hover:color-[#b4a38c]" @click="handlePostMsg">
+        <view
+          class="send-btn ml-10px cursor-pointer [&_.u-icon__icon]:color-gray hover:[&_.u-icon__icon]:color-[#b4a38c]"
+          @click="handlePostMsg"
+        >
           <up-icon name="email" />
         </view>
       </view>
@@ -100,6 +108,43 @@ function handlePostMsg() {
 </template>
 
 <style scoped lang="scss">
+.loading-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+
+  & > * {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #fff;
+    background-color: #fff;
+  }
+
+  .loading-1 {
+    animation: loading-1 0.6s 0s ease infinite alternate;
+  }
+
+  .loading-2 {
+    animation: loading-1 0.6s 0.3s ease infinite alternate;
+  }
+
+  .loading-3 {
+    animation: loading-1 0.6s 0.6s ease infinite alternate;
+  }
+}
+
+@keyframes loading-1 {
+  0% {
+    background-color: #fff;
+  }
+
+  100% {
+    background-color: #f9ae3d;
+  }
+}
+
 .chat-container {
   display: flex;
   flex-direction: column;
