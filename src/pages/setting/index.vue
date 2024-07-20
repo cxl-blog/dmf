@@ -14,16 +14,13 @@ import imgSrc from '@/static/imgs/logo_v2.png'
 
 const { t } = useI18n()
 const { layout } = storeToRefs(useAppStore())
+const { pushEnabled } = storeToRefs(useSystemStore())
 const appStore = useAppStore()
 const lunar = Lunar.fromDate(new Date())
 const offsetTop = computed(() => {
   return layout.value.statusHeight + layout.value.navbarHeight || 0
 })
 appStore.startLoading()
-
-// const headerHpx = computed(() => {
-//   return `${unref(offsetTop)}px`
-// })
 
 onMounted(() => {
   appStore.endLoading()
@@ -34,7 +31,8 @@ const headerTpx = computed(() => {
 })
 
 const setting = reactive({
-  openModel: true
+  openModel: true,
+  messagePush: false
 })
 </script>
 
@@ -88,6 +86,23 @@ const setting = reactive({
                   </text>
                   <u-switch
                     v-model="setting.openModel"
+                    space="2"
+                    activeColor="#f9ae3d"
+                    disabled
+                    inactiveColor="rgb(230, 230, 230)"
+                  />
+                </view>
+              </template>
+            </u-cell>
+
+            <u-cell icon="volume" :title="t('开启消息推送')" :disabled="!pushEnabled">
+              <template #value>
+                <view class="flex items-center">
+                  <text class="mr-5px color-gray">
+                    {{ setting.messagePush ? t('开启') : t('关闭') }}
+                  </text>
+                  <u-switch
+                    v-model="setting.messagePush"
                     space="2"
                     activeColor="#f9ae3d"
                     disabled

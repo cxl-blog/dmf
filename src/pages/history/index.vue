@@ -45,7 +45,7 @@ function handleShowDetail(item: Data) {
   const timer = setTimeout(() => {
     isClick.value = false
     clearTimeout(timer)
-  }, 200)
+  }, 100)
 }
 
 // todo uniapp 不支持指令
