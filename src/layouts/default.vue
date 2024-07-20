@@ -134,7 +134,7 @@ onShareTimeline(() => {
 // #endif
 
 function handleTabChange(val) {
-  const item = tabList[val]
+  const item = tabList.value[val]
   try {
     uni.reLaunch({
       url: `/${item.path}`,
