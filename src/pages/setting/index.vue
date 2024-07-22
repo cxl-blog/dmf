@@ -78,7 +78,7 @@ const setting = reactive({
               :isLink="true"
               arrow-direction="right"
             /> -->
-            <u-cell icon="heart-fill" :title="t('模式选择')" disabled>
+            <!-- <u-cell icon="heart-fill" :title="t('模式选择')" disabled>
               <template #value>
                 <view class="flex items-center">
                   <text class="mr-5px color-gray">
@@ -93,7 +93,7 @@ const setting = reactive({
                   />
                 </view>
               </template>
-            </u-cell>
+            </u-cell> -->
 
             <u-cell icon="volume" :title="t('开启消息推送')" :disabled="!pushEnabled">
               <template #value>
