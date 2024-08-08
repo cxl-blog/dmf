@@ -9,6 +9,9 @@ export default {
 
 <script setup lang="ts">
 const systemStore = useSystemStore()
+const appStore = useAppStore()
+
+appStore.startLoading()
 
 onLaunch(() => {
   if (!wx.cloud) {
@@ -20,7 +23,9 @@ onLaunch(() => {
     })
   }
 
-  systemStore.getToggles()
+  systemStore.getToggles().finally(() => {
+    nextTick(appStore.endLoading)
+  })
 })
 
 onHide(() => {

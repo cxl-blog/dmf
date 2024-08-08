@@ -109,6 +109,9 @@
     "useShake": true,
     "useDebounce": true,
     "useHistory": true,
-    "useSystemStore": true
+    "useSystemStore": true,
+    "useWeixin": true,
+    "useUserStore": true,
+    "useUserStoreWithout": true
   }
 }

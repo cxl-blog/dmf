@@ -23,15 +23,6 @@ declare global {
     }
   }
 
-  declare const wx: {
-    cloud: {
-      callContainer: (params: any) => Promise<any>
-      init: (params: any) => void
-    }
-    showShareMenu: Fn
-    updateShareMenu: Fn
-  }
-
   declare interface IntrinsicElementAttributes {}
 
   declare interface Fn<T = any> {

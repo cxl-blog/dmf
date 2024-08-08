@@ -100,6 +100,9 @@ declare global {
   const useShake: typeof import('./src/hooks/useShake')['useShake']
   const useSlots: typeof import('vue')['useSlots']
   const useSystemStore: typeof import('./src/store/modules/system')['useSystemStore']
+  const useUserStore: typeof import('./src/store/modules/user')['useUserStore']
+  const useUserStoreWithout: typeof import('./src/store/modules/user')['useUserStoreWithout']
+  const useWeixin: typeof import('./src/hooks/useWeixin')['useWeixin']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
@@ -240,6 +243,11 @@ declare module 'vue' {
     readonly useSystemStore: UnwrapRef<
       typeof import('./src/store/modules/system')['useSystemStore']
     >
+    readonly useUserStore: UnwrapRef<typeof import('./src/store/modules/user')['useUserStore']>
+    readonly useUserStoreWithout: UnwrapRef<
+      typeof import('./src/store/modules/user')['useUserStoreWithout']
+    >
+    readonly useWeixin: UnwrapRef<typeof import('./src/hooks/useWeixin')['useWeixin']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
@@ -362,6 +370,11 @@ declare module '@vue/runtime-core' {
     readonly useSystemStore: UnwrapRef<
       typeof import('./src/store/modules/system')['useSystemStore']
     >
+    readonly useUserStore: UnwrapRef<typeof import('./src/store/modules/user')['useUserStore']>
+    readonly useUserStoreWithout: UnwrapRef<
+      typeof import('./src/store/modules/user')['useUserStoreWithout']
+    >
+    readonly useWeixin: UnwrapRef<typeof import('./src/hooks/useWeixin')['useWeixin']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>

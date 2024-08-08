@@ -4,16 +4,16 @@ import type { SystemState } from '@/config/system'
 export const useSystemStore = defineStore('system', {
   state: (): SystemState => {
     return {
-      aiChatEnabled: true,
-      checker: true,
-      divinatoryList: true,
-      pushEnabled: true,
-      quickStart: true
+      aiChatEnabled: false,
+      checker: false,
+      divinatoryList: false,
+      pushEnabled: false,
+      quickStart: false
     }
   },
   actions: {
-    getToggles() {
-      toggles().then(res => {
+    async getToggles() {
+      await toggles().then(res => {
         Object.assign(this, res)
       })
     }

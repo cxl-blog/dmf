@@ -64,6 +64,8 @@
     "@vueuse/components": "^10.9.0",
     "@vueuse/core": "^9.13.0",
     "dayjs": "^1.11.10",
+    "crypto-js": "^4.2.0",
+    "js-base64": "^3.7.5",
     "lodash-es": "^4.17.21",
     "lunar-typescript": "^1.7.4",
     "pinia": "2.0.35",

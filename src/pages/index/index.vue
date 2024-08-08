@@ -13,6 +13,7 @@ import { usePage } from '@uni-helper/uni-use'
 import { customerTrigrams, divinationDetail as divinationDetailReq } from '@/api/divination'
 
 import imgSrc from '@/static/imgs/logo_v2_5x.png'
+import homeSrc from '@/static/imgs/home.png'
 import startSrc from '@/static/imgs/start.svg'
 import restartSrc from '@/static/imgs/restart.svg'
 import showDetailSrc from '@/static/imgs/show-detail.svg'
@@ -21,6 +22,7 @@ import DetailPopup from '@/components/divination-symbol/DetailPopup.vue'
 import WritingCeremony from '@/components/writing-ceremony/index.vue'
 
 const { mode, category } = storeToRefs(useDivinationStore())
+const { checker } = storeToRefs(useSystemStore())
 const { t } = useI18n()
 const divinationDetail = reactive({
   id: '',
@@ -165,13 +167,20 @@ async function getDetail() {
         <up-text suffixIcon="arrow-right" :text="t('查看更多')" @click="jumpTo" />
       </view>
     </view>
-    <view class="content-center" :class="{ 'logo-start-animate': startLoading }">
-      <img :src="imgSrc" class="content-center-1" mode="scaleToFill" />
+    <view class="flex-1">
+      <view class="content-center" :class="{ 'logo-start-animate': startLoading }">
+        <img
+          :src="checker ? homeSrc : imgSrc"
+          class="content-center-1"
+          :class="{ 'transform-scale-125': !checker }"
+          mode="scaleToFill"
+        />
+      </view>
     </view>
 
     <WritingCeremony ref="writingRef" class="relative mb-20px w-100%" :active="startLoading" />
 
-    <view class="content-footer w-100% flex flex-1 justify-between">
+    <view v-if="checker" class="content-footer w-100% flex flex-1 justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
         <up-image
           :src="!divinationDetail.trigramsId ? startSrc : restartSrc"
@@ -246,7 +255,7 @@ async function getDetail() {
   border-radius: 50%;
   background-size: 100% 100%;
   // transform: scale(0.96);
-  transform: scale(1.25);
+  // transform: scale(1.25);
 }
 
 .text-area {

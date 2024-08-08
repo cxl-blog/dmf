@@ -33,12 +33,7 @@
     {
       "path": "pages/chat/index",
       "type": "page",
-      "style": {
-        "navigationBarTitleText": "AI测算"
-      },
-      "activeTabPath": "pages/chat/index",
-      "tabbarDisabled": true,
-      "pageTooltipDisabled": true
+      "style": {}
     },
     {
       "path": "pages/divinatory-symbol/Detail",
