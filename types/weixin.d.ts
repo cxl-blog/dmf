@@ -29,6 +29,12 @@ declare global {
       fail?: Fn
       complete?: Fn
     }) => void
+    getUpdateManager: () => {
+      onCheckForUpdate: Fn
+      onUpdateReady: Fn
+      applyUpdate: Fn
+      onUpdateFailed: Fn
+    }
   }
 }
 

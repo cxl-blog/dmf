@@ -180,7 +180,7 @@ async function getDetail() {
 
     <WritingCeremony ref="writingRef" class="relative mb-20px w-100%" :active="startLoading" />
 
-    <view v-if="checker" class="content-footer w-100% flex flex-1 justify-between">
+    <view class="content-footer w-100% flex flex-1 justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
         <up-image
           :src="!divinationDetail.trigramsId ? startSrc : restartSrc"
