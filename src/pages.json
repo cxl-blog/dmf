@@ -31,11 +31,6 @@
       "style": {}
     },
     {
-      "path": "pages/chat/index",
-      "type": "page",
-      "style": {}
-    },
-    {
       "path": "pages/divinatory-symbol/Detail",
       "type": "page",
       "style": {}

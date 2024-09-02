@@ -8,4 +8,6 @@ export const customerTrigrams = data => request.post('/customer-trigrams', data)
 
 export const trigrams = () => request.get('/trigrams')
 
+export const dayTrigrams = () => request.get('/daily-trigram')
+
 export const toggles = () => request.get('/toggles')

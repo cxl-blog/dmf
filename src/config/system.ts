@@ -4,4 +4,5 @@ export type SystemState = {
   divinatoryList: boolean
   pushEnabled: boolean
   quickStart: boolean
+  sharable: boolean
 }

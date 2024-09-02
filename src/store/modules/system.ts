@@ -8,7 +8,8 @@ export const useSystemStore = defineStore('system', {
       checker: false,
       divinatoryList: false,
       pushEnabled: false,
-      quickStart: false
+      quickStart: false,
+      sharable: false
     }
   },
   actions: {

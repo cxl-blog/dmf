@@ -14,6 +14,7 @@ const appStore = useAppStore()
 appStore.startLoading()
 
 onLaunch(() => {
+  // #ifdef MP-WEIXIN
   if (!wx.cloud) {
     console.error('初始化失败')
   } else {
@@ -22,11 +23,6 @@ onLaunch(() => {
       traceUser: true
     })
   }
-
-  systemStore.getToggles().finally(() => {
-    nextTick(appStore.endLoading)
-  })
-
   const updateManager = wx.getUpdateManager()
 
   updateManager.onCheckForUpdate(function (res) {
@@ -49,6 +45,11 @@ onLaunch(() => {
 
   updateManager.onUpdateFailed(function () {
     // 新版本下载失败
+  })
+  // #endif
+
+  systemStore.getToggles().finally(() => {
+    nextTick(appStore.endLoading)
   })
 })
 

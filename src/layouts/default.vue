@@ -10,6 +10,7 @@ export default {
 <script setup lang="ts">
 import { usePage } from '@uni-helper/uni-use'
 import PageTooltip from '@/components/page-tooltip/index.vue'
+import ShareButton from '@/components/share/ShareButton.vue'
 
 // import WXBizDataCrypt from '@/utils/weixin-biz-data-crypt'
 
@@ -18,7 +19,7 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const { pages, pageLoading, layout } = storeToRefs(appStore)
 const { mode } = storeToRefs(useDivinationStore())
-const { aiChatEnabled } = storeToRefs(useSystemStore())
+const { sharable } = storeToRefs(useSystemStore())
 // const { isLogin } = storeToRefs(useUserStore())
 const statusBarHeight = ref(44)
 const navbarHeight = ref(44)
@@ -31,19 +32,6 @@ const tabList = ref([
   { name: t('历史记录'), path: 'pages/history/index', icon: 'list' },
   { name: t('设置'), path: 'pages/setting/index', icon: 'setting' }
 ])
-
-watch(
-  () => aiChatEnabled.value,
-  val => {
-    const target = unref(tabList).find(item => item.path === 'pages/chat/index')
-    if (val && !target) {
-      tabList.value.splice(2, 0, { name: t('AI测算'), path: 'pages/chat/index', icon: 'chat' })
-    }
-  },
-  {
-    immediate: true
-  }
-)
 
 const tab = computed(() => {
   const index = tabList.value.findIndex(item => item.path === pageConfig.value.activeTabPath)
@@ -295,6 +283,8 @@ function handleLeftClick() {
         </view>
       </view>
     </u-loading-page>
+
+    <ShareButton v-if="sharable" />
   </view>
 </template>
 
