@@ -180,7 +180,19 @@ async function getDetail() {
 
     <WritingCeremony ref="writingRef" class="relative mb-20px w-100%" :active="startLoading" />
 
-    <view class="content-footer w-100% flex flex-1 justify-between">
+    <view v-if="checker">
+      <up-input
+        v-model="divinationDetail.trigramsId"
+        type="number"
+        placeholder="请输入编号(1-64)"
+        @input="event => (divinationDetail.trigramsId = event.target.value)"
+      />
+      <up-button @click="getDetail">
+        {{ t('查询') }}
+      </up-button>
+    </view>
+
+    <view v-if="!checker" class="content-footer w-100% flex flex-1 justify-between">
       <view class="flex flex-1 flex-col items-center" @click="start">
         <up-image
           :src="!divinationDetail.trigramsId ? startSrc : restartSrc"
